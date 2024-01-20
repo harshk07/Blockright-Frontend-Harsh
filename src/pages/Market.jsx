@@ -7,26 +7,79 @@ import { Tabs } from "../components/Tabs";
 import { Carousel1 } from "../components/Carousel1";
 import axios from "axios";
 import { Dropdown } from "../components/Dropdown";
-import { Navigate } from "react-router-dom";
+import { useCart } from "../context/cart/CartContext";
+import { DropdownColor } from "../components/DropdownColor"
 
 export const Market = () => {
-  const [selectedSize, setSelectedSize] = useState("");
-  const [selectedColor, setSelectedColor] = useState("");
+  const [numberOfPieces, setNumberOfPieces] = useState(1);
+  const [quantities, setQuantities] = useState(Array(numberOfPieces).fill(1));
+  const [selectedSizes, setSelectedSizes] = useState(Array(numberOfPieces).fill(""));
+  const [selectedColor, setSelectedColor] = useState(Array(numberOfPieces).fill(""));
+  // const [selectedColor, setSelectedColor] = useState("");
+  const [nftData, setNftData] = useState([]);
+
+  const navigate = useNavigate();
 
   const { id } = useParams();
-  console.log(id);
-  const [numberOfPieces, setNumberOfPieces] = useState(1);
+  const { addToCart } = useCart();
+
+  const handleAddToCart = () => {
+    const itemsToAdd = quantities.map((quantity, index) => ({
+      title: selectItem.merchTitle,
+      price: selectItem.price,
+      quantity: quantity,
+      size: selectedSizes[index], // Use selected size for each piece
+      color: selectedColor[index],
+    }));
+
+    itemsToAdd.forEach((item) => addToCart(item));
+  };
+
 
   const handleIncreasePieces = () => {
     setNumberOfPieces((prev) => prev + 1);
+    setQuantities((prevQuantities) => [...prevQuantities, 1]);
+    setSelectedSizes((prevSizes) => [...prevSizes, ""]);
+    setSelectedColor((prevColor) => [...prevColor, ""]);
   };
 
   const handleDecreasePieces = () => {
     if (numberOfPieces > 1) {
       setNumberOfPieces((prev) => prev - 1);
+      setQuantities((prevQuantities) => prevQuantities.slice(0, -1));
+      setSelectedSizes((prevSizes) => prevSizes.slice(0, -1));
+      setSelectedColor((prevColor) => prevColor.slice(0, -1));
     }
   };
-  const [nftData, setNftData] = useState([]);
+
+  const handleQuantityChange = (index, value) => {
+    const newQuantities = [...quantities];
+    newQuantities[index] = value;
+    setQuantities(newQuantities);
+  };
+
+  const handleSizeChange = (index, size) => {
+    console.log(`handleSizeChange called for piece ${index + 1} with size ${size}`);
+    const newSizes = [...selectedSizes];
+    newSizes[index] = size;
+    setSelectedSizes(newSizes);
+    // console.log(newSizes[index]);
+    console.log(`Selected size for piece ${index + 1}: ${newSizes[index]}`);
+  };
+
+  const handleColorChange = (index, color) => {
+    console.log(`Selected color for piece ${index + 1}: ${color}`);
+    // You can update the state or perform any other necessary actions
+    const newColor = [...selectedColor];
+    newColor[index] = color;
+    setSelectedColor(newColor);
+    console.log(`Selected color for piece ${index + 1}: ${newColor[index]}`);
+  };
+
+  console.log("Selected Sizes:", selectedSizes);
+  console.log("Selected Color:", selectedColor);
+
+
   useEffect(() => {
     const options = {
       method: "GET",
@@ -37,10 +90,7 @@ export const Market = () => {
     axios
       .request(options)
       .then(function (response) {
-        // console.log(response.data.response)
-        const filteredData = response.data.response.filter(
-          (item) => item.isPublished === true
-        );
+        const filteredData = response.data.response.filter((item) => item.isPublished === true);
         console.log(filteredData);
         setNftData(filteredData);
       })
@@ -51,21 +101,13 @@ export const Market = () => {
 
   const youMayLike = nftData.slice(0, 4);
 
-  //Selecting the selected item
   const selectItem = nftData.find((item) => item._id === id);
 
-  console.log(selectItem);
+  // const handleSizeClick = (size) => {
+  //   setSelectedColor(size);
+  // };
 
-  const handleSizeClick = (size) => {
-    setSelectedSize(size);
-  };
-
-  const handleColorClick = (color) => {
-    setSelectedColor(color);
-  };
   const Navigate = useNavigate();
-
-  const [quantity, setQuantity] = useState(1);
 
   return (
     <div className="bg-black">
@@ -74,21 +116,9 @@ export const Market = () => {
         <section className="body-font">
           <div className="container mx-auto flex px-5 my-24 md:flex-row flex-col items-center">
             <div className="">
-              <Carousel1
-                firstElement={selectItem ? selectItem.images[0] : null}
-              />
+              <Carousel1 firstElement={selectItem ? selectItem.images[0] : null} />
             </div>
             <div className="ml-10 lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center gap-4">
-              {/* <p className="text-gray-600"> {selectItem ? selectItem.walletAddress : "No Wallet Address here."}</p> */}
-              {/* <h1 className="text-3xl font-bold text-white">
-                {selectItem ? selectItem.merchTitle : "Item Does Not Exist"}
-              </h1>
-              <p className="leading-relaxed text-white font-normal mb-">
-                {selectItem ? selectItem.description : "Description Not Found."}
-              </p> */}
-
-              <div className="flex gap-20 mb-8">
-              </div>
               <div className="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 -mt-5 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center gap-3 ">
                 <div className="bg-white p-5 mb-5 overflow-hidden mx-3">
                   <div className="flex items-center justify-between">
@@ -110,7 +140,6 @@ export const Market = () => {
                           >
                             -
                           </button>
-                          {/* <p className="text-black inline ml-9">1</p> */}
                           <button
                             onClick={handleIncreasePieces}
                             className="flex items-center justify-center font-semibold w-5 h-5 rounded-full text-white bg-red-500 absolute ml-16 mb-10"
@@ -120,35 +149,30 @@ export const Market = () => {
                         </div>
                       </div>
                       <div className="flex flex-col pl-2 mt-7 items-baseline gap-1">
-                        {/* <div className="flex gap-20">
-                          <p className="font-bold">{selectItem ? selectItem.merchTitle : "Item Does Not Exist"}</p>
-                          <p className="font-bold">${selectItem ? selectItem.price : "..."}</p>
-                        </div> */}
-                        {Array.from({ length: numberOfPieces }).map(
-                          (_, index) => (
-                            <div key={index} className="flex gap-[8rem] ">
-                              <p className="font-normal flex items-center">
-                                <input
-                                  type="number"
-                                  placeholder="0"
-                                  max={10}
-                                  min={0}
-                                  value={quantity} // Bind value to quantity state
-                                  onChange={(e) => setQuantity(parseInt(e.target.value, 10))} // Update quantity state on change
-                                  className="w-9 pt-1 pl-2 border-none pb-1 outline-none bg-white border border-black mr-1"
-                                />
-                                <span className="text-black font-semibold">Piece</span>
-                              </p>
-                              <Dropdown
-                                size="Size"
-                                size1="X"
-                                size2="XL"
-                                size3="XXL"
-                                size4="XXXL"
+                        {Array.from({ length: numberOfPieces }).map((_, index) => (
+                          <div key={index} className="flex gap-[8rem] ">
+                            <p className="font-normal flex items-center">
+                              <input
+                                type="number"
+                                placeholder="0"
+                                max={10}
+                                min={0}
+                                value={quantities[index]}
+                                onChange={(e) => handleQuantityChange(index, parseInt(e.target.value, 10))}
+                                className="w-9 pt-1 pl-2 border-none pb-1 outline-none bg-white border border-black mr-1"
                               />
-                            </div>
-                          )
-                        )}
+                              <span className="text-black font-semibold">Piece</span>
+                            </p>
+                            <Dropdown
+                              size="Size"
+                              onSelectSize={(size) => handleSizeChange(index, size)}
+                            />
+                            <DropdownColor
+                              color="Color"
+                              onSelectColor={(color) => handleColorChange(index, color)}
+                            />
+                          </div>
+                        ))}
                       </div>
                     </div>
                   </div>
@@ -163,7 +187,7 @@ export const Market = () => {
                       Shipping
                     </div>
                     <div className="text-black font-semibold text-lg">
-                      ${selectItem ? selectItem.price * quantity : "-"}
+                      ${selectItem ? selectItem.price * quantities.reduce((acc, qty) => acc + qty, 0) : "-"}
                       <br />
                       $80
                     </div>
@@ -173,23 +197,19 @@ export const Market = () => {
                     <p className="text-black text-xl font-medium">Total</p>
                     <p className="text-black text-xs ml-[14rem] ">$</p>
                     <p className="text-black text-xl font-semibold ml-1">
-                      {selectItem ? selectItem.price*quantity + 80 : "-"}
+                      {selectItem ? selectItem.price * quantities.reduce((acc, qty) => acc + qty, 0) + 80 : "-"}
                     </p>
                   </div>
                   <div className="text-center items-center w-auto py-5 ">
-                    <button className="text-white bg-black hover:bg-slate-600 rounded-lg w-[23rem] text-lg py-1 px-4" onClick={() => Navigate("/ConfirmorderPage")}>
-                      Proceed to order details
+                    <button
+                      className="text-white bg-black hover:bg-slate-600 rounded-lg w-[23rem] text-lg py-1 px-4"
+                      onClick={handleAddToCart}
+                    >
+                      Add to Cart
                     </button>
                   </div>
                 </div>
               </div>
-              {/* <div className="flex justify-center gap-3 mb-2">
-                <Link to="/ConfirmorderPage">
-                  <button className="inline-flex text-white bg-sky-600 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">
-                    <a href="/">Proceed</a>
-                  </button>
-                </Link>
-              </div> */}
             </div>
           </div>
         </section>
@@ -200,9 +220,7 @@ export const Market = () => {
 
         <div className="bg-blue-600 text-center font-semibold py-4 mb-10">
           <p className="text-white text-2xl">Buy Authentic, Support Creator</p>
-          <p className="text-white text-3xl">
-            Exclusive License web3 goodies here.
-          </p>
+          <p className="text-white text-3xl">Exclusive License web3 goodies here.</p>
         </div>
         <div className="text-center mt-20 font-bold">
           <p className="text-white text-3xl">You may also like</p>
@@ -210,13 +228,16 @@ export const Market = () => {
 
         <div className="grid grid-cols-4 mt-4">
           {youMayLike.map((item) => (
-            <Link to="/Market">
-              <Card1
-                imgSource={item.images[0]}
-                title={item.merchTitle}
-                description={item.description}
-              />
-            </Link>
+            <div
+              key={item._id}
+              onClick={() => {
+                navigate(`/market/${item._id}`);
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }}
+              className="cursor-pointer"
+            >
+              <Card1 imgSource={item.images[0]} title={item.merchTitle} description={item.description} />
+            </div>
           ))}
         </div>
       </div>
@@ -224,5 +245,3 @@ export const Market = () => {
     </div>
   );
 };
-
-export default Market;

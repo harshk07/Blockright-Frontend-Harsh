@@ -68,9 +68,9 @@ const Navbar = () => {
               <Link2 className="hover:text-gray-300" to="#contact" smooth>
                 Contact us
               </Link2>
-              <Link2 className="hover:text-gray-300" to="#My_Cart" smooth>
+              <Link className="hover:text-gray-300" to="/CartPage">
                 My Cart
-              </Link2>
+              </Link>
               <Link className="hover:text-gray-300" to="/MyProfile">
                 My Profile
               </Link>

@@ -6,32 +6,33 @@ import Footer from "../layout/Footer";
 import { Link, useNavigate } from "react-router-dom";
 import { Carousel2 } from "../components/Carousel2";
 import axios from "axios";
+import Product from "../components/Product";
 
 export const Shopping = () => {
   const navigate = useNavigate();
 
   const [nftData, setNftData] = useState([]);
-    useEffect(() => {
-        const options = {
-          method: "GET",
-          url: "http://127.0.0.1:8000/ecommerce/getAll/",
-          params: { adminId: "64f85ac8a4fb9e04cd207be5" },
-        };
-      
-        axios
-          .request(options)
-          .then(function (response) {
-            // console.log(response.data.response)
-            const filteredData = response.data.response.filter(
-                (item) => item.isPublished === true
-              );
-              console.log(filteredData)
-            setNftData(filteredData);
-          })
-          .catch(function (error) {
-            console.error(error);
-          });
-      }, []);
+  useEffect(() => {
+    const options = {
+      method: "GET",
+      url: "http://127.0.0.1:8000/ecommerce/getAll/",
+      params: { adminId: "64f85ac8a4fb9e04cd207be5" },
+    };
+
+    axios
+      .request(options)
+      .then(function (response) {
+        // console.log(response.data.response)
+        const filteredData = response.data.response.filter(
+          (item) => item.isPublished === true
+        );
+        console.log(filteredData)
+        setNftData(filteredData);
+      })
+      .catch(function (error) {
+        console.error(error);
+      });
+  }, []);
   return (
     <div className="bg-black">
       <Navbar />
@@ -111,8 +112,8 @@ export const Shopping = () => {
         </div>
         <div className="mt-[-5rem]">
           <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1  lg:grid-cols-2  xl:grid-cols-3 gap-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            {nftData.map((item)=>(
-              <div onClick={()=>navigate(`/market/${item._id}`)} className="cursor-pointer">
+            {nftData.map((item) => (
+              <div onClick={() => navigate(`/market/${item._id}`)} className="cursor-pointer">
                 <Card1
                   imgSource={item.images[0]}
                   title={item.merchTitle}
@@ -121,6 +122,11 @@ export const Shopping = () => {
                 />
               </div>
             ))}
+            {/* {nftData.map((item) => (
+              <div key={item._id}>
+                <Product productDetails={item} />
+              </div>
+            ))} */}
             {/* Add more Card1 components here */}
           </div>
         </div>

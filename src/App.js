@@ -1,5 +1,6 @@
 import React from "react";
 import LandingPage from "./pages/LandingPage/LandingPage";
+import MyForm from "./pages/LandingPage/MyForm";
 import ConnectWallet from "./pages/ConnectWallet";
 import { ErrorPage } from "./pages/ErrorPage";
 import { Dashboard } from "./pages/Dashboard";
@@ -27,102 +28,108 @@ import Orders from "./component/Orders";
 import Payment from "./component/Payment";
 import RightsAdmin from "./component/RightsAdmin";
 import Customerpayment from "./pages/Customerpayment";
+import CartPage from "./pages/CartPage";
+import { CartProvider } from "./context/cart/CartContext";
 
 
 function App() {
   return (
     <WalletIDMainState>
       <Router>
-        <>
-          <div>
-            <Routes>
-              <Route path="/AdminLogin" element={<AdminLogin />} />
+        <CartProvider>
 
-              {/*Admin Dashboard */}
-              <Route
-                path="/AdminDashboard"
-                element={
-                  <AdminDashboardLayout>
-                    <User />
-                  </AdminDashboardLayout>
-                }
-              />
-              <Route
-                path="/AdminDashboard/nft"
-                element={
-                  <AdminDashboardLayout>
-                    <NFT />
-                  </AdminDashboardLayout>
-                }
-              />
+          <>
+            <div>
+              <Routes>
+                <Route path="/AdminLogin" element={<AdminLogin />} />
 
-              <Route
-                path="/AdminDashboard/products"
-                element={
-                  <AdminDashboardLayout>
-                    <Products />
-                  </AdminDashboardLayout>
-                }
-              />
-              <Route
-                path="/AdminDashboard/rights"
-                element={
-                  <AdminDashboardLayout>
-                    <RightsAdmin />
-                  </AdminDashboardLayout>
-                }
-              />
-              <Route
-                path="/AdminDashboard/orders"
-                element={
-                  <AdminDashboardLayout>
-                    <Orders />
-                  </AdminDashboardLayout>
-                }
-              />
+                {/*Admin Dashboard */}
+                <Route
+                  path="/AdminDashboard"
+                  element={
+                    <AdminDashboardLayout>
+                      <User />
+                    </AdminDashboardLayout>
+                  }
+                />
+                <Route
+                  path="/AdminDashboard/nft"
+                  element={
+                    <AdminDashboardLayout>
+                      <NFT />
+                    </AdminDashboardLayout>
+                  }
+                />
 
-              <Route
-                path="/AdminDashboard/shop"
-                element={
-                  <AdminDashboardLayout>
-                    <Shop />
-                  </AdminDashboardLayout>
-                }
-              />
-              <Route
-                path="/AdminDashboard/license"
-                element={
-                  <AdminDashboardLayout>
-                    <License />
-                  </AdminDashboardLayout>
-                }
-              />
-              <Route
-                path="/AdminDashboard/payment"
-                element={
-                  <AdminDashboardLayout>
-                    <Payment />
-                  </AdminDashboardLayout>
-                }
-              />
+                <Route
+                  path="/AdminDashboard/products"
+                  element={
+                    <AdminDashboardLayout>
+                      <Products />
+                    </AdminDashboardLayout>
+                  }
+                />
+                <Route
+                  path="/AdminDashboard/rights"
+                  element={
+                    <AdminDashboardLayout>
+                      <RightsAdmin />
+                    </AdminDashboardLayout>
+                  }
+                />
+                <Route
+                  path="/AdminDashboard/orders"
+                  element={
+                    <AdminDashboardLayout>
+                      <Orders />
+                    </AdminDashboardLayout>
+                  }
+                />
 
-              <Route exact path="/" element={<LandingPage />} />
-              <Route path="/Connectwallet" element={<ConnectWallet />} />
-              <Route path="/Dashboard" element={<Dashboard />} />
-              <Route path="/NftPage" element={<NftPage />} />
-              <Route path="/Rightspage" element={<Rightspage />} />
-              <Route path="/Shopping" element={<Shopping />} />
-              <Route path="/Market/:id" element={<Market />} />
-              <Route path="/AgreementPage" element={<AgreementPage />} />
-              <Route path="/ConfirmorderPage" element={<ConfirmorderPage />} />
-              <Route path="/Loader" element={<Loader />} />
-              <Route path="/Customerpayment" element={<Customerpayment />} />
-              <Route path="/MyProfile" element={<MyProfile />} />
+                <Route
+                  path="/AdminDashboard/shop"
+                  element={
+                    <AdminDashboardLayout>
+                      <Shop />
+                    </AdminDashboardLayout>
+                  }
+                />
+                <Route
+                  path="/AdminDashboard/license"
+                  element={
+                    <AdminDashboardLayout>
+                      <License />
+                    </AdminDashboardLayout>
+                  }
+                />
+                <Route
+                  path="/AdminDashboard/payment"
+                  element={
+                    <AdminDashboardLayout>
+                      <Payment />
+                    </AdminDashboardLayout>
+                  }
+                />
 
-              <Route exact path="*" element={<ErrorPage />} />
-            </Routes>
-          </div>
-        </>
+                <Route exact path="/" element={<LandingPage />} />
+                <Route path="/Connectwallet" element={<ConnectWallet />} />
+                <Route path="/Dashboard" element={<Dashboard />} />
+                <Route path="/NftPage" element={<NftPage />} />
+                <Route path="/Rightspage" element={<Rightspage />} />
+                <Route path="/Shopping" element={<Shopping />} />
+                <Route path="/Market/:id" element={<Market />} />
+                <Route path="/AgreementPage" element={<AgreementPage />} />
+                <Route path="/ConfirmorderPage" element={<ConfirmorderPage />} />
+                <Route path="/Loader" element={<Loader />} />
+                <Route path="/Customerpayment" element={<Customerpayment />} />
+                <Route path="/MyProfile" element={<MyProfile />} />
+                <Route path="/CartPage" element={<CartPage />} />
+                <Route path="/MyForm" element={<MyForm />} />
+                <Route exact path="*" element={<ErrorPage />} />
+              </Routes>
+            </div>
+          </>
+        </CartProvider>
       </Router>
     </WalletIDMainState>
   );
