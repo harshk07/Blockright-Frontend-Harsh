@@ -61,14 +61,15 @@ const ConnectWallet = () => {
           axios
             .post("http://127.0.0.1:8000/user/login", dataToSave)
             .then(function (response) {
-              console.log(response.data);
+              // console.log(response);
               // setFetchedWalletAddress(response.walletId);
               setFetchedWalletId(response.data.response.walletId.toString());
-              console.log(response.data.response.walletId.toString());
-              console.log("Below is nft id");
+              console.log(fetchedWalletId)
+              // console.log(response.data.response.walletId.toString());
+              // console.log("Below is nft id");
               setNftId(response.data.response.nftId.toString());
 
-              console.log(response.data.response.nftId.toString());
+              // console.log(response.data.response.nftId.toString());
               // Handle the response from the server if needed
             })
             .catch(function (error) {

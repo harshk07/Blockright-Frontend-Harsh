@@ -18,7 +18,7 @@ export const NftPage = () => {
     // Make an API request to fetch data dynamically
     axios
       .get("http://127.0.0.1:8000/nft/get/", {
-        params: { userID: "651bcd37b800bfb8b3a0edb6" },
+        params: { userID: fetchedWalletId },
       })
       .then((response) => {
         // Set the API response data in the state
@@ -59,7 +59,7 @@ export const NftPage = () => {
             <div className="mt-16 px-10">
               {chunkArray(apiResponseData, 3).map((row, rowIndex) => (
                 <div key={rowIndex} className="flex justify-around space-x-3">
-                  {row.map((item, index) => (
+                  {row && row.map((item, index) => (
                     <Nft
                       key={index}
                       imgSource={item.cached_file_url}
