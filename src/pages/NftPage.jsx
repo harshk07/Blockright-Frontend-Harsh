@@ -11,33 +11,47 @@ export const NftPage = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  const { fetchedWalletId,setFetchedWalletId,fetchedWalletAddress } = useContext(WalletIDMainContext);
-  const [apiResponseData, setApiResponseData] = useState([]);
+  const { fetchedWalletId, fetchedWalletAddress } =
+    useContext(WalletIDMainContext);
+  console.log("Wallet id hai", fetchedWalletId);
 
+  const [apiResponseData, setApiResponseData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
   useEffect(() => {
-    // Make an API request to fetch data dynamically
+    setIsLoading(true);
+    setError(null);
     axios
       .get("http://127.0.0.1:8000/nft/get/", {
-        params: { userID: "651bcd37b800bfb8b3a0edb6" },
+        params: { userID: fetchedWalletId },
       })
       .then((response) => {
-        // Set the API response data in the state
         setApiResponseData(response.data.response);
-        console.log(response.data.response);
       })
       .catch((error) => {
-        console.error("Error fetching API data:", error);
+        setError("Error fetching API data");
+        console.error(error);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
-  }, []);
+  }, [fetchedWalletId]);
 
   // Define a function to chunk the array into rows of 3
   const chunkArray = (array, size) => {
-    const chunkedArray = [];
-    for (let i = 0; i < array.length; i += size) {
-      chunkedArray.push(array.slice(i, i + size));
-    }
-    return chunkedArray;
+    return array.reduce(
+      (acc, _, i) => (i % size ? acc : [...acc, array.slice(i, i + size)]),
+      []
+    );
   };
+
+  if (isLoading)
+    return (
+      <div className="flex justify-center items-center">
+        <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-blue-500"></div>
+      </div>
+    );
+  if (error) return <div>{error}</div>;
 
   return (
     <div className="bg-black">

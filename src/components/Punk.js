@@ -14,7 +14,7 @@ const Punk = () => {
           "http://127.0.0.1:8000/user/getRights/",
           // { params: { walletId: fetchedWalletId.toString() } }
           // { params: { walletId: '65a67bd20033cb5001382f38' } }
-          { params: { walletId: '65a67bd20033cb5001382f38' } }
+          { params: { walletId: '65b29d08da0fbcb895da9372' } }
         );
         const rightsData = Object.values(response.data);
         setFetchRights(rightsData);
