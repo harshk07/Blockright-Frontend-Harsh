@@ -42,8 +42,12 @@ export const CartProvider = ({ children }) => {
         dispatch({ type: 'REMOVE_FROM_CART', payload: index });
     };
 
+    const getTotalItems = () => {
+        return state.items.reduce((total, item) => total + item.quantity, 0);
+    };
+
     return (
-        <CartContext.Provider value={{ cart: state, addToCart, removeFromCart }}>
+        <CartContext.Provider value={{ cart: state, addToCart, removeFromCart, getTotalItems }}>
             {children}
         </CartContext.Provider>
     );

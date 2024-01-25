@@ -7,9 +7,12 @@ import logo from "../Images/blockright-logo.png";
 import { ethers } from 'ethers';
 import WalletIDMainContext from "../context/walletID/WalletIDMainContext";
 import { useContext } from "react";
+import { useCart } from '../context/cart/CartContext';
 
 const Navbar = () => {
   const { setFetchedWalletAddress } = useContext(WalletIDMainContext);
+  const { getTotalItems } = useCart();
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -69,7 +72,7 @@ const Navbar = () => {
                 Contact us
               </Link2>
               <Link className="hover:text-gray-300" to="/CartPage">
-                My Cart
+                My Cart ({getTotalItems()})
               </Link>
               <Link className="hover:text-gray-300" to="/MyProfile">
                 My Profile
