@@ -1,27 +1,16 @@
-import React,{useState} from 'react'
+import React from "react";
 
-export const Dropdown = (props) => {
-
-    let [selectedOption, setSelectedOption] = useState('');
-
-    const handleSelectChange = (event) => {
-      setSelectedOption(event.target.value);
-    };
-
+export const Dropdown = ({ size, onSelectSize }) => {
   return (
-  <>
-    <div className="bg-white border-none">
-      <select value={selectedOption} onChange={handleSelectChange } className='outline-none bg-white border'>
-        <option value="" className='text-xs' hidden>{props.size}</option>
-        <option value="option1">{props.size1}</option>
-        <option value="option2">{props.size2}</option>
-        <option value="option3">{props.size3}</option>
-        <option value="option4">{props.size4}</option>
-      </select>
-      {/* {selectedOption && <p>You selected: {selectedOption}</p>} */}
-    </div>
-
-  
-  </>
-  )
-}
+    <select
+      className="border-none bg-white outline-none cursor-pointer"
+      onChange={(e) => onSelectSize(e.target.value)}
+    >
+      <option value="">{size}</option>
+      <option value="X">X</option>
+      <option value="XL">XL</option>
+      <option value="XXL">XXL</option>
+      <option value="XXXL">XXXL</option>
+    </select>
+  );
+};
