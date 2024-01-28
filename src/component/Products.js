@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import ImageCarousel from "./ImageCarousel";
 
 const Products = () => {
   const [productData, setProductData] = useState([]);
@@ -386,6 +387,9 @@ const Products = () => {
             {/* Details Modal Content */}
             <div className="p-4">
               <div className="mb-4">
+                <div className="w-[12rem]">
+                  <ImageCarousel images={selectedProduct.images} />
+                </div>
                 <p className="text-gray-700 mb-2">
                   Product Id: {selectedProduct._id}
                 </p>
@@ -401,6 +405,7 @@ const Products = () => {
                 <p className="text-gray-700 mb-2">
                   Image URL: {selectedProduct.images}
                 </p>
+
                 <p className="text-gray-700 mb-2">
                   Tags: {selectedProduct.tags.join(", ")}
                 </p>
@@ -414,7 +419,8 @@ const Products = () => {
                   Available Quantity: {selectedProduct.availableQuantity}
                 </p>
                 <p className="text-gray-700 mb-2">
-                  Expiry Date: {new Date(selectedProduct.lastDate).toLocaleDateString()}
+                  Expiry Date:{" "}
+                  {new Date(selectedProduct.lastDate).toLocaleDateString()}
                 </p>
                 <p className="text-gray-700 mb-2">
                   Description: {selectedProduct.description}
