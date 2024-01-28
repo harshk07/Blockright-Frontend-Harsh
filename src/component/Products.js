@@ -108,6 +108,7 @@ const Products = () => {
         <table className="w-100% h-100% text-center text-sm">
           <thead>
             <tr className="border-2">
+              <th className="border-2 p-3 w-1/12">Product Title</th>
               <th className="border-2 p-3 w-1/12">Category</th>
               <th className="border-2 p-3 w-1/12">Image URL</th>
               <th className="border-2 p-3 w-1/12">Tags</th>
@@ -117,16 +118,16 @@ const Products = () => {
               <th className="border-2 p-3 w-1/12">Available Quantity</th>
               <th className="border-2 p-3 w-1/12">Expiry Date</th>
               <th className="border-2 p-3 w-1/12">Is Published</th>
-              <th className="border-2 p-3 w-1/12">Wallet Address</th>
               <th className="border-2 p-3 w-1/12">Original Image</th>
               <th className="border-2 p-3 w-1/12">Description</th>
-              <th className="border-2 p-3 w-1/12">Product Title</th>
+
               <th className="border-2 p-3 w-1/12">Actions</th>
             </tr>
           </thead>
           <tbody>
             {productData.map((product, index) => (
               <tr className="border-2" key={index}>
+                <td className="border-2 p-3">{product.merchTitle}</td>
                 <td className="border-2 p-3">{product.category}</td>
                 <td className="border-2 p-3">{product.images}</td>
                 <td className="border-2 p-3">{product.tags.join(", ")}</td>
@@ -150,12 +151,11 @@ const Products = () => {
                     {product.isPublished ? "Published" : "Not Published"}
                   </button>
                 </td>
-                <td className="border-2 p-3">{product.walletAddress}</td>
                 <td className="border-2 p-3">
                   <img src={product.originalImage} alt="Product Img" />
                 </td>
                 <td className="border-2 p-3">{product.description}</td>
-                <td className="border-2 p-3">{product.merchTitle}</td>
+
                 <td className="border-2">
                   <button
                     className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
@@ -190,33 +190,42 @@ const Products = () => {
             {/* Edit Modal Content */}
             <div className="p-4">
               <div className="mb-4">
-                <label className="block text-gray-700 mb-2">Image URL</label>
+                <label className="block text-gray-700 mb-2">
+                  Images (comma-separated)
+                </label>
                 <input
                   type="text"
                   className="border rounded w-full py-2 px-3"
-                  value={selectedProduct.images}
+                  value={selectedProduct.images.join(", ")} // Join the array into a comma-separated string
                   onChange={(e) =>
                     setSelectedProduct({
                       ...selectedProduct,
-                      images: e.target.value,
+                      images: e.target.value
+                        .split(",")
+                        .map((item) => item.trim()), // Split the input string into an array
                     })
                   }
                 />
               </div>
               <div className="mb-4">
-                <label className="block text-gray-700 mb-2">Tags</label>
+                <label className="block text-gray-700 mb-2">
+                  Tags (comma-separated)
+                </label>
                 <input
                   type="text"
                   className="border rounded w-full py-2 px-3"
-                  value={selectedProduct.tags}
+                  value={selectedProduct.tags.join(", ")} // Join the array into a comma-separated string
                   onChange={(e) =>
                     setSelectedProduct({
                       ...selectedProduct,
-                      tags: e.target.value,
+                      tags: e.target.value
+                        .split(",")
+                        .map((item) => item.trim()), // Split the input string into an array
                     })
                   }
                 />
               </div>
+
               <div className="mb-4">
                 <label className="block text-gray-700 mb-2">Price</label>
                 <input
@@ -346,6 +355,9 @@ const Products = () => {
                   Product Id: {selectedProduct._id}
                 </p>
                 <p className="text-gray-700">NFT Id: {selectedProduct.nftId}</p>
+                <p className="text-gray-700">
+                  Wallet Address {selectedProduct.walletAddress}
+                </p>
               </div>
               <div className="mb-4">
                 <p className="text-gray-700 mb-2">
