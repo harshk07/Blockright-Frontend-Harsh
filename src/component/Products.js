@@ -6,6 +6,18 @@ const Products = () => {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [showEditModal, setShowEditModal] = useState(false);
   const [showDetailsModal, setShowDetailsModal] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
+  const indexOfLastProduct = currentPage * itemsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - itemsPerPage;
+  const currentProducts = productData.slice(
+    indexOfFirstProduct,
+    indexOfLastProduct
+  );
+
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,7 +48,6 @@ const Products = () => {
   };
 
   const handleEditSave = async () => {
-    // Send a PATCH request to update the selected product
     const options = {
       method: "PATCH",
       url: `http://127.0.0.1:8000/ecommerce/editDetails/`,
@@ -57,7 +68,6 @@ const Products = () => {
       },
     };
 
-    // Update the product data locally first
     const updatedProductData = productData.map((product) =>
       product._id === selectedProduct._id ? { ...selectedProduct } : product
     );
@@ -78,7 +88,7 @@ const Products = () => {
     const updatedProduct = { ...product };
     updatedProduct.isPublished = !updatedProduct.isPublished;
 
-    const adminId = "64f85ac8a4fb9e04cd207be5"; // Replace with your actual admin ID
+    const adminId = "64f85ac8a4fb9e04cd207be5";
     const productId = updatedProduct._id;
 
     const url = `http://127.0.0.1:8000/ecommerce/editDetails/?adminId=${adminId}&productId=${productId}`;
@@ -88,10 +98,8 @@ const Products = () => {
         isPublished: updatedProduct.isPublished,
       });
 
-      // Handle successful response if needed
       console.log(response.data);
 
-      // Update the product data locally
       const updatedProductData = productData.map((p) =>
         p._id === updatedProduct._id ? updatedProduct : p
       );
@@ -103,68 +111,74 @@ const Products = () => {
   };
 
   return (
-    <div className="mx-10 mt-10">
+    <div className="mx-[5rem] mt-10">
       <div className="flex justify-center mt-5">
-        <table className="w-100% h-100% text-center text-sm">
+        <table className="w-[110rem] h-100% text-center text-sm">
           <thead>
             <tr className="border-2">
+              <th className="border-2 p-3 w-1/12">Original Image</th>
               <th className="border-2 p-3 w-1/12">Product Title</th>
+              <th className="border-2 p-3 w-1/12">Description</th>
               <th className="border-2 p-3 w-1/12">Category</th>
-              <th className="border-2 p-3 w-1/12">Image URL</th>
-              <th className="border-2 p-3 w-1/12">Tags</th>
               <th className="border-2 p-3 w-1/12">Price</th>
               <th className="border-2 p-3 w-1/12">Discount(%)</th>
               <th className="border-2 p-3 w-1/12">Total Quantity</th>
               <th className="border-2 p-3 w-1/12">Available Quantity</th>
               <th className="border-2 p-3 w-1/12">Expiry Date</th>
-              <th className="border-2 p-3 w-1/12">Is Published</th>
-              <th className="border-2 p-3 w-1/12">Original Image</th>
-              <th className="border-2 p-3 w-1/12">Description</th>
+              <th className="border-2 p-3 w-1/12">Market</th>
 
               <th className="border-2 p-3 w-1/12">Actions</th>
             </tr>
           </thead>
           <tbody>
-            {productData.map((product, index) => (
+            {currentProducts.map((product, index) => (
               <tr className="border-2" key={index}>
-                <td className="border-2 p-3">{product.merchTitle}</td>
-                <td className="border-2 p-3">{product.category}</td>
-                <td className="border-2 p-3">{product.images}</td>
-                <td className="border-2 p-3">{product.tags.join(", ")}</td>
-                <td className="border-2 p-3">{`$ ${product.price}`}</td>
-                <td className="border-2 p-3">{`${product.discount}%`}</td>
-                <td className="border-2 p-3">{product.totalQuantity}</td>
-                <td className="border-2 p-3">
+                <td className="py-2 flex justify-center">
+                  <img
+                    src={product.originalImage}
+                    className="w-20"
+                    alt="Product Img"
+                  />
+                </td>
+                <td className="border-2 p-2">{product.merchTitle}</td>
+                <td className="border-2 p-2">
+                  {product && product.description
+                    ? product.description.split(" ").slice(0, 10).join(" ") +
+                      (product.description.split(" ").length > 10 ? " ..." : "")
+                    : "No description"}
+                </td>
+
+                <td className="border-2 p-2">{product.category}</td>
+                <td className="border-2 p-2">{`$ ${product.price}`}</td>
+                <td className="border-2 p-2">{`${product.discount}%`}</td>
+                <td className="border-2 p-2">{product.totalQuantity}</td>
+                <td className="border-2 p-2">
                   {`${product.availableQuantity}`}
                 </td>
-                <td className="border-2 p-3">
+                <td className="border-2 p-2">
                   {new Date(product.lastDate).toLocaleDateString()}
                 </td>
 
-                <td className="border-2 p-3">
+                <td className="border-2 p-2 text-xs">
                   <button
                     className={`${
                       product.isPublished ? "bg-green-500" : "bg-red-500"
-                    } text-white font-bold py-2 px-4 rounded-full`}
+                    } text-white font-bold py-2 px-2 rounded-md`}
                     onClick={() => togglePublishedStatus(product)}
                   >
-                    {product.isPublished ? "Published" : "Not Published"}
+                    {product.isPublished ? "Published" : "Publish"}
                   </button>
                 </td>
-                <td className="border-2 p-3">
-                  <img src={product.originalImage} alt="Product Img" />
-                </td>
-                <td className="border-2 p-3">{product.description}</td>
 
                 <td className="border-2">
                   <button
-                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1.5 px-2 rounded-md"
                     onClick={() => openEditModal(product)}
                   >
                     Edit
                   </button>
                   <button
-                    className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full ml-2"
+                    className="bg-green-500 hover:bg-green-700 text-white font-bold py-1.5 px-2 rounded-md ml-2"
                     onClick={() => openDetailsModal(product)}
                   >
                     Details
@@ -175,18 +189,39 @@ const Products = () => {
           </tbody>
         </table>
       </div>
+      <div className="flex justify-center mt-4">
+        {productData.length > itemsPerPage && (
+          <ul className="pagination flex">
+            {Array(Math.ceil(productData.length / itemsPerPage))
+              .fill()
+              .map((_, index) => (
+                <li
+                  key={index}
+                  className={`page-item mx-2 ${
+                    currentPage === index + 1 ? "active" : ""
+                  }`}
+                >
+                  <button
+                    className="page-link"
+                    onClick={() => paginate(index + 1)}
+                  >
+                    {index + 1}
+                  </button>
+                </li>
+              ))}
+          </ul>
+        )}
+      </div>
 
       {/* Edit Modal */}
       {showEditModal && selectedProduct && (
-        <div className="fixed inset-0 flex items-center justify-center z-50">
+        <div className="fixed inset-0 flex items-center justify-center z-50 w-[80%] mx-[10rem]">
           <div className="bg-white w-[50%] sm:w-11/12 md:w-3/4 lg:w-2/3 xl:w-1/2 rounded-lg shadow-lg overflow-hidden">
             <div className="bg-gray-200 px-4 py-3">
               <h2 className="text-lg font-semibold text-gray-800">
                 Edit Product
               </h2>
             </div>
-
-            {/* Edit Modal Content */}
             <div className="p-4">
               <div className="mb-4">
                 <label className="block text-gray-700 mb-2">Title</label>
@@ -257,7 +292,7 @@ const Products = () => {
                   <label className="block text-gray-700 mb-2">Price</label>
                   <input
                     type="text"
-                    className="border rounded w-full py-2 px-3"
+                    className="border rounded w-[90%] py-2 px-2"
                     value={selectedProduct.price}
                     onChange={(e) =>
                       setSelectedProduct({
@@ -271,7 +306,7 @@ const Products = () => {
                   <label className="block text-gray-700 mb-2">Discount</label>
                   <input
                     type="text"
-                    className="border rounded w-full py-2 px-3"
+                    className="border rounded w-[90%] py-2 px-2"
                     value={selectedProduct.discount}
                     onChange={(e) =>
                       setSelectedProduct({
@@ -282,12 +317,10 @@ const Products = () => {
                   />
                 </div>
                 <div className="mb-4">
-                  <label className="block text-gray-700 mb-2">
-                    Available Quantity
-                  </label>
+                  <label className="block text-gray-700 mb-2">Available</label>
                   <input
                     type="text"
-                    className="border rounded w-full py-2 px-3"
+                    className="border rounded w-[90%] py-2 px-2"
                     value={selectedProduct.availableQuantity}
                     onChange={(e) =>
                       setSelectedProduct({
@@ -297,21 +330,22 @@ const Products = () => {
                     }
                   />
                 </div>
-              </div>
-
-              <div className="mb-4">
-                <label className="block text-gray-700 mb-2">Expiry Date</label>
-                <input
-                  type="date"
-                  className="border rounded w-full py-2 px-3"
-                  value={selectedProduct.lastDate}
-                  onChange={(e) =>
-                    setSelectedProduct({
-                      ...selectedProduct,
-                      lastDate: e.target.value,
-                    })
-                  }
-                />
+                <div className="mb-4">
+                  <label className="block text-gray-700 mb-2">
+                    Expiry Date
+                  </label>
+                  <input
+                    type="date"
+                    className="border rounded w-[90%] py-2 px-3"
+                    value={selectedProduct.lastDate}
+                    onChange={(e) =>
+                      setSelectedProduct({
+                        ...selectedProduct,
+                        lastDate: e.target.value,
+                      })
+                    }
+                  />
+                </div>
               </div>
             </div>
 
@@ -341,7 +375,7 @@ const Products = () => {
       {/* Details Modal */}
       {showDetailsModal && selectedProduct && (
         <div className="fixed inset-0 flex items-center justify-center z-50">
-          <div className="bg-white w-3/4 sm:w-2/3 md:w-1/2 lg:w-1/3 xl:w-1/4 rounded-lg shadow-lg overflow-hidden">
+          <div className="bg-white w-3/4 sm:w-2/3 md:w-3/4 lg:w-1/3 xl:w-1/4 rounded-lg shadow-lg overflow-hidden">
             {/* Details Modal Header */}
             <div className="bg-gray-200 px-4 py-3">
               <h2 className="text-lg font-semibold text-gray-800">
@@ -358,6 +392,9 @@ const Products = () => {
                 <p className="text-gray-700">NFT Id: {selectedProduct.nftId}</p>
                 <p className="text-gray-700">
                   Wallet Address {selectedProduct.walletAddress}
+                </p>
+                <p className="text-gray-700">
+                  Title: {selectedProduct.merchTitle}
                 </p>
               </div>
               <div className="mb-4">
@@ -377,13 +414,10 @@ const Products = () => {
                   Available Quantity: {selectedProduct.availableQuantity}
                 </p>
                 <p className="text-gray-700 mb-2">
-                  Expiry Date: {selectedProduct.lastDate}
+                  Expiry Date: {new Date(selectedProduct.lastDate).toLocaleDateString()}
                 </p>
                 <p className="text-gray-700 mb-2">
                   Description: {selectedProduct.description}
-                </p>
-                <p className="text-gray-700">
-                  Title: {selectedProduct.merchTitle}
                 </p>
               </div>
             </div>
