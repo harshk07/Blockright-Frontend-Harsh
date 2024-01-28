@@ -216,13 +216,14 @@ const Products = () => {
 
       {/* Edit Modal */}
       {showEditModal && selectedProduct && (
-        <div className="fixed inset-0 flex items-center justify-center z-50 w-[80%] mx-[10rem]">
-          <div className="bg-white w-[50%] sm:w-11/12 md:w-3/4 lg:w-2/3 xl:w-1/2 rounded-lg shadow-lg overflow-hidden">
-            <div className="bg-gray-200 px-4 py-3">
-              <h2 className="text-lg font-semibold text-gray-800">
-                Edit Product
-              </h2>
+        <div className="fixed inset-0 flex items-center justify-center z-50">
+          <div className="bg-white w-full sm:w-11/12 md:w-3/4 lg:w-2/3 xl:w-1/2 rounded-lg shadow-lg overflow-hidden">
+            {/* Edit Product Modal Header */}
+            <div className="bg-gray-800 text-white px-4 py-3">
+              <h2 className="text-lg font-semibold">Edit Product</h2>
             </div>
+
+            {/* Edit Product Modal Content */}
             <div className="p-4">
               <div className="mb-4">
                 <label className="block text-gray-700 mb-2">Title</label>
@@ -240,8 +241,7 @@ const Products = () => {
               </div>
               <div className="mb-4">
                 <label className="block text-gray-700 mb-2">Description</label>
-                <input
-                  type="text"
+                <textarea
                   className="border rounded w-full py-2 px-3"
                   value={selectedProduct.description}
                   onChange={(e) =>
@@ -288,12 +288,12 @@ const Products = () => {
                   }
                 />
               </div>
-              <div className="flex justify-between">
-                <div className="mb-4">
+              <div className="flex flex-wrap -mx-2">
+                <div className="w-full md:w-1/2 lg:w-1/4 mb-4 px-2">
                   <label className="block text-gray-700 mb-2">Price</label>
                   <input
                     type="text"
-                    className="border rounded w-[90%] py-2 px-2"
+                    className="border rounded w-full py-2 px-3"
                     value={selectedProduct.price}
                     onChange={(e) =>
                       setSelectedProduct({
@@ -303,11 +303,11 @@ const Products = () => {
                     }
                   />
                 </div>
-                <div className="mb-4">
+                <div className="w-full md:w-1/2 lg:w-1/4 mb-4 px-2">
                   <label className="block text-gray-700 mb-2">Discount</label>
                   <input
                     type="text"
-                    className="border rounded w-[90%] py-2 px-2"
+                    className="border rounded w-full py-2 px-3"
                     value={selectedProduct.discount}
                     onChange={(e) =>
                       setSelectedProduct({
@@ -317,11 +317,11 @@ const Products = () => {
                     }
                   />
                 </div>
-                <div className="mb-4">
+                <div className="w-full md:w-1/2 lg:w-1/4 mb-4 px-2">
                   <label className="block text-gray-700 mb-2">Available</label>
                   <input
                     type="text"
-                    className="border rounded w-[90%] py-2 px-2"
+                    className="border rounded w-full py-2 px-3"
                     value={selectedProduct.availableQuantity}
                     onChange={(e) =>
                       setSelectedProduct({
@@ -331,13 +331,13 @@ const Products = () => {
                     }
                   />
                 </div>
-                <div className="mb-4">
+                <div className="w-full md:w-1/2 lg:w-1/4 mb-4 px-2">
                   <label className="block text-gray-700 mb-2">
                     Expiry Date
                   </label>
                   <input
                     type="date"
-                    className="border rounded w-[90%] py-2 px-3"
+                    className="border rounded w-full py-2 px-3"
                     value={selectedProduct.lastDate}
                     onChange={(e) =>
                       setSelectedProduct({
@@ -350,12 +350,12 @@ const Products = () => {
               </div>
             </div>
 
-            {/* Edit Modal Footer */}
-            <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+            {/* Edit Product Modal Footer */}
+            <div className="bg-gray-100 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
               <span className="mt-3 flex w-full rounded-md shadow-sm sm:mt-0 sm:w-auto">
                 <button
                   onClick={handleEditSave}
-                  className="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-blue-500 text-base leading-6 font-medium text-white shadow-sm hover:bg-blue-600 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue focus:ring focus:ring-blue-200 active:bg-blue-700 transition ease-in-out duration-150"
+                  className="inline-flex justify-center w-full rounded-md bg-blue-500 text-white px-4 py-2 text-base font-medium shadow-sm hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-200 active:bg-blue-700 transition ease-in-out duration-150"
                 >
                   Save Changes
                 </button>
@@ -363,7 +363,7 @@ const Products = () => {
               <span className="mt-3 flex w-full rounded-md shadow-sm sm:mt-0 sm:w-auto">
                 <button
                   onClick={() => setShowEditModal(false)}
-                  className="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-base leading-6 font-medium text-gray-700 shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue focus:ring focus:ring-blue-200 active:text-gray-800 active:bg-gray-50 transition ease-in-out duration-150"
+                  className="inline-flex justify-center w-full rounded-md border border-gray-300 bg-white text-gray-700 px-4 py-2 text-base font-medium shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue focus:ring focus:ring-blue-200 active:text-gray-800 active:bg-gray-50 transition ease-in-out duration-150"
                 >
                   Cancel
                 </button>
@@ -376,64 +376,73 @@ const Products = () => {
       {/* Details Modal */}
       {showDetailsModal && selectedProduct && (
         <div className="fixed inset-0 flex items-center justify-center z-50">
-          <div className="bg-white w-3/4 sm:w-2/3 md:w-3/4 lg:w-1/3 xl:w-1/4 rounded-lg shadow-lg overflow-hidden">
+          <div className="bg-white w-full sm:w-11/12 md:w-3/4 lg:w-2/3 xl:w-1/2 rounded-lg shadow-lg overflow-hidden">
             {/* Details Modal Header */}
-            <div className="bg-gray-200 px-4 py-3">
-              <h2 className="text-lg font-semibold text-gray-800">
-                Product Details
-              </h2>
+            <div className="bg-gray-800 text-white px-4 py-3">
+              <h2 className="text-lg font-semibold">Product Details</h2>
             </div>
 
             {/* Details Modal Content */}
             <div className="p-4">
               <div className="mb-4">
-                <div className="w-[12rem]">
-                  <ImageCarousel images={selectedProduct.images} />
-                </div>
-                <p className="text-gray-700 mb-2">
+                <p className="text-gray-700">
                   Product Id: {selectedProduct._id}
                 </p>
                 <p className="text-gray-700">NFT Id: {selectedProduct.nftId}</p>
                 <p className="text-gray-700">
-                  Wallet Address {selectedProduct.walletAddress}
+                  Wallet Address: {selectedProduct.walletAddress}
                 </p>
-                <p className="text-gray-700">
+                <div className="flex justify-center items-center mt-4">
+                  <div className="w-[12rem]">
+                    <ImageCarousel images={selectedProduct.images} />
+                  </div>
+                </div>
+                <p className="text-gray-700 mt-4">
                   Title: {selectedProduct.merchTitle}
                 </p>
               </div>
               <div className="mb-4">
-                <p className="text-gray-700 mb-2">
+                <p className="text-gray-700">
                   Image URL: {selectedProduct.images}
                 </p>
 
-                <p className="text-gray-700 mb-2">
-                  Tags: {selectedProduct.tags.join(", ")}
+                <p className="text-gray-700 mt-2">
+                  Tags:{" "}
+                  {selectedProduct.tags.map((tag, index) => (
+                    <span
+                      key={index}
+                      className="inline-block px-2 py-1 text-white bg-blue-500 rounded-md mr-2 mb-2"
+                    >
+                      {tag}
+                    </span>
+                  ))}
                 </p>
-                <p className="text-gray-700 mb-2">
-                  Price: {selectedProduct.price}
+
+                <p className="text-gray-700">
+                  Price: $ {selectedProduct.price}
                 </p>
-                <p className="text-gray-700 mb-2">
-                  Discount: {selectedProduct.discount}
+                <p className="text-gray-700">
+                  Discount: {selectedProduct.discount} %
                 </p>
-                <p className="text-gray-700 mb-2">
-                  Available Quantity: {selectedProduct.availableQuantity}
+                <p className="text-gray-700">
+                  Available Quantity: {selectedProduct.availableQuantity} units
                 </p>
-                <p className="text-gray-700 mb-2">
+                <p className="text-gray-700">
                   Expiry Date:{" "}
                   {new Date(selectedProduct.lastDate).toLocaleDateString()}
                 </p>
-                <p className="text-gray-700 mb-2">
+                <p className="text-gray-700 mt-2">
                   Description: {selectedProduct.description}
                 </p>
               </div>
             </div>
 
             {/* Details Modal Footer */}
-            <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+            <div className="bg-gray-100 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
               <span className="mt-3 flex w-full rounded-md shadow-sm sm:mt-0 sm:w-auto">
                 <button
                   onClick={() => setShowDetailsModal(false)}
-                  className="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-base leading-6 font-medium text-gray-700 shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue focus:ring focus:ring-blue-200 active:text-gray-800 active:bg-gray-50 transition ease-in-out duration-150"
+                  className="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-gray-200 text-base leading-6 font-medium text-gray-800 hover:bg-gray-300 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue focus:ring focus:ring-blue-200 active:bg-gray-50 transition ease-in-out duration-150"
                 >
                   Close
                 </button>
