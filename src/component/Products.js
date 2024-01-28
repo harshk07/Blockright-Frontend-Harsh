@@ -103,7 +103,7 @@ const Products = () => {
   };
 
   return (
-    <div>
+    <div className="mx-10 mt-10">
       <div className="flex justify-center mt-5">
         <table className="w-100% h-100% text-center text-sm">
           <thead>
@@ -179,8 +179,7 @@ const Products = () => {
       {/* Edit Modal */}
       {showEditModal && selectedProduct && (
         <div className="fixed inset-0 flex items-center justify-center z-50">
-          <div className="bg-white w-3/4 sm:w-2/3 md:w-1/2 lg:w-1/3 xl:w-1/4 rounded-lg shadow-lg overflow-hidden">
-            {/* Edit Modal Header */}
+          <div className="bg-white w-[50%] sm:w-11/12 md:w-3/4 lg:w-2/3 xl:w-1/2 rounded-lg shadow-lg overflow-hidden">
             <div className="bg-gray-200 px-4 py-3">
               <h2 className="text-lg font-semibold text-gray-800">
                 Edit Product
@@ -190,96 +189,15 @@ const Products = () => {
             {/* Edit Modal Content */}
             <div className="p-4">
               <div className="mb-4">
-                <label className="block text-gray-700 mb-2">
-                  Images (comma-separated)
-                </label>
+                <label className="block text-gray-700 mb-2">Title</label>
                 <input
                   type="text"
                   className="border rounded w-full py-2 px-3"
-                  value={selectedProduct.images.join(", ")} // Join the array into a comma-separated string
+                  value={selectedProduct.merchTitle}
                   onChange={(e) =>
                     setSelectedProduct({
                       ...selectedProduct,
-                      images: e.target.value
-                        .split(",")
-                        .map((item) => item.trim()), // Split the input string into an array
-                    })
-                  }
-                />
-              </div>
-              <div className="mb-4">
-                <label className="block text-gray-700 mb-2">
-                  Tags (comma-separated)
-                </label>
-                <input
-                  type="text"
-                  className="border rounded w-full py-2 px-3"
-                  value={selectedProduct.tags.join(", ")} // Join the array into a comma-separated string
-                  onChange={(e) =>
-                    setSelectedProduct({
-                      ...selectedProduct,
-                      tags: e.target.value
-                        .split(",")
-                        .map((item) => item.trim()), // Split the input string into an array
-                    })
-                  }
-                />
-              </div>
-
-              <div className="mb-4">
-                <label className="block text-gray-700 mb-2">Price</label>
-                <input
-                  type="text"
-                  className="border rounded w-full py-2 px-3"
-                  value={selectedProduct.price}
-                  onChange={(e) =>
-                    setSelectedProduct({
-                      ...selectedProduct,
-                      price: e.target.value,
-                    })
-                  }
-                />
-              </div>
-              <div className="mb-4">
-                <label className="block text-gray-700 mb-2">Discount</label>
-                <input
-                  type="text"
-                  className="border rounded w-full py-2 px-3"
-                  value={selectedProduct.discount}
-                  onChange={(e) =>
-                    setSelectedProduct({
-                      ...selectedProduct,
-                      discount: e.target.value,
-                    })
-                  }
-                />
-              </div>
-              <div className="mb-4">
-                <label className="block text-gray-700 mb-2">
-                  Available Quantity
-                </label>
-                <input
-                  type="text"
-                  className="border rounded w-full py-2 px-3"
-                  value={selectedProduct.availableQuantity}
-                  onChange={(e) =>
-                    setSelectedProduct({
-                      ...selectedProduct,
-                      availableQuantity: e.target.value,
-                    })
-                  }
-                />
-              </div>
-              <div className="mb-4">
-                <label className="block text-gray-700 mb-2">Expiry Date</label>
-                <input
-                  type="date"
-                  className="border rounded w-full py-2 px-3"
-                  value={selectedProduct.lastDate}
-                  onChange={(e) =>
-                    setSelectedProduct({
-                      ...selectedProduct,
-                      lastDate: e.target.value,
+                      merchTitle: e.target.value,
                     })
                   }
                 />
@@ -299,15 +217,98 @@ const Products = () => {
                 />
               </div>
               <div className="mb-4">
-                <label className="block text-gray-700 mb-2">Title</label>
+                <label className="block text-gray-700 mb-2">
+                  Images (comma-separated)
+                </label>
                 <input
                   type="text"
                   className="border rounded w-full py-2 px-3"
-                  value={selectedProduct.merchTitle}
+                  value={selectedProduct.images.join(", ")}
                   onChange={(e) =>
                     setSelectedProduct({
                       ...selectedProduct,
-                      merchTitle: e.target.value,
+                      images: e.target.value
+                        .split(",")
+                        .map((item) => item.trim()),
+                    })
+                  }
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-gray-700 mb-2">
+                  Tags (comma-separated)
+                </label>
+                <input
+                  type="text"
+                  className="border rounded w-full py-2 px-3"
+                  value={selectedProduct.tags.join(", ")}
+                  onChange={(e) =>
+                    setSelectedProduct({
+                      ...selectedProduct,
+                      tags: e.target.value
+                        .split(",")
+                        .map((item) => item.trim()),
+                    })
+                  }
+                />
+              </div>
+              <div className="flex justify-between">
+                <div className="mb-4">
+                  <label className="block text-gray-700 mb-2">Price</label>
+                  <input
+                    type="text"
+                    className="border rounded w-full py-2 px-3"
+                    value={selectedProduct.price}
+                    onChange={(e) =>
+                      setSelectedProduct({
+                        ...selectedProduct,
+                        price: e.target.value,
+                      })
+                    }
+                  />
+                </div>
+                <div className="mb-4">
+                  <label className="block text-gray-700 mb-2">Discount</label>
+                  <input
+                    type="text"
+                    className="border rounded w-full py-2 px-3"
+                    value={selectedProduct.discount}
+                    onChange={(e) =>
+                      setSelectedProduct({
+                        ...selectedProduct,
+                        discount: e.target.value,
+                      })
+                    }
+                  />
+                </div>
+                <div className="mb-4">
+                  <label className="block text-gray-700 mb-2">
+                    Available Quantity
+                  </label>
+                  <input
+                    type="text"
+                    className="border rounded w-full py-2 px-3"
+                    value={selectedProduct.availableQuantity}
+                    onChange={(e) =>
+                      setSelectedProduct({
+                        ...selectedProduct,
+                        availableQuantity: e.target.value,
+                      })
+                    }
+                  />
+                </div>
+              </div>
+
+              <div className="mb-4">
+                <label className="block text-gray-700 mb-2">Expiry Date</label>
+                <input
+                  type="date"
+                  className="border rounded w-full py-2 px-3"
+                  value={selectedProduct.lastDate}
+                  onChange={(e) =>
+                    setSelectedProduct({
+                      ...selectedProduct,
+                      lastDate: e.target.value,
                     })
                   }
                 />
