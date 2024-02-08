@@ -27,6 +27,7 @@ export const NftPage = () => {
       })
       .then((response) => {
         setApiResponseData(response.data.response);
+        console.log("NFT DATA:", response.data.response)
       })
       .catch((error) => {
         setError("Error fetching API data");

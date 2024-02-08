@@ -1,12 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useCart } from '../context/cart/CartContext';
+import { useNavigate } from 'react-router-dom';  // Import useNavigate
 
 const CartPage = () => {
     const { cart, removeFromCart } = useCart();
+    const [productDetails, setProductDetails] = useState(cart.items.map(item => ({
+        // productImage: item.image,
+        quantity: item.quantity,
+        color: item.color,
+        size: item.size,
+        // quality: '',
+        verificationId: "RNO123",
+    })));
+
+    const navigate = useNavigate();  // Use useNavigate hook for navigation
 
     const handleRemoveItemClick = (itemIndex) => {
         removeFromCart(itemIndex);
         console.log(`Item at index ${itemIndex} removed from the cart`);
+    };
+
+    const handleProceedToCheckout = () => {
+        // Pass the productDetails to the next page where user information is collected
+        console.log(productDetails);
+        navigate('/myForm', { state: { productDetails } });
     };
 
     return (
@@ -41,6 +58,12 @@ const CartPage = () => {
                     </li>
                 ))}
             </ul>
+            <button
+                onClick={handleProceedToCheckout}
+                className="text-white bg-green-500 px-4 py-2 mt-4 rounded-md"
+            >
+                Proceed to Checkout
+            </button>
         </div>
     );
 };

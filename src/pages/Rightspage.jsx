@@ -67,68 +67,7 @@ export const Rightspage = () => {
 
   const handleSubmitPost = (e) => {
     e.preventDefault();
-    // console.log(merch3LicenseCondition)
-    //   const options = {
-    //     method: "POST",
-    //     url: "http://127.0.0.1:8000/drm/user/askRights/",
-    //     headers: { "Content-Type": "application/json" },
-    //     data: {
-    //       // walletId: fetchedWalletId.toString(),
-    //       walletId: '65a67bd20033cb5001382f38',
-    //       nftId: nftId,
-    //       userLicenseCondition: userLicenseCondition,
-    //       imgSrc: state.data.imgSource,
-    //       capRights: {
-    //         merchantQuantity: quantity3,
-    //         merchTitle: nftName,
-    //         licenseFees: price3,
-    //         merchLicenseCondition: merch3LicenseCondition,
-    //         licenseTerm: licenseTerm3,
-    //         rightsGiven: false,
-    //       },
-    //       tshirtRights: {
-    //         merchantQuantity: quantity1,
-    //         merchTitle: nftName,
-    //         licenseFees: price1,
-    //         merchLicenseCondition: merch1LicenseCondition,
-    //         licenseTerm: licenseTerm1,
-    //         rightsGiven: false,
-    //       },
-    //       hoodieRights: {
-    //         merchantQuantity: quantity2,
-    //         merchTitle: nftName,
-    //         licenseFees: price2,
-    //         merchLicenseCondition: merch2LicenseCondition,
-    //         licenseTerm: licenseTerm2,
-    //         rightsGiven: false,
-    //       },
-    //       mugRights: {
-    //         merchantQuantity: quantity4,
-    //         merchTitle: nftName,
-    //         licenseFees: price4,
-    //         merchLicenseCondition: merch4LicenseCondition,
-    //         licenseTerm: licenseTerm4,
-    //         rightsGiven: false,
-    //       },
-    //     },
-    //   };
-
-    //   axios
-    //     .request(options)
-    //     .then(function (response) {
-    //       console.log(response.data);
-    //       console.log(fetchedWalletId);
     handleNext(state.data.imgSource, state.data.name, state.data.price);
-    //     })
-    //     .catch(function (error) {
-    //       console.error(error);
-    //     });
-    // };
-
-    // function handleNext(imgsrc, name, price) {
-    //   const data = { imgSource: imgsrc, name: name, price: price };
-    //   navigate("/AgreementPage", { state: { data } });
-    // }
   };
 
   const handleNext = (imgsrc, name, price) => {

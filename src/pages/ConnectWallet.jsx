@@ -16,14 +16,14 @@ const ConnectWallet = () => {
   const [defaultAccount, setDefaultAccount] = useState(null);
   const [userBalance, setUserBalance] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-   // New state for login status
+  // New state for login status
   const {
     fetchedWalletAddress,
     setFetchedWalletAddress,
     fetchedWalletId,
     setFetchedWalletId,
     fetchedWalletType,
-    setFetchedWalletType,nftId, setNftId
+    setFetchedWalletType, nftId, setNftId
   } = useContext(WalletIDMainContext);
   const navigate = useNavigate();
 
@@ -55,7 +55,7 @@ const ConnectWallet = () => {
             walletAddress: "0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d",//result[0] dalna idhar dynamic ke liye
             walletType: walletType,
             totalRefferal: ["saluh"],
-            
+
           };
 
           axios
@@ -67,6 +67,7 @@ const ConnectWallet = () => {
               console.log(fetchedWalletId)
               // console.log(response.data.response.walletId.toString());
               // console.log("Below is nft id");
+              console.log("Hamara response", response.data.response);
               setNftId(response.data.response.nftId.toString());
 
               // console.log(response.data.response.nftId.toString());
