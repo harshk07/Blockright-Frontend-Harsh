@@ -9,21 +9,20 @@ import image2 from "../Images/metamask.png";
 import image3 from "../Images/trust-wallet.png";
 import image4 from "../Images/wallet-connect.png";
 import WalletIDMainContext from "../context/walletID/WalletIDMainContext";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
+import { useNavigate } from "react-router-dom";
 
 const ConnectWallet = () => {
   const [errorMessage, setErrorMessage] = useState(null);
   const [defaultAccount, setDefaultAccount] = useState(null);
   const [userBalance, setUserBalance] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-   // New state for login status
+  // New state for login status
   const {
-    fetchedWalletAddress,
     setFetchedWalletAddress,
     fetchedWalletId,
     setFetchedWalletId,
-    fetchedWalletType,
-    setFetchedWalletType,nftId, setNftId
+    setFetchedWalletType,
+    setNftId,
   } = useContext(WalletIDMainContext);
   const navigate = useNavigate();
 
@@ -52,19 +51,19 @@ const ConnectWallet = () => {
           }
 
           const dataToSave = {
-            walletAddress: "0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d",//result[0] dalna idhar dynamic ke liye
+            walletAddress: "0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d", //result[0] dalna idhar dynamic ke liye
             walletType: walletType,
             totalRefferal: ["saluh"],
-            
           };
 
+          localStorage.setItem("walletAddress", dataToSave.walletAddress);
           axios
             .post("http://127.0.0.1:8000/user/login", dataToSave)
             .then(function (response) {
               // console.log(response);
               // setFetchedWalletAddress(response.walletId);
               setFetchedWalletId(response.data.response.walletId.toString());
-              console.log(fetchedWalletId)
+              console.log(fetchedWalletId);
               // console.log(response.data.response.walletId.toString());
               // console.log("Below is nft id");
               setNftId(response.data.response.nftId.toString());
@@ -79,11 +78,11 @@ const ConnectWallet = () => {
         })
         .catch((error) => {
           console.log(error);
-          setErrorMessage('Not able to connect wallet');
+          setErrorMessage("Not able to connect wallet");
         });
     } else {
       //Edited this message { converted in english }
-      setErrorMessage('Install Metamask or use correct ethereum');
+      setErrorMessage("Install Metamask or use correct ethereum");
     }
   };
 
@@ -133,7 +132,9 @@ const ConnectWallet = () => {
             className="cursor-pointer w-60 flex text-gray-300 rounded-lg p-2 my-1.5 bg-white font-medium  brightness-50 relative"
             disabled={!window.ethereum}
           >
-            <span className="absolute top-2 left-14 font-bold text-black">Coming Soon...</span>
+            <span className="absolute top-2 left-14 font-bold text-black">
+              Coming Soon...
+            </span>
             <span className="w-fit ml-[12rem] absolute z-10">
               <img className="w-[30px]" src={image1} alt="Wallet" />
             </span>
@@ -144,7 +145,9 @@ const ConnectWallet = () => {
             className="cursor-pointer w-60 flex text-gray-300 rounded-lg p-2 my-1.5 bg-white font-medium brightness-50 relative"
             disabled={!window.ethereum}
           >
-            <span className="absolute top-2 left-14 font-bold text-black">Coming Soon...</span>
+            <span className="absolute top-2 left-14 font-bold text-black">
+              Coming Soon...
+            </span>
             <span className="cursor-pointer w-fit ml-[12rem] absolute z-10">
               <img className="w-[30px]" src={image3} alt="Wallet" />
             </span>
@@ -155,7 +158,9 @@ const ConnectWallet = () => {
             className="cursor-pointer w-60 flex text-gray-300 rounded-lg p-2 my-1.5 bg-white font-medium brightness-50 relative"
             disabled={!window.ethereum}
           >
-            <span className="absolute top-2 left-14 font-bold text-black">Coming Soon...</span>
+            <span className="absolute top-2 left-14 font-bold text-black">
+              Coming Soon...
+            </span>
             <span className="cursor-pointer w-fit ml-[12rem] absolute z-10">
               <img className="w-[30px]" src={image4} alt="Wallet" />
             </span>

@@ -45,7 +45,6 @@ const PendingRights = () => {
                             <p>Merchant Quantity: {rightsData.merchantQuantity}</p>
                             <p>Merch Title: {rightsData.merchTitle}</p>
                             <p>License Fees: {rightsData.licenseFees}</p>
-                            {/* Add more properties as needed */}
                         </div>
                     );
                 })}
