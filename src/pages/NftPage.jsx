@@ -10,6 +10,7 @@ export const NftPage = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+  const localWalletId = localStorage.getItem("walletID");
 
   const { fetchedWalletId, fetchedWalletAddress } =
     useContext(WalletIDMainContext);
@@ -23,7 +24,7 @@ export const NftPage = () => {
     setError(null);
     axios
       .get("http://127.0.0.1:8000/nft/get/", {
-        params: { userID: fetchedWalletId },
+        params: { userID: localWalletId },
       })
       .then((response) => {
         setApiResponseData(response.data.response);

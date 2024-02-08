@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../Images/blockright-logo.png";
-
+import { useNavigate } from "react-router-dom";
 const Navbar2 = () => {
   const [myValue, setMyValue] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const storedValue = localStorage.getItem("walletAddress");
@@ -17,6 +18,11 @@ const Navbar2 = () => {
     const startPart = address.slice(0, 7);
     const endPart = address.slice(-6);
     return `${startPart}......${endPart}`;
+  };
+  const handleLogout = () => {
+    localStorage.removeItem("walletID");
+    localStorage.removeItem("walletAddress");
+    navigate("/");
   };
 
   return (
@@ -32,6 +38,7 @@ const Navbar2 = () => {
           <p>{truncateWalletAddress(myValue)}</p>
         </button>
       </div>
+      <button onClick={handleLogout}>Logout</button>
     </div>
   );
 };
