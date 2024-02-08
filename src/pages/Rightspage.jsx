@@ -15,16 +15,22 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import axios from "axios"; // Import Axios
 
 export const Rightspage = () => {
-  const { fetchedWalletAddress, nftName, fetchedWalletId, fetchNftImage, nftId, setNftId } =
-    useContext(WalletIDMainContext);
+  const {
+    fetchedWalletAddress,
+    nftName,
+    fetchedWalletId,
+    fetchNftImage,
+    nftId,
+    setNftId,
+  } = useContext(WalletIDMainContext);
   const [licenseTerm1, setLicenseTerm1] = useState("");
   const [licenseTerm2, setLicenseTerm2] = useState("");
   const [licenseTerm3, setLicenseTerm3] = useState("");
   const [licenseTerm4, setLicenseTerm4] = useState("");
-  const [merch1LicenseCondition, setMerch1LicenseCondition] = useState();
-  const [merch2LicenseCondition, setMerch2LicenseCondition] = useState();
-  const [merch3LicenseCondition, setMerch3LicenseCondition] = useState();
-  const [merch4LicenseCondition, setMerch4LicenseCondition] = useState();
+  const [merch1LicenseCondition, setMerch1LicenseCondition] = useState("");
+  const [merch2LicenseCondition, setMerch2LicenseCondition] = useState("");
+  const [merch3LicenseCondition, setMerch3LicenseCondition] = useState("");
+  const [merch4LicenseCondition, setMerch4LicenseCondition] = useState("");
   const [userLicenseCondition, setUserLicenseCondition] = useState();
 
   useEffect(() => {
@@ -77,46 +83,42 @@ export const Rightspage = () => {
       price: price,
       userLicenseCondition: userLicenseCondition,
       tshirtRights: {
-        merchantQuantity: quantity1,
+        merchantQuantity: parseInt(quantity1),
         merchTitle: nftName,
-        licenseFees: price1,
+        licenseFees: parseFloat(price1),
         merchLicenseCondition: merch1LicenseCondition,
         licenseTerm: licenseTerm1,
         rightsGiven: false,
       },
       hoodieRights: {
-        merchantQuantity: quantity2,
+        merchantQuantity: parseInt(quantity2),
         merchTitle: nftName,
-        licenseFees: price2,
+        licenseFees: parseFloat(price2),
         merchLicenseCondition: merch2LicenseCondition,
         licenseTerm: licenseTerm2,
         rightsGiven: false,
       },
       capRights: {
-        merchantQuantity: quantity3,
+        merchantQuantity: parseInt(quantity3),
         merchTitle: nftName,
-        licenseFees: price3,
-        merchLicenseCondition: merch3LicenseCondition,
+        licenseFees: parseFloat(price3),
         licenseTerm: licenseTerm3,
+        merchLicenseCondition: merch3LicenseCondition,
         rightsGiven: false,
       },
       mugRights: {
-        merchantQuantity: quantity4,
+        merchantQuantity: parseInt(quantity4),
         merchTitle: nftName,
-        licenseFees: price4,
-        merchLicenseCondition: merch4LicenseCondition,
+        licenseFees: parseFloat(price4),
         licenseTerm: licenseTerm4,
+        merchLicenseCondition: merch4LicenseCondition,
         rightsGiven: false,
-      }
+      },
     };
 
     navigate("/AgreementPage", { state: { agreementPageData: data } });
-    // console.log({ data })
-    // console.log(data['imgSource'])
-    // console.log(data.mugRights.merchantQuantity)
+    console.log(data);
   };
-
-
 
   return (
     <div className="bg-black">
@@ -186,7 +188,7 @@ export const Rightspage = () => {
                   <div className="flex">
                     <p className="font-bold text-blue-800"> $ </p>
                     <input
-                      type="text"
+                      type="number"
                       value={price1}
                       onChange={(event) => {
                         // Update the license term in the parent component
@@ -211,7 +213,7 @@ export const Rightspage = () => {
                   <p className="font-medium mt-5">Quantity</p>
                   <div className="flex">
                     <input
-                      type="text"
+                      type="number"
                       value={quantity1}
                       onChange={(event) => {
                         // Update the license term in the parent component
@@ -306,7 +308,7 @@ export const Rightspage = () => {
                   <div className="flex">
                     <p className="font-bold text-blue-800"> $ </p>
                     <input
-                      type="text"
+                      type="number"
                       value={price2}
                       onChange={(event) => {
                         // Update the license term in the parent component
@@ -331,7 +333,7 @@ export const Rightspage = () => {
                   <p className="font-medium mt-5">Quantity</p>
                   <div className="flex">
                     <input
-                      type="text"
+                      type="number"
                       value={quantity2}
                       onChange={(event) => {
                         // Update the license term in the parent component
@@ -428,7 +430,7 @@ export const Rightspage = () => {
                   <div className="flex">
                     <p className="font-bold text-blue-800"> $ </p>
                     <input
-                      type="text"
+                      type="number"
                       value={price3}
                       onChange={(event) => {
                         // Update the license term in the parent component
@@ -453,7 +455,7 @@ export const Rightspage = () => {
                   <p className="font-medium mt-5">Quantity</p>
                   <div className="flex">
                     <input
-                      type="text"
+                      type="number"
                       value={quantity3}
                       onChange={(event) => {
                         // Update the license term in the parent component
@@ -517,8 +519,8 @@ export const Rightspage = () => {
                   </select>
 
                   <h2 className="font-bold texl-xl text-black mt-5">
-                    <div className="border-b w-32 border-black"></div>
-                    $ {result3} estimated earning from license royalty
+                    <div className="border-b w-32 border-black"></div>${" "}
+                    {result3} estimated earning from license royalty
                   </h2>
                   {/* <div className="flex mt-2">
                     <p className="">
@@ -550,7 +552,7 @@ export const Rightspage = () => {
                   <div className="flex">
                     <p className="font-bold text-blue-800"> $ </p>
                     <input
-                      type="text"
+                      type="number"
                       value={price4}
                       onChange={(event) => {
                         // Update the license term in the parent component
@@ -575,7 +577,7 @@ export const Rightspage = () => {
                   <p className="font-medium mt-5">Quantity</p>
                   <div className="flex">
                     <input
-                      type="text"
+                      type="number"
                       value={quantity4}
                       onChange={(event) => {
                         // Update the license term in the parent component
