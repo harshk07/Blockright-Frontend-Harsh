@@ -5,7 +5,7 @@ import { Footer2 } from "../layout/Footer2";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import WalletIDMainContext from "../context/walletID/WalletIDMainContext";
 import axios from "axios";
-import Web3 from 'web3';
+import Web3 from "web3";
 
 export const AgreementPage = () => {
   const location = useLocation();
@@ -13,6 +13,10 @@ export const AgreementPage = () => {
   const { state } = location;
 
   const { fetchedWalletAddress, nftId } = useContext(WalletIDMainContext);
+  const walletAddress = localStorage.getItem(
+    "walletAddress",
+    fetchedWalletAddress
+  );
   const [agreed, setAgreed] = useState(false);
 
   const web3 = new Web3(window.ethereum);
@@ -36,88 +40,71 @@ export const AgreementPage = () => {
     }
   }, [state, navigate]);
 
-  // const convertToIntegerOrZero = (value) => {
-  //   const integerValue = parseInt(value, 10);
-  //   return isNaN(integerValue) ? 0 : integerValue;
-  // };
-
-  const convertToIntegerOrZero = (value) => {
-    const integerValue = parseInt(value, 10);
-
-    // Check if the conversion is successful and the result is not NaN
-    // If the conversion fails, return 0
-    return Number.isInteger(integerValue) ? integerValue : 0;
-  };
-
   const submitRights = () => {
+    console.log("state hai", state);
     if (state && state.agreementPageData) {
       const apiData = state.agreementPageData;
+      console.log("apidata", apiData);
+      const options = {
+        method: "POST",
+        url: "http://127.0.0.1:8000/drm/user/askRights/",
+        headers: { "Content-Type": "application/json" },
+        data: {
+          walletId: "65b29d08da0fbcb895da9372",
+          nftId: "65b29d08da0fbcb895da9373",
+          userLicenseCondition: apiData.userLicenseCondition,
+          imgSrc: apiData.imgSource,
+          capRights: {
+            merchantQuantity: apiData.capRights.merchantQuantity,
+            rightsGiven: false,
+            merchTitle: apiData.capRights.merchTitle,
+            licenseFees: apiData.capRights.licenseFees,
+            merchLicenseCondition: apiData.capRights.merchLicenseCondition,
+            licenseTerm: apiData.capRights.licenseTerm,
+          },
+          tshirtRights: {
+            merchantQuantity: apiData.tshirtRights.merchantQuantity,
+            rightsGiven: false,
+            merchTitle: apiData.tshirtRights.merchTitle,
+            licenseFees: apiData.tshirtRights.licenseFees,
+            merchLicenseCondition: apiData.tshirtRights.merchLicenseCondition,
+            licenseTerm: apiData.tshirtRights.licenseTerm,
+          },
+          hoodieRights: {
+            merchantQuantity: apiData.hoodieRights.merchantQuantity,
+            rightsGiven: false,
+            merchTitle: apiData.hoodieRights.merchTitle,
+            licenseFees: apiData.hoodieRights.licenseFees,
+            merchLicenseCondition: apiData.hoodieRights.merchLicenseCondition,
+            licenseTerm: apiData.hoodieRights.licenseTerm,
+          },
+          mugRights: {
+            merchantQuantity: apiData.mugRights.merchantQuantity,
+            rightsGiven: false,
+            merchTitle: apiData.mugRights.merchTitle,
+            licenseFees: apiData.mugRights.licenseFees,
+            merchLicenseCondition: apiData.mugRights.merchLicenseCondition,
+            licenseTerm: apiData.mugRights.licenseTerm,
+          },
+        },
+      };
+      console.log(options)
 
-      // Make the API call here using axios
-      //     const options = {
-      //       method: "POST",
-      //       url: "http://127.0.0.1:8000/drm/user/askRights/",
-      //       headers: { "Content-Type": "application/json" },
-      //       data: {
-      //         walletId: '65a67bd20033cb5001382f38',
-      //         nftId: nftId,
-      //         userLicenseCondition: apiData.userLicenseCondition,
-      //         imgSrc: apiData.imgSource,
-      //         capRights: {
-      //           merchantQuantity: convertToIntegerOrZero(apiData.capRights.merchantQuantity),
-      //           rightsGiven: false,
-      //           merchTitle: apiData.capRights.merchTitle,
-      //           licenseFees: convertToIntegerOrZero(apiData.capRights.licenseFees),
-      //           merchLicenseCondition: apiData.capRights.merchLicenseCondition,
-      //           licenseTerm: apiData.capRights.licenseTerm
-      //         },
-      //         tshirtRights: {
-      //           merchantQuantity: convertToIntegerOrZero(apiData.tshirtRights.merchantQuantity),
-      //           rightsGiven: false,
-      //           merchTitle: apiData.tshirtRights.merchTitle,
-      //           licenseFees: convertToIntegerOrZero(apiData.tshirtRights.licenseFees),
-      //           merchLicenseCondition: apiData.tshirtRights.merchLicenseCondition,
-      //           licenseTerm: apiData.tshirtRights.licenseTerm
-      //         },
-      //         hoodieRights: {
-      //           merchantQuantity: convertToIntegerOrZero(apiData.hoodieRights.merchantQuantity),
-      //           rightsGiven: false,
-      //           merchTitle: apiData.hoodieRights.merchTitle,
-      //           licenseFees: convertToIntegerOrZero(apiData.hoodieRights.licenseFees),
-      //           merchLicenseCondition: apiData.hoodieRights.merchLicenseCondition,
-      //           licenseTerm: apiData.hoodieRights.licenseTerm
-      //         },
-      //         mugRights: {
-      //           merchantQuantity: convertToIntegerOrZero(apiData.mugRights.merchantQuantity),
-      //           rightsGiven: false,
-      //           merchTitle: apiData.mugRights.merchTitle,
-      //           licenseFees: convertToIntegerOrZero(apiData.mugRights.licenseFees),
-      //           merchLicenseCondition: apiData.mugRights.merchLicenseCondition,
-      //           licenseTerm: apiData.mugRights.licenseTerm
-      //         }
-      //       }
-      //     };
-
-      //     axios
-      //       .request(options)
-      //       .then(function (response) {
-      //         console.log(response.data);
-      //         // Handle success
-      //       })
-      //       .catch(function (error) {
-      //         console.error(error);
-      //         // Handle error
-      //       });
-      console.log(typeof (convertToIntegerOrZero(apiData.capRights.merchantQuantity)))
-      console.log(convertToIntegerOrZero(apiData.capRights.merchantQuantity))
+      axios
+        .request(options)
+        .then(function (response) {
+          console.log(response.data);
+        })
+        .catch(function (error) {
+          console.error(error);
+        });
     }
-
   };
 
   function stringToHex(str) {
-    let hex = '';
+    let hex = "";
     for (let i = 0; i < str.length; i++) {
-      hex += str.charCodeAt(i).toString(16).padStart(2, '0');
+      hex += str.charCodeAt(i).toString(16).padStart(2, "0");
     }
     return hex;
   }
@@ -139,22 +126,28 @@ export const AgreementPage = () => {
         // Check if MetaMask is installed and connected
         if (window.ethereum && window.ethereum.isMetaMask) {
           // Request account access if not already granted
-          const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
+          const accounts = await window.ethereum.request({
+            method: "eth_requestAccounts",
+          });
           const from = accounts[0];
 
           // Your signing logic goes here
-          const exampleMessage = 'By signing this you agree for the minting of the NFTs';
+          const exampleMessage =
+            "By signing this you agree for the minting of the NFTs";
           // const msg = `0x${Buffer.from(exampleMessage, 'utf8').toString('hex')}`;
           const msg = `0x${stringToHex(exampleMessage)}`;
           const sign = await window.ethereum.request({
-            method: 'personal_sign',
+            method: "personal_sign",
             params: [msg, from],
           });
 
-          console.log('Signature:', sign);
-          console.log('fethchedWalletAddress:', fetchedWalletAddress);
+          console.log("Signature:", sign);
+          console.log("fethchedWalletAddress:", fetchedWalletAddress);
           var recoveredAddress = await recover(msg, sign);
-          if (recoveredAddress === fetchedWalletAddress) {
+          if (
+            recoveredAddress === fetchedWalletAddress ||
+            recoveredAddress === walletAddress
+          ) {
             // User is authenticated
             console.log("User authenticated");
             // Proceed with minting or other actions
@@ -168,7 +161,6 @@ export const AgreementPage = () => {
           }
 
           // Now you can proceed with minting or perform other actions with the signature
-
         } else {
           // MetaMask not available or not connected
           alert("Please install and connect MetaMask to proceed.");
@@ -224,7 +216,7 @@ export const AgreementPage = () => {
   // };
 
   return (
-    <div className='bg-black'>
+    <div className="bg-black">
       <Navbar2 value={fetchedWalletAddress} />
       <section className="mx-[9rem] lg:mx-auto lg:w-[55rem] 2xl:w-[75rem] 2xl:mx-auto">
         <div className=" pb-[45px]">
@@ -405,15 +397,15 @@ export const AgreementPage = () => {
                   onChange={handleCheckboxChange}
                 />
                 <span style={{ margin: "7px" }}>I agree to the</span>
-                <a href="terms.html" target="_blank" style={{ "color": "blue" }}>
+                <a href="terms.html" target="_blank" style={{ color: "blue" }}>
                   terms and conditions
                 </a>
               </label>
               <div className="flex my-10">
-
                 <button
                   className="btn w-54 font-semibold text-xl rounded-none border=1 border-blue"
-                  onClick={handleMintMerch}>
+                  onClick={handleMintMerch}
+                >
                   Mint Merch
                 </button>
               </div>
