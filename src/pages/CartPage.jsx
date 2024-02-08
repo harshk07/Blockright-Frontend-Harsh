@@ -5,13 +5,17 @@ import { useNavigate } from 'react-router-dom';  // Import useNavigate
 const CartPage = () => {
     const { cart, removeFromCart } = useCart();
     const [productDetails, setProductDetails] = useState(cart.items.map(item => ({
-        // productImage: item.image,
+        productId: item.productId,
+        productTitle: item.title,
+        productImage: item.imgSource,
+        price: item.price,
         quantity: item.quantity,
-        color: item.color,
         size: item.size,
-        // quality: '',
+        color: item.color,
         verificationId: "RNO123",
     })));
+
+    console.log("Image URL in cartPage:", productDetails.imgSource);
 
     const navigate = useNavigate();  // Use useNavigate hook for navigation
 
@@ -22,7 +26,7 @@ const CartPage = () => {
 
     const handleProceedToCheckout = () => {
         // Pass the productDetails to the next page where user information is collected
-        console.log(productDetails);
+        console.log("Products after checking out:", productDetails);
         navigate('/myForm', { state: { productDetails } });
     };
 

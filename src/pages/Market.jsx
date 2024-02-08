@@ -25,12 +25,17 @@ export const Market = () => {
 
   const handleAddToCart = () => {
     const itemsToAdd = quantities.map((quantity, index) => ({
+      productId: selectItem._id,
       title: selectItem.merchTitle,
+      imgSource: selectItem.images[0],
       price: selectItem.price,
       quantity: quantity,
       size: selectedSizes[index], // Use selected size for each piece
       color: selectedColor[index],
+
     }));
+    console.log("Image URL in Market page:", selectItem.images[0]);
+    console.log("selected Product ID in Market page:", selectItem._id);
 
     itemsToAdd.forEach((item) => addToCart(item));
   };
@@ -103,12 +108,7 @@ export const Market = () => {
 
   const selectItem = nftData.find((item) => item._id === id);
 
-  // const handleSizeClick = (size) => {
-  //   setSelectedColor(size);
-  // };
-
   const Navigate = useNavigate();
-
   return (
     <div className="bg-black">
       <Navbar />

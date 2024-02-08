@@ -95,13 +95,36 @@ const MyForm = () => {
   };
 
   const sendOrderToAPI = () => {
-    const apiEndpoint = 'http://127.0.0.1:8000/order/ecommerce/';
+    // const apiEndpoint = 'http://127.0.0.1:8000/order/ecommerce/';
+    // const options = {
+    //   method: 'POST',
+    //   url: apiEndpoint,
+    //   headers: { 'Content-Type': 'application/json' },
+    //   data: {
+    //     // orderId: 'string',
+    //     userName: formData.userName,
+    //     userEmail: formData.userEmail,
+    //     userMobile: formData.userMobile,
+    //     city: formData.city,
+    //     country: formData.country,
+    //     address: formData.address,
+    //     pin: formData.pin,
+    //     products: productDetails,
+    //   },
+    // };
+
+    // axios.request(options)
+    //   .then(function (response) {
+    //     console.log(response.data);
+    //   })
+    //   .catch(function (error) {
+    //     console.error(error);
+    //   });
     const options = {
       method: 'POST',
-      url: apiEndpoint,
+      url: 'http://127.0.0.1:8000/order/ecommerce/',
       headers: { 'Content-Type': 'application/json' },
       data: {
-        // orderId: 'string',
         userName: formData.userName,
         userEmail: formData.userEmail,
         userMobile: formData.userMobile,
@@ -109,17 +132,15 @@ const MyForm = () => {
         country: formData.country,
         address: formData.address,
         pin: formData.pin,
-        products: productDetails,
-      },
+        products: productDetails
+      }
     };
 
-    axios.request(options)
-      .then(function (response) {
-        console.log(response.data);
-      })
-      .catch(function (error) {
-        console.error(error);
-      });
+    axios.request(options).then(function (response) {
+      console.log(response.data);
+    }).catch(function (error) {
+      console.error(error);
+    });
   };
 
   const handleStepNext = () => {
