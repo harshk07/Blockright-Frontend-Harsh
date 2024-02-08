@@ -5,32 +5,27 @@ import Punk from "./Punk";
 
 const Upload = () => {
   return (
-    <>
-      <div className="mx-[9rem] lg:mx-auto lg:w-[55rem] 2xl:w-[75rem] 2xl:mx-auto">
-        <div className="text-white flex  mt-14">
-          <div className="flex">
-            <Punk />
-          </div>
-
-          <div className="w-[25rem] ml-72 mt-">
+    <div className="flex justify-center items-center w-[100vw] px-10">
+      <div className="flex">
+        <div className="flex border-2 border-gray-500 rounded">
+          <Punk />
+        </div>
+        <div className="text-white flex mt-14 relative right-0">
+          <div className="w-[24rem] ml-72 mt-">
             <Link to="/NftPage">
-              <div className="border-2 border-dashed  rounded-xl text-2xl mb-[2rem] border-cyan-800 hover:bg-slate-600 hover:border-2 hover:border-dashed ml- h-44 flex justify-center items-center">
+              <div className="border-2 border-dashed rounded-xl text-2xl mb-[2rem] border-cyan-800 hover:bg-slate-600 hover:border-2 hover:border-dashed ml- h-44 flex justify-center items-center">
                 <h1>Mint your NFT Merch</h1>
               </div>
             </Link>
             <div className="flex mb-6 gap-7">
               <div className="bg-[#191E24] w-[11rem] h-[7rem] rounded-xl flex flex-col justify-center items-center">
                 <p className="text-blue-600 font-normal">Earned</p>
-                <p className="text-blue-600 text-5xl font-bold">
-                  $0
-                </p>
+                <p className="text-blue-600 text-5xl font-bold">$0</p>
               </div>
               <div className="bg-[#191E24] w-[11rem] h-[7rem] rounded-xl flex flex-col justify-center items-center">
                 <p
                   style={{
                     color: "grey",
-                    // paddingLeft: "20px",
-                    // fontSize: "20px",
                   }}
                   className=""
                 >
@@ -39,7 +34,6 @@ const Upload = () => {
                 <p
                   style={{
                     color: "orange",
-                    // paddingLeft: "20px",
                   }}
                   className="text-5xl font-bold"
                 >
@@ -56,7 +50,7 @@ const Upload = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

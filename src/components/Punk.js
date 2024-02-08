@@ -51,7 +51,7 @@ const Punk = () => {
       return (
         <div
           key={index}
-          className="mt-10 border-2 border-dashed p-3 rounded-lg mb-[3rem] border-cyan-800 hover:bg-slate-600 hover:border-2 hover:border-dashed flex min-h-52"
+          className="mt-10 border-2 border-dashed p-3 rounded-lg mb-[3rem] border-cyan-800 hover:bg-slate-600 hover:border-2 hover:border-dashed flex"
         >
           <div className="">
             <p className="text-xl font-bold">
