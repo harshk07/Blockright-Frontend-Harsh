@@ -63,6 +63,10 @@ const ConnectWallet = () => {
               // console.log(response);
               // setFetchedWalletAddress(response.walletId);
               setFetchedWalletId(response.data.response.walletId.toString());
+              localStorage.setItem(
+                "walletID",
+                response.data.response.walletId.toString()
+              );
               console.log(fetchedWalletId);
               // console.log(response.data.response.walletId.toString());
               // console.log("Below is nft id");
