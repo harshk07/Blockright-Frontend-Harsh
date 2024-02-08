@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { BsShareFill } from "react-icons/bs";
 import axios from "axios";
 import WalletIDMainContext from "../context/walletID/WalletIDMainContext";
@@ -7,15 +7,20 @@ const Punk = () => {
   const { fetchedWalletId, fetchRights, setFetchRights } =
     useContext(WalletIDMainContext);
 
+  console.log("fetched rights hai ye", fetchRights);
+  const [errorMessage, setErrorMessage] = useState("");
   useEffect(() => {
     const fetchRightsData = async () => {
       try {
         const response = await axios.get(
           "http://127.0.0.1:8000/user/getRights/",
-          // { params: { walletId: fetchedWalletId.toString() } }
-          // { params: { walletId: '65a67bd20033cb5001382f38' } }
-          { params: { walletId: '65a67bd20033cb5001382f38' } }
+          { params: { walletId: "65c4d0c466933724f9bbf1e0" } }
         );
+        console.log(response);
+        if (response.data.message) {
+          setErrorMessage(response.data.message);
+          return;
+        }
         const rightsData = Object.values(response.data);
         setFetchRights(rightsData);
       } catch (error) {
@@ -64,121 +69,133 @@ const Punk = () => {
             {/* cap */}
             {item.capRights.merchantQuantity * item.capRights.licenseFees >
               0 && (
-                <>
-                  <div className="flex gap-3 py-2">
+              <>
+                <div className="flex gap-3 py-2">
+                  <div>
+                    <p className="text-sm">
+                      {item.capRights.merchantQuantity || 0} capRights Minted{" "}
+                      {item.capRights.licenseFees || 0} license Fees{" "}
+                    </p>
+                    <p className="text-sm">
+                      {" "}
+                      0 sold, {item.capRights.merchantQuantity} left
+                    </p>
+                  </div>
+                  <div className="leading-0 flex">
                     <div>
-                      <p className="text-sm">
-                        {item.capRights.merchantQuantity || 0} capRights Minted{" "}
-                        {item.capRights.licenseFees || 0} license Fees{" "}
+                      <p className="text-2xl m-0 p-0 font-semibold">
+                        $
+                        {item.capRights.merchantQuantity *
+                          item.capRights.licenseFees || 0}
                       </p>
-                      <p className="text-sm"> 0 sold, {item.capRights.merchantQuantity} left</p>
+                      <p className="text-xs -mt-1 ml-2"> Earned</p>
                     </div>
-                    <div className="leading-0 flex">
-                      <div>
-                        <p className="text-2xl m-0 p-0 font-semibold">
-                          $
-                          {item.capRights.merchantQuantity *
-                            item.capRights.licenseFees || 0}
-                        </p>
-                        <p className="text-xs -mt-1 ml-2"> Earned</p>
-                      </div>
-                      <div className="text-2xl ml-2 mt-3">
-                        <BsShareFill />
-                      </div>
+                    <div className="text-2xl ml-2 mt-3">
+                      <BsShareFill />
                     </div>
                   </div>
-                  <p className="border-1 border-b"></p>
-                </>
-              )}
+                </div>
+                <p className="border-1 border-b"></p>
+              </>
+            )}
             {/* Tshirt */}
             {item.tshirtRights.merchantQuantity *
               item.tshirtRights.licenseFees >
               0 && (
-                <>
-                  <div className="flex gap-3 py-2">
+              <>
+                <div className="flex gap-3 py-2">
+                  <div>
+                    <p className="text-sm">
+                      {item.tshirtRights.merchantQuantity || 0} tshirtRights
+                      Minted {item.tshirtRights.licenseFees || 0} license Fees{" "}
+                    </p>
+                    <p className="text-sm">
+                      {" "}
+                      0 sold, {item.tshirtRights.merchantQuantity} left
+                    </p>
+                  </div>
+                  <div className="leading-0 flex">
                     <div>
-                      <p className="text-sm">
-                        {item.tshirtRights.merchantQuantity || 0} tshirtRights
-                        Minted {item.tshirtRights.licenseFees || 0} license Fees{" "}
+                      <p className="text-2xl m-0 p-0 font-semibold">
+                        $
+                        {item.tshirtRights.merchantQuantity *
+                          item.tshirtRights.licenseFees || 0}
                       </p>
-                      <p className="text-sm"> 0 sold, {item.tshirtRights.merchantQuantity} left</p>
+                      <p className="text-xs -mt-1 ml-2"> Earned</p>
                     </div>
-                    <div className="leading-0 flex">
-                      <div>
-                        <p className="text-2xl m-0 p-0 font-semibold">
-                          $
-                          {item.tshirtRights.merchantQuantity *
-                            item.tshirtRights.licenseFees || 0}
-                        </p>
-                        <p className="text-xs -mt-1 ml-2"> Earned</p>
-                      </div>
-                      <div className="text-2xl ml-2 mt-3">
-                        <BsShareFill />
-                      </div>
+                    <div className="text-2xl ml-2 mt-3">
+                      <BsShareFill />
                     </div>
                   </div>
-                  <p className="border-1 border-b"></p>
-                </>
-              )}
+                </div>
+                <p className="border-1 border-b"></p>
+              </>
+            )}
             {/* HoodieRights */}
             {item.hoodieRights.merchantQuantity *
               item.hoodieRights.licenseFees >
               0 && (
-                <>
-                  <div className="flex gap-3 py-2">
+              <>
+                <div className="flex gap-3 py-2">
+                  <div>
+                    <p className="text-sm">
+                      {item.hoodieRights.merchantQuantity || 0} hoodieRights
+                      Minted {item.hoodieRights.licenseFees || 0} license Fees{" "}
+                    </p>
+                    <p className="text-sm">
+                      {" "}
+                      0 sold, {item.hoodieRights.merchantQuantity} left
+                    </p>
+                  </div>
+                  <div className="leading-0 flex">
                     <div>
-                      <p className="text-sm">
-                        {item.hoodieRights.merchantQuantity || 0} hoodieRights
-                        Minted {item.hoodieRights.licenseFees || 0} license Fees{" "}
+                      <p className="text-2xl m-0 p-0 font-semibold">
+                        $
+                        {item.hoodieRights.merchantQuantity *
+                          item.hoodieRights.licenseFees || 0}
                       </p>
-                      <p className="text-sm"> 0 sold, {item.hoodieRights.merchantQuantity} left</p>
+                      <p className="text-xs -mt-1 ml-2"> Earned</p>
                     </div>
-                    <div className="leading-0 flex">
-                      <div>
-                        <p className="text-2xl m-0 p-0 font-semibold">
-                          $
-                          {item.hoodieRights.merchantQuantity *
-                            item.hoodieRights.licenseFees || 0}
-                        </p>
-                        <p className="text-xs -mt-1 ml-2"> Earned</p>
-                      </div>
-                      <div className="text-2xl ml-2 mt-3">
-                        <BsShareFill />
-                      </div>
+                    <div className="text-2xl ml-2 mt-3">
+                      <BsShareFill />
                     </div>
                   </div>
-                  <p className="border-1 border-b"></p>
-                </>
-              )}
+                </div>
+                <p className="border-1 border-b"></p>
+              </>
+            )}
             {/* mugRights */}
             {item.mugRights.merchantQuantity * item.mugRights.licenseFees >
               0 && (
-                <>
-                  <div className="flex gap-3 py-2">
+              <>
+                <div className="flex gap-3 py-2">
+                  <div>
+                    <p className="text-sm">
+                      {item.mugRights.merchantQuantity || 0} mugRights Minted{" "}
+                      {item.mugRights.licenseFees || 0} license Fees{" "}
+                    </p>
+                    <p className="text-sm">
+                      {" "}
+                      0 sold, {item.mugRights.merchantQuantity} left
+                    </p>
+                  </div>
+                  <div className="leading-0 flex">
                     <div>
-                      <p className="text-sm">
-                        {item.mugRights.merchantQuantity || 0} mugRights Minted{" "}
-                        {item.mugRights.licenseFees || 0} license Fees{" "}
+                      <p className="text-2xl m-0 p-0 font-semibold">
+                        $
+                        {item.mugRights.merchantQuantity *
+                          item.mugRights.licenseFees || 0}
                       </p>
-                      <p className="text-sm"> 0 sold, {item.mugRights.merchantQuantity} left</p>
+                      <p className="text-xs -mt-1 ml-2"> Earned</p>
                     </div>
-                    <div className="leading-0 flex">
-                      <div>
-                        <p className="text-2xl m-0 p-0 font-semibold">
-                          $
-                          {item.mugRights.merchantQuantity *
-                            item.mugRights.licenseFees || 0}
-                        </p>
-                        <p className="text-xs -mt-1 ml-2"> Earned</p>
-                      </div>
-                      <div className="text-2xl ml-2 mt-3">
-                        <BsShareFill />
-                      </div>
+                    <div className="text-2xl ml-2 mt-3">
+                      <BsShareFill />
                     </div>
                   </div>
-                  <p className="border-1 border-b"></p>
-                </>
-              )}
+                </div>
+                <p className="border-1 border-b"></p>
+              </>
+            )}
           </div>
           <div className="h- w-32 ml-5 mt-5">
             <img src={item.imgSrc} alt="" />
@@ -189,12 +206,15 @@ const Punk = () => {
     return null; // Add a semicolon here
   };
 
-  console.log("Fetch rights here", fetchRights)
+  console.log("Fetch rights here", fetchRights);
 
-  if (fetchRights.length === 21 && fetchRights[0] === 'U' && fetchRights[1] === 's') {
-    return <div className="text-xl font-bold flex items-center justify-center gap-3 w-[32rem]">No rights are approved !!</div>
+  if (errorMessage) {
+    return (
+      <div className="text-xl font-bold flex items-center justify-center gap-3 w-[32rem]">
+        {errorMessage}
+      </div>
+    );
   }
-
   return <div>{fetchRights.map(renderRightsCard)}</div>;
 };
 
