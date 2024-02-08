@@ -50,8 +50,8 @@ export const AgreementPage = () => {
         url: "http://127.0.0.1:8000/drm/user/askRights/",
         headers: { "Content-Type": "application/json" },
         data: {
-          walletId: "65b29d08da0fbcb895da9372",
-          nftId: "65b29d08da0fbcb895da9373",
+          walletId: "65c4d0c466933724f9bbf1e0",
+          nftId: "65c4d0c466933724f9bbf1e1",
           userLicenseCondition: apiData.userLicenseCondition,
           imgSrc: apiData.imgSource,
           capRights: {
