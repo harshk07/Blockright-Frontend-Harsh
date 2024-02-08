@@ -26,16 +26,15 @@ export const AgreementPage = () => {
   };
 
   useEffect(() => {
-    // Scroll the window to the top when the component mounts
+    if (nftId === "") {
+      navigate("/NftPage");
+    }
     window.scrollTo(0, 0);
   }, []);
 
   useEffect(() => {
-    // Check if location.state and location.state.agreementPageData exist
     if (!state || !state.agreementPageData) {
-      // Handle the case when location.state or agreementPageData is undefined
       console.error("location.state or agreementPageData is undefined");
-      // Optionally, navigate to an error page or a fallback page
       navigate("/error");
     }
   }, [state, navigate]);
@@ -50,8 +49,8 @@ export const AgreementPage = () => {
         url: "http://127.0.0.1:8000/drm/user/askRights/",
         headers: { "Content-Type": "application/json" },
         data: {
-          walletId: "65c4d0c466933724f9bbf1e0",
-          nftId: "65c4d0c466933724f9bbf1e1",
+          walletId: "65c4f232ecc0bd903efc8211",
+          nftId: nftId,
           userLicenseCondition: apiData.userLicenseCondition,
           imgSrc: apiData.imgSource,
           capRights: {
@@ -88,7 +87,7 @@ export const AgreementPage = () => {
           },
         },
       };
-      console.log(options)
+      console.log(options);
 
       axios
         .request(options)

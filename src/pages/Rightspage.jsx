@@ -6,13 +6,11 @@ import { useNavigate } from "react-router-dom";
 import WalletIDMainContext from "../context/walletID/WalletIDMainContext";
 import { useContext } from "react";
 import { useLocation } from "react-router-dom";
-
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import axios from "axios"; // Import Axios
 
 export const Rightspage = () => {
   const {
@@ -32,9 +30,13 @@ export const Rightspage = () => {
   const [merch3LicenseCondition, setMerch3LicenseCondition] = useState("");
   const [merch4LicenseCondition, setMerch4LicenseCondition] = useState("");
   const [userLicenseCondition, setUserLicenseCondition] = useState();
+  const navigate = useNavigate();
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    if (nftId === "") {
+      navigate("/NftPage");
+    }
   }, []);
 
   //T-shirts
@@ -67,7 +69,6 @@ export const Rightspage = () => {
 
   const totalEarning = calculateTotal - calculateCommision; // Calculate the total earnings
 
-  const navigate = useNavigate();
   const location = useLocation();
   const { state } = location;
 

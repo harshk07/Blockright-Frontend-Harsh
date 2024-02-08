@@ -9,8 +9,6 @@ const RightsAdmin = () => {
   const navigate = useNavigate();
 
   const [approvalStatus, setApprovalStatus] = useState({});
-  // const [imageUrl,setImageUrl]=useState("");
-  // const [nftId,setNftId]=useState("");
   const [approvalButtonDisabled, setApprovalButtonDisabled] = useState({});
 
   useEffect(() => {
@@ -39,8 +37,7 @@ const RightsAdmin = () => {
         });
 
         setFetchRights(filteredRights);
-        // setImageUrl(filteredRights.imgSrc);
-        // setNftId(filteredRights.nftId);///
+
       })
       .catch(function (error) {
         console.error(error);
