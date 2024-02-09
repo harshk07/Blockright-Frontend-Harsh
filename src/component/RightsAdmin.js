@@ -37,7 +37,6 @@ const RightsAdmin = () => {
         });
 
         setFetchRights(filteredRights);
-
       })
       .catch(function (error) {
         console.error(error);
@@ -74,13 +73,21 @@ const RightsAdmin = () => {
         console.error(error);
       });
   };
-  const AddNewProduct = (imgUrl, NftId, type, totalQuantity,merchTitle) => {
+  const AddNewProduct = (
+    imgUrl,
+    NftId,
+    type,
+    totalQuantity,
+    merchTitle,
+    walletId
+  ) => {
     const options = {
       method: "POST",
       url: "http://127.0.0.1:8000/ecommerce/add/",
       params: { adminId: "64e9acc80c8b7ac2f37f492f" },
       headers: { "Content-Type": "application/json" },
       data: {
+        walletId: walletId,
         nftId: NftId,
         category: type,
         originalImage: imgUrl,
@@ -92,8 +99,8 @@ const RightsAdmin = () => {
         totalQuantity: totalQuantity,
         availableQuantity: 0,
         lastDate: "2023-09-06T16:03:17.110Z",
-        description:"",
-        merchTitle:merchTitle
+        description: "",
+        merchTitle: merchTitle,
       },
     };
 
@@ -107,7 +114,15 @@ const RightsAdmin = () => {
       });
   };
 
-  const handleApprovalChange = (type, index, rightsId, imgSrc, nftId,item) => {
+  const handleApprovalChange = (
+    type,
+    index,
+    rightsId,
+    imgSrc,
+    nftId,
+    item,
+    walletId
+  ) => {
     // Check if the button is already disabled
     if (approvalButtonDisabled[`${type}_${index}`]) {
       return;
@@ -144,7 +159,7 @@ const RightsAdmin = () => {
       default:
         totalQuantity = 0;
     }
-    AddNewProduct(imgSrc, nftId, type,totalQuantity,merchTitle);
+    AddNewProduct(imgSrc, nftId, type, totalQuantity, merchTitle, walletId);
   };
 
   const renderMerchApproval = (item, type, index, rightsId) => {
@@ -176,18 +191,18 @@ const RightsAdmin = () => {
               <div>
                 <button
                   style={{ width: "100px" }}
-                  onClick={() =>{
+                  onClick={() => {
                     handleApprovalChange(
                       type,
                       index,
                       rightsId,
                       item.imgSrc,
                       item.nftId,
-                      item
-                    )
-                      navigate(0);
-                  }
-                  }
+                      item,
+                      item.walletId
+                    );
+                    navigate(0);
+                  }}
                   className={`${
                     approvalStatus[`${type}_${index}`]
                       ? "bg-green-500"
