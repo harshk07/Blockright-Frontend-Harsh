@@ -2,6 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
-:root, [data-theme] {
-    background-color: white;
+:root,
+[data-theme] {
+  background-color: white;
+}
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: black;
+}
+
+::-webkit-scrollbar-thumb {
+  background: gray;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
