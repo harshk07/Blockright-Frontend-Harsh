@@ -14,7 +14,7 @@ const PendingRights = () => {
         const options = {
             method: 'GET',
             url: 'http://127.0.0.1:8000/drm/getSpecificRight/',
-            params: { wallet_id: '65a67bd20033cb5001382f38' }
+            params: { wallet_id: '65c4f232ecc0bd903efc8211' }
         };
 
         axios

@@ -74,9 +74,9 @@ const MyForm = () => {
     currentDate.setDate(currentDate.getDate() + 7);
 
     const formFields = `
-      User Name: ${formData.userName}
-      User Email: ${formData.userEmail}
-      User Mobile: ${formData.userMobile}
+      Cutomer Name: ${formData.userName}
+      Customer Email: ${formData.userEmail}
+      Customer Mobile: ${formData.userMobile}
       Address: ${formData.address}
       City: ${formData.city}
       Pin: ${formData.pin}
@@ -95,39 +95,14 @@ const MyForm = () => {
   };
 
   const sendOrderToAPI = () => {
-    // const apiEndpoint = 'http://127.0.0.1:8000/order/ecommerce/';
-    // const options = {
-    //   method: 'POST',
-    //   url: apiEndpoint,
-    //   headers: { 'Content-Type': 'application/json' },
-    //   data: {
-    //     // orderId: 'string',
-    //     userName: formData.userName,
-    //     userEmail: formData.userEmail,
-    //     userMobile: formData.userMobile,
-    //     city: formData.city,
-    //     country: formData.country,
-    //     address: formData.address,
-    //     pin: formData.pin,
-    //     products: productDetails,
-    //   },
-    // };
-
-    // axios.request(options)
-    //   .then(function (response) {
-    //     console.log(response.data);
-    //   })
-    //   .catch(function (error) {
-    //     console.error(error);
-    //   });
     const options = {
       method: 'POST',
       url: 'http://127.0.0.1:8000/order/ecommerce/',
       headers: { 'Content-Type': 'application/json' },
       data: {
-        userName: formData.userName,
-        userEmail: formData.userEmail,
-        userMobile: formData.userMobile,
+        customerName: formData.userName,
+        cutomerEmail: formData.userEmail,
+        customerMobile: formData.userMobile,
         city: formData.city,
         country: formData.country,
         address: formData.address,
