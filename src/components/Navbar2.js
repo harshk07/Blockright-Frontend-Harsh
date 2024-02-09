@@ -34,13 +34,16 @@ const Navbar2 = () => {
         >
           <img className="w-[170px]" src={logo} alt="logo blockright" />
         </Link>
-        <div>
-          <button className="font-semibold lg:inline-flex mr-5 items-center bg-blue-600 text-white border-2 border-blue-900 py-2 px-3 hover:bg-gray-200 rounded text-base mt-4 md:mt-0 hidden">
+        <div className="flex gap-4 justify-around">
+          <button className="font-semibold lg:inline-flex items-center bg-[#0B1733] text-white border-2 border-blue-700 py-2 px-3 hover:bg-gray-200 rounded text-base mt-4 md:mt-0 hidden">
             <p>{truncateWalletAddress(myValue)}</p>
+          </button>
+          <button className="text-white p-2 border-2 rounded-md bg-[#0B1733] border-blue-700">
+            <p>Mint Nft Merch</p>
           </button>
           <button
             onClick={handleLogout}
-            className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
+            className="bg-[#330b0b] border-2 border-red-900 hover:bg-red-700 text-white px-3 text-sm rounded"
           >
             Logout
           </button>
