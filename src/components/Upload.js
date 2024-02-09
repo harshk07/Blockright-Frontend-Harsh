@@ -4,7 +4,7 @@ import Punk from "./Punk";
 import PendingRights from "./PendingRights";
 
 const Upload = () => {
-  const [activeTab, setActiveTab] = useState("pendingRights");
+  const [activeTab, setActiveTab] = useState("approved");
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
@@ -39,7 +39,7 @@ const Upload = () => {
           {activeTab === "pendingRights" ? <PendingRights /> : <Punk />}
         </div>
       </div>
-      <div className="w-[24rem]">
+      <div className="w-[24rem] text-gray-400">
         <Link to="/NftPage">
           <div className="border-2 border-dashed rounded-xl text-2xl mb-[2rem] border-cyan-800 hover:bg-slate-600 hover:border-2 hover:border-dashed ml- h-44 flex justify-center items-center">
             <h1>Mint your NFT Merch</h1>
