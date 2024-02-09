@@ -57,7 +57,7 @@ const Punk = () => {
       return (
         <div
           key={index}
-          className="mt-10 border-2 border-dashed p-3 rounded-lg mb-[3rem] border-cyan-800 hover:bg-slate-600 hover:border-2 hover:border-dashed flex"
+          className="mt-10 border-2 border-dashed rounded-lg border-cyan-800 hover:bg-slate-600 hover:border-2 hover:border-dashed flex justify-center w-[35rem] gap-5 py-5 px-5 items-center text-gray-300"
         >
           <div className="">
             <p className="text-xl font-bold">
@@ -198,8 +198,12 @@ const Punk = () => {
                 </>
               )}
           </div>
-          <div className="h- w-32 ml-5 mt-5">
-            <img src={item.imgSrc} alt="" />
+          <div className="w-[8rem] h-[8rem]">
+            <img
+              src={item.imgSrc}
+              alt="image of nft"
+              className="object-contain w-full h-full"
+            />
           </div>
         </div>
       );
