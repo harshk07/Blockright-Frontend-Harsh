@@ -39,7 +39,9 @@ const Navbar2 = () => {
             <p>{truncateWalletAddress(myValue)}</p>
           </button>
           <button className="text-white p-2 border-2 rounded-md bg-[#0B1733] border-blue-700">
-            <p>Mint Nft Merch</p>
+            <Link to="/NftPage">
+              <p>Mint Nft Merch</p>
+            </Link>
           </button>
           <button
             onClick={handleLogout}
