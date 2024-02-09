@@ -12,13 +12,13 @@ const Upload = () => {
 
   return (
     <div className="flex gap-[10rem] justify-center mt-14">
-      <div className="w-[40rem] h-[40rem]">
-        <div className="flex mb-4">
+      <div className="w-[40rem]">
+        <div className="flex">
           <button
             className={`${
               activeTab === "approved"
                 ? "bg-green-400 text-black"
-                : "text-white"
+                : "border-[1px] border-gray-800 text-white"
             } py-2 px-4 rounded-l-lg`}
             onClick={() => handleTabClick("approved")}
           >
@@ -27,15 +27,15 @@ const Upload = () => {
           <button
             className={`${
               activeTab === "pendingRights"
-                ? "bg-red-300 text-white"
-                : "text-white"
+                ? "bg-orange-400 text-white"
+                : "border-[1px] border-gray-800 text-white"
             } py-2 px-4 rounded-r-lg`}
             onClick={() => handleTabClick("pendingRights")}
           >
             Pending Rights
           </button>
         </div>
-        <div className="border-2 border-gray-500 rounded">
+        <div className="rounded">
           {activeTab === "pendingRights" ? <PendingRights /> : <Punk />}
         </div>
       </div>
