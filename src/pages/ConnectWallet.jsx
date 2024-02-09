@@ -70,9 +70,6 @@ const ConnectWallet = () => {
               console.log(fetchedWalletId);
               // console.log(response.data.response.walletId.toString());
               // console.log("Below is nft id");
-              console.log("Hamara response", response.data.response);
-              setNftId(response.data.response.nftId.toString());
-
               // console.log(response.data.response.nftId.toString());
               // Handle the response from the server if needed
             })

@@ -28,7 +28,7 @@ export const NftPage = () => {
       })
       .then((response) => {
         setApiResponseData(response.data.response);
-        console.log("NFT DATA:", response.data.response)
+        console.log(response.data.response);
       })
       .catch((error) => {
         setError("Error fetching API data");
@@ -80,6 +80,7 @@ export const NftPage = () => {
                       key={index}
                       imgSource={item.cached_file_url}
                       name={item.name}
+                      nftId={item._id}
                     />
                   ))}
                 </div>
