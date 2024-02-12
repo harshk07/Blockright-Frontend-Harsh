@@ -96,6 +96,7 @@ export const Market = () => {
   const youMayLike = nftData.slice(0, 4);
 
   const selectItem = nftData.find((item) => item._id === id);
+  console.log(selectItem);
   return (
     <div className="bg-black">
       <Navbar />
@@ -117,7 +118,8 @@ export const Market = () => {
                       <div className="w-24 h-28 mt-8 ">
                         <img
                           className="w-24 h-28"
-                          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRLwGb3KPeGRFGXJuTQIBwU1RA-taAyI-5r3Td5EYCBWz0YlyKFmrvTsl6ExLT5Xfwj-8&usqp=CAU"
+                          // src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRLwGb3KPeGRFGXJuTQIBwU1RA-taAyI-5r3Td5EYCBWz0YlyKFmrvTsl6ExLT5Xfwj-8&usqp=CAU"
+                          src={selectItem.images}
                           alt="cloth img"
                         />
                         <div className="flex mt-2 items-baseline">
