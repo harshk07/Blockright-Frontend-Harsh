@@ -60,9 +60,9 @@ const Products = () => {
       data: {
         images: selectedProduct.images,
         tags: selectedProduct.tags,
-        price: selectedProduct.price,
-        discount: selectedProduct.discount,
-        availableQuantity: selectedProduct.availableQuantity,
+        price: parseInt(selectedProduct.price),
+        discount: parseInt(selectedProduct.discount),
+        availableQuantity: parseInt(selectedProduct.availableQuantity),
         lastDate: selectedProduct.lastDate,
         description: selectedProduct.description,
         merchTitle: selectedProduct.merchTitle,
@@ -292,21 +292,22 @@ const Products = () => {
                 <div className="w-full md:w-1/2 lg:w-1/4 mb-4 px-2">
                   <label className="block text-gray-700 mb-2">Price</label>
                   <input
-                    type="text"
+                    type="number"
                     className="border rounded w-full py-2 px-3"
                     value={selectedProduct.price}
-                    onChange={(e) =>
+                    onChange={(e) => {
                       setSelectedProduct({
                         ...selectedProduct,
                         price: e.target.value,
-                      })
-                    }
+                      });
+                      console.log(typeof e.target.value);
+                    }}
                   />
                 </div>
                 <div className="w-full md:w-1/2 lg:w-1/4 mb-4 px-2">
                   <label className="block text-gray-700 mb-2">Discount</label>
                   <input
-                    type="text"
+                    type="number"
                     className="border rounded w-full py-2 px-3"
                     value={selectedProduct.discount}
                     onChange={(e) =>
@@ -320,7 +321,7 @@ const Products = () => {
                 <div className="w-full md:w-1/2 lg:w-1/4 mb-4 px-2">
                   <label className="block text-gray-700 mb-2">Available</label>
                   <input
-                    type="text"
+                    type="number"
                     className="border rounded w-full py-2 px-3"
                     value={selectedProduct.availableQuantity}
                     onChange={(e) =>
