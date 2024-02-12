@@ -10,7 +10,7 @@ const Upload = () => {
   };
 
   return (
-    <div className="flex gap-[10rem] justify-center mt-14">
+    <div className="flex gap-[10rem] justify-center mt-10">
       <div className="w-[40rem]">
         <div className="flex">
           <button
