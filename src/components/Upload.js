@@ -1,9 +1,29 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Punk from "./Punk";
 import PendingRights from "./PendingRights";
+import axios from "axios";
 
 const Upload = () => {
   const [activeTab, setActiveTab] = useState("approved");
+  const walletAddress = localStorage.getItem("walletAddress");
+  const [transaction, setTransaction] = useState([]);
+  useEffect(() => {
+    const options = {
+      method: "GET",
+      url: "http://127.0.0.1:8000/payment/getTransaction/",
+      params: { walletAddress: walletAddress },
+    };
+
+    axios
+      .request(options)
+      .then(function (response) {
+        console.log(response.data);
+        setTransaction(response.data);
+      })
+      .catch(function (error) {
+        console.error(error);
+      });
+  }, []);
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
@@ -14,19 +34,21 @@ const Upload = () => {
       <div className="w-[40rem]">
         <div className="flex">
           <button
-            className={`${activeTab === "approved"
+            className={`${
+              activeTab === "approved"
                 ? "bg-green-400 text-black"
                 : "border-[1px] border-gray-800 text-white"
-              } py-2 px-4 rounded-l-lg`}
+            } py-2 px-4 rounded-l-lg`}
             onClick={() => handleTabClick("approved")}
           >
             Approved
           </button>
           <button
-            className={`${activeTab === "pendingRights"
+            className={`${
+              activeTab === "pendingRights"
                 ? "bg-orange-400 text-white"
                 : "border-[1px] border-gray-800 text-white"
-              } py-2 px-4 rounded-r-lg`}
+            } py-2 px-4 rounded-r-lg`}
             onClick={() => handleTabClick("pendingRights")}
           >
             Requested Rights
@@ -52,146 +74,31 @@ const Upload = () => {
         </p>
         <div class="bg-white shadow-lg rounded-lg p-4 w-[19rem] h-[24rem] overflow-y-scroll">
           <ul>
-            <li class="flex justify-between items-center py-1 border-b">
-              <div>
-                <p class="text-[10px] font-bold text-gray-800">
-                  #Punk 201 - Exclusive Hoodies
-                </p>
-                <p class="text-[10px] text-gray-500">
-                  #345 Sold in Frankfurt, Germany
-                </p>
-                <p class="text-[10px] text-gray-500">23rd July, 2023</p>
-              </div>
-              <div>
-                <p class="text-2xl font-bold text-green-500">+$20</p>
-              </div>
-            </li>
-            <li class="flex justify-between items-center py-1 border-b">
-              <div>
-                <p class="text-[10px] font-bold text-gray-800">
-                  #Punk 201 - Exclusive Hoodies
-                </p>
-                <p class="text-[10px] text-gray-500">
-                  #345 Sold in Frankfurt, Germany
-                </p>
-                <p class="text-[10px] text-gray-500">23rd July, 2023</p>
-              </div>
-              <div>
-                <p class="text-2xl font-bold text-green-500">+$20</p>
-              </div>
-            </li>
-            <li class="flex justify-between items-center py-1 border-b">
-              <div>
-                <p class="text-[10px] font-bold text-gray-800">
-                  #Punk 201 - Exclusive Hoodies
-                </p>
-                <p class="text-[10px] text-gray-500">
-                  #345 Sold in Frankfurt, Germany
-                </p>
-                <p class="text-[10px] text-gray-500">23rd July, 2023</p>
-              </div>
-              <div>
-                <p class="text-2xl font-bold text-green-500">+$20</p>
-              </div>
-            </li>
-            <li class="flex justify-between items-center py-1 border-b">
-              <div>
-                <p class="text-[10px] font-bold text-gray-800">
-                  #Punk 201 - Exclusive Hoodies
-                </p>
-                <p class="text-[10px] text-gray-500">
-                  #345 Sold in Frankfurt, Germany
-                </p>
-                <p class="text-[10px] text-gray-500">23rd July, 2023</p>
-              </div>
-              <div>
-                <p class="text-2xl font-bold text-green-500">+$20</p>
-              </div>
-            </li>
-            <li class="flex justify-between items-center py-1 border-b">
-              <div>
-                <p class="text-[10px] font-bold text-gray-800">
-                  #Punk 201 - Exclusive Hoodies
-                </p>
-                <p class="text-[10px] text-gray-500">
-                  #345 Sold in Frankfurt, Germany
-                </p>
-                <p class="text-[10px] text-gray-500">23rd July, 2023</p>
-              </div>
-              <div>
-                <p class="text-2xl font-bold text-green-500">+$20</p>
-              </div>
-            </li>
-            <li class="flex justify-between items-center py-1 border-b">
-              <div>
-                <p class="text-[10px] font-bold text-gray-800">
-                  #Punk 201 - Exclusive Hoodies
-                </p>
-                <p class="text-[10px] text-gray-500">
-                  #345 Sold in Frankfurt, Germany
-                </p>
-                <p class="text-[10px] text-gray-500">23rd July, 2023</p>
-              </div>
-              <div>
-                <p class="text-2xl font-bold text-green-500">+$20</p>
-              </div>
-            </li>
-            <li class="flex justify-between items-center py-1 border-b">
-              <div>
-                <p class="text-[10px] font-bold text-gray-800">
-                  #Punk 201 - Exclusive Hoodies
-                </p>
-                <p class="text-[10px] text-gray-500">
-                  #345 Sold in Frankfurt, Germany
-                </p>
-                <p class="text-[10px] text-gray-500">23rd July, 2023</p>
-              </div>
-              <div>
-                <p class="text-2xl font-bold text-green-500">+$20</p>
-              </div>
-            </li>
-            <li class="flex justify-between items-center py-1 border-b">
-              <div>
-                <p class="text-[10px] font-bold text-gray-800">
-                  #Punk 201 - Exclusive Hoodies
-                </p>
-                <p class="text-[10px] text-gray-500">
-                  #345 Sold in Frankfurt, Germany
-                </p>
-                <p class="text-[10px] text-gray-500">23rd July, 2023</p>
-              </div>
-              <div>
-                <p class="text-2xl font-bold text-green-500">+$20</p>
-              </div>
-            </li>
-            <li class="flex justify-between items-center py-1 border-b">
-              <div>
-                <p class="text-[10px] font-bold text-gray-800">
-                  #Punk 201 - Exclusive Hoodies
-                </p>
-                <p class="text-[10px] text-gray-500">
-                  #345 Sold in Frankfurt, Germany
-                </p>
-                <p class="text-[10px] text-gray-500">23rd July, 2023</p>
-              </div>
-              <div>
-                <p class="text-2xl font-bold text-green-500">+$20</p>
-              </div>
-            </li>
-            <li class="flex justify-between items-center py-1 border-b">
-              <div>
-                <p class="text-[10px] font-bold text-gray-800">
-                  #Punk 201 - Exclusive Hoodies
-                </p>
-                <p class="text-[10px] text-gray-500">
-                  #345 Sold in Frankfurt, Germany
-                </p>
-                <p class="text-[10px] text-gray-500">23rd July, 2023</p>
-              </div>
-              <div>
-                <p class="text-2xl font-bold text-green-500">+$20</p>
-              </div>
-            </li>
+            {transaction.map((item, key) => {
+              return (
+                <li
+                  key={key}
+                  class="flex justify-between items-center py-1 border-b"
+                >
+                  <div>
+                    <p class="text-[10px] font-bold text-gray-800">
+                      {item.title} - {item.category}
+                    </p>
+                    <p class="text-[10px] text-gray-500">
+                      #{item.quantity} Sold in {item.address}, {item.country}
+                    </p>
+                    <p class="text-[10px] text-gray-500">
+                      {new Date(item.time).toDateString()}
+                    </p>
+                  </div>
+                  <div>
+                    <p class="text-2xl font-bold text-green-500">
+                      +${item.price}
+                    </p>
+                  </div>
+                </li>
+              );
+            })}
           </ul>
         </div>
       </div>
