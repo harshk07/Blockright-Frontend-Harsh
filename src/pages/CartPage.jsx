@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { useCart } from '../context/cart/CartContext';
-import { useNavigate } from 'react-router-dom';  // Import useNavigate
+import { useLocation, useNavigate } from 'react-router-dom';  // Import useNavigate
 
 const CartPage = () => {
     const { cart, removeFromCart } = useCart();
+    const location = useLocation();
     const [productDetails, setProductDetails] = useState(cart.items.map(item => ({
         productId: item.productId,
         productTitle: item.title,
@@ -27,6 +28,7 @@ const CartPage = () => {
     const handleProceedToCheckout = () => {
         // Pass the productDetails to the next page where user information is collected
         console.log("Products after checking out:", productDetails);
+        console.log("Before going to the myForm page.. state : ", location.state);
         navigate('/myForm', { state: { productDetails } });
     };
 

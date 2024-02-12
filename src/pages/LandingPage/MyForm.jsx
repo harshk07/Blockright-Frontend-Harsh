@@ -9,6 +9,7 @@ import { SiShopify } from "react-icons/si";
 import { Link } from "react-router-dom";
 
 const MyForm = () => {
+  const [orderId, setOrderId] = useState("");
   const [formData, setFormData] = useState({
     userName: "",
     userEmail: "",
@@ -65,7 +66,8 @@ const MyForm = () => {
     return hexValue;
   };
 
-  const saveAsPDF = () => {
+  const saveAsPDF = async () => {
+    await sendOrderToAPI();
     const pdf = new jsPDF();
     const organization = "Blockright Pvt. Ltd.";
     pdf.text(organization, 70, 10);
@@ -74,9 +76,9 @@ const MyForm = () => {
     currentDate.setDate(currentDate.getDate() + 7);
 
     const formFields = `
-      Cutomer Name: ${formData.userName}
-      Customer Email: ${formData.userEmail}
-      Customer Mobile: ${formData.userMobile}
+      User Name: ${formData.userName}
+      User Email: ${formData.userEmail}
+      User Mobile: ${formData.userMobile}
       Address: ${formData.address}
       City: ${formData.city}
       Pin: ${formData.pin}
@@ -86,37 +88,44 @@ const MyForm = () => {
     `;
 
     pdf.text(formFields, 70, 20);
-    navigate("/Customerpayment");
     pdf.save("formDataWithQRCode.pdf");
 
     // Call the API when saving the PDF
-    console.log("API for details submission submitted");
-    sendOrderToAPI();
+    console.log("Location state before navigating:", location.state);
+    navigate('/Customerpayment', { state: { ...location.state, orderId } });
+    console.log("Location state After navigating:", location.state);
+    console.log("API for product details PDF and navigate to CustomerPayment called");
   };
 
-  const sendOrderToAPI = () => {
-    const options = {
-      method: 'POST',
-      url: 'http://127.0.0.1:8000/order/ecommerce/',
-      headers: { 'Content-Type': 'application/json' },
-      data: {
-        customerName: formData.userName,
-        cutomerEmail: formData.userEmail,
-        customerMobile: formData.userMobile,
-        city: formData.city,
-        country: formData.country,
-        address: formData.address,
-        pin: formData.pin,
-        products: productDetails
-      }
-    };
-
-    axios.request(options).then(function (response) {
+  const sendOrderToAPI = async () => {
+    try {
+      const options = {
+        method: 'POST',
+        url: 'http://127.0.0.1:8000/order/ecommerce/',
+        headers: { 'Content-Type': 'application/json' },
+        data: {
+          userName: formData.userName,
+          userEmail: formData.userEmail,
+          userMobile: formData.userMobile,
+          city: formData.city,
+          country: formData.country,
+          address: formData.address,
+          pin: formData.pin,
+          products: productDetails
+        }
+      };
+      const response = await axios.request(options);
       console.log(response.data);
-    }).catch(function (error) {
-      console.error(error);
-    });
+      setOrderId(response.data.response.order_id);
+      console.log(response.data.response.order_id);
+      return response.data.response.order_id; // Return orderId
+    } catch (error) {
+      console.error("Error sending order to API:", error);
+      throw error; // Propagate error
+    }
   };
+
+  console.log("MyForm me test kar rahe hai order ID: ", orderId);
 
   const handleStepNext = () => {
     if (currentStep === 1) {
