@@ -34,7 +34,6 @@ export const Market = () => {
       color: selectedColor[index],
 
     }));
-    console.log("Image URL in Market page:", selectItem.images[0]);
     console.log("selected Product ID in Market page:", selectItem._id);
 
     itemsToAdd.forEach((item) => addToCart(item));
@@ -64,25 +63,16 @@ export const Market = () => {
   };
 
   const handleSizeChange = (index, size) => {
-    console.log(`handleSizeChange called for piece ${index + 1} with size ${size}`);
     const newSizes = [...selectedSizes];
     newSizes[index] = size;
     setSelectedSizes(newSizes);
-    // console.log(newSizes[index]);
-    console.log(`Selected size for piece ${index + 1}: ${newSizes[index]}`);
   };
 
   const handleColorChange = (index, color) => {
-    console.log(`Selected color for piece ${index + 1}: ${color}`);
-    // You can update the state or perform any other necessary actions
     const newColor = [...selectedColor];
     newColor[index] = color;
     setSelectedColor(newColor);
-    console.log(`Selected color for piece ${index + 1}: ${newColor[index]}`);
   };
-
-  console.log("Selected Sizes:", selectedSizes);
-  console.log("Selected Color:", selectedColor);
 
 
   useEffect(() => {
@@ -96,7 +86,6 @@ export const Market = () => {
       .request(options)
       .then(function (response) {
         const filteredData = response.data.response.filter((item) => item.isPublished === true);
-        console.log(filteredData);
         setNftData(filteredData);
       })
       .catch(function (error) {
@@ -107,8 +96,6 @@ export const Market = () => {
   const youMayLike = nftData.slice(0, 4);
 
   const selectItem = nftData.find((item) => item._id === id);
-
-  const Navigate = useNavigate();
   return (
     <div className="bg-black">
       <Navbar />
