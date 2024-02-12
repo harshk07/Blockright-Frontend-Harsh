@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import Punk from "./Punk";
 import PendingRights from "./PendingRights";
 
@@ -37,39 +36,163 @@ const Upload = () => {
           {activeTab === "pendingRights" ? <PendingRights /> : <Punk />}
         </div>
       </div>
-      <div className="w-[24rem] text-gray-400">
-        <Link to="/NftPage">
-          <div className="border-2 border-dashed rounded-xl text-2xl mb-[2rem] border-cyan-800 hover:bg-slate-600 hover:border-2 hover:border-dashed ml- h-44 flex justify-center items-center">
-            <h1>Mint your NFT Merch</h1>
+      <div className="w-[19rem] text-gray-400">
+        <div className="flex mb-4 gap-3">
+          <div className="bg-slate-100 w-[14rem] h-[6rem] rounded-xl flex flex-col justify-center items-center">
+            <p className="text-cyan-500 font-normal">Earned</p>
+            <p className="text-cyan-500 text-4xl font-bold">$0</p>
           </div>
-        </Link>
-        <div className="flex mb-6 gap-7">
-          <div className="bg-[#191E24] w-[11rem] h-[7rem] rounded-xl flex flex-col justify-center items-center">
-            <p className="text-blue-600 font-normal">Earned</p>
-            <p className="text-blue-600 text-5xl font-bold">$0</p>
-          </div>
-          <div className="bg-[#191E24] w-[11rem] h-[7rem] rounded-xl flex flex-col justify-center items-center">
-            <p
-              style={{
-                color: "grey",
-              }}
-              className=""
-            >
-              Withdrawn
-            </p>
-            <p
-              style={{
-                color: "orange",
-              }}
-              className="text-5xl font-bold"
-            >
-              $0
-            </p>
+          <div className="bg-slate-100 w-[14rem] h-[6rem] rounded-xl flex flex-col justify-center items-center">
+            <p className="text-orange-400">Withdrawn</p>
+            <p className="text-4xl font-bold text-amber-900">$0</p>
           </div>
         </div>
-        <p className="text-white font-bold text-3xl my-3">Recent Transaction</p>
-        <div className="bg-[#191E24] w-[24rem] h-[24rem] rounded-xl mb-5 flex justify-center items-center">
-          <p className="text-gray-500 text-lg">No Sales Transaction</p>
+        <p className="text-white font-bold text-2xl my-2 text-center">
+          Recent Transaction
+        </p>
+        <div class="bg-white shadow-lg rounded-lg p-4 w-[19rem] h-[24rem] overflow-y-scroll">
+          <ul>
+            <li class="flex justify-between items-center py-1 border-b">
+              <div>
+                <p class="text-[10px] font-bold text-gray-800">
+                  #Punk 201 - Exclusive Hoodies
+                </p>
+                <p class="text-[10px] text-gray-500">
+                  #345 Sold in Frankfurt, Germany
+                </p>
+                <p class="text-[10px] text-gray-500">23rd July, 2023</p>
+              </div>
+              <div>
+                <p class="text-2xl font-bold text-green-500">+$20</p>
+              </div>
+            </li>
+            <li class="flex justify-between items-center py-1 border-b">
+              <div>
+                <p class="text-[10px] font-bold text-gray-800">
+                  #Punk 201 - Exclusive Hoodies
+                </p>
+                <p class="text-[10px] text-gray-500">
+                  #345 Sold in Frankfurt, Germany
+                </p>
+                <p class="text-[10px] text-gray-500">23rd July, 2023</p>
+              </div>
+              <div>
+                <p class="text-2xl font-bold text-green-500">+$20</p>
+              </div>
+            </li>
+            <li class="flex justify-between items-center py-1 border-b">
+              <div>
+                <p class="text-[10px] font-bold text-gray-800">
+                  #Punk 201 - Exclusive Hoodies
+                </p>
+                <p class="text-[10px] text-gray-500">
+                  #345 Sold in Frankfurt, Germany
+                </p>
+                <p class="text-[10px] text-gray-500">23rd July, 2023</p>
+              </div>
+              <div>
+                <p class="text-2xl font-bold text-green-500">+$20</p>
+              </div>
+            </li>
+            <li class="flex justify-between items-center py-1 border-b">
+              <div>
+                <p class="text-[10px] font-bold text-gray-800">
+                  #Punk 201 - Exclusive Hoodies
+                </p>
+                <p class="text-[10px] text-gray-500">
+                  #345 Sold in Frankfurt, Germany
+                </p>
+                <p class="text-[10px] text-gray-500">23rd July, 2023</p>
+              </div>
+              <div>
+                <p class="text-2xl font-bold text-green-500">+$20</p>
+              </div>
+            </li>
+            <li class="flex justify-between items-center py-1 border-b">
+              <div>
+                <p class="text-[10px] font-bold text-gray-800">
+                  #Punk 201 - Exclusive Hoodies
+                </p>
+                <p class="text-[10px] text-gray-500">
+                  #345 Sold in Frankfurt, Germany
+                </p>
+                <p class="text-[10px] text-gray-500">23rd July, 2023</p>
+              </div>
+              <div>
+                <p class="text-2xl font-bold text-green-500">+$20</p>
+              </div>
+            </li>
+            <li class="flex justify-between items-center py-1 border-b">
+              <div>
+                <p class="text-[10px] font-bold text-gray-800">
+                  #Punk 201 - Exclusive Hoodies
+                </p>
+                <p class="text-[10px] text-gray-500">
+                  #345 Sold in Frankfurt, Germany
+                </p>
+                <p class="text-[10px] text-gray-500">23rd July, 2023</p>
+              </div>
+              <div>
+                <p class="text-2xl font-bold text-green-500">+$20</p>
+              </div>
+            </li>
+            <li class="flex justify-between items-center py-1 border-b">
+              <div>
+                <p class="text-[10px] font-bold text-gray-800">
+                  #Punk 201 - Exclusive Hoodies
+                </p>
+                <p class="text-[10px] text-gray-500">
+                  #345 Sold in Frankfurt, Germany
+                </p>
+                <p class="text-[10px] text-gray-500">23rd July, 2023</p>
+              </div>
+              <div>
+                <p class="text-2xl font-bold text-green-500">+$20</p>
+              </div>
+            </li>
+            <li class="flex justify-between items-center py-1 border-b">
+              <div>
+                <p class="text-[10px] font-bold text-gray-800">
+                  #Punk 201 - Exclusive Hoodies
+                </p>
+                <p class="text-[10px] text-gray-500">
+                  #345 Sold in Frankfurt, Germany
+                </p>
+                <p class="text-[10px] text-gray-500">23rd July, 2023</p>
+              </div>
+              <div>
+                <p class="text-2xl font-bold text-green-500">+$20</p>
+              </div>
+            </li>
+            <li class="flex justify-between items-center py-1 border-b">
+              <div>
+                <p class="text-[10px] font-bold text-gray-800">
+                  #Punk 201 - Exclusive Hoodies
+                </p>
+                <p class="text-[10px] text-gray-500">
+                  #345 Sold in Frankfurt, Germany
+                </p>
+                <p class="text-[10px] text-gray-500">23rd July, 2023</p>
+              </div>
+              <div>
+                <p class="text-2xl font-bold text-green-500">+$20</p>
+              </div>
+            </li>
+            <li class="flex justify-between items-center py-1 border-b">
+              <div>
+                <p class="text-[10px] font-bold text-gray-800">
+                  #Punk 201 - Exclusive Hoodies
+                </p>
+                <p class="text-[10px] text-gray-500">
+                  #345 Sold in Frankfurt, Germany
+                </p>
+                <p class="text-[10px] text-gray-500">23rd July, 2023</p>
+              </div>
+              <div>
+                <p class="text-2xl font-bold text-green-500">+$20</p>
+              </div>
+            </li>
+          </ul>
         </div>
       </div>
     </div>

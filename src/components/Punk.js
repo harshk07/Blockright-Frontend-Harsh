@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { BsShareFill } from "react-icons/bs";
 import axios from "axios";
 import WalletIDMainContext from "../context/walletID/WalletIDMainContext";
+import { Link } from "react-router-dom";
 
 const Punk = () => {
   const { fetchedWalletId, fetchRights, setFetchRights } =
@@ -208,7 +209,7 @@ const Punk = () => {
         </div>
       );
     }
-    return null; // Add a semicolon here
+    return null;
   };
 
   console.log("Fetch rights here", fetchRights);
@@ -216,7 +217,11 @@ const Punk = () => {
   if (errorMessage) {
     return (
       <div className="text-xl font-bold flex items-center justify-center gap-3 w-[32rem]">
-        {errorMessage}
+        <Link to="/NftPage">
+          <div className="border-2 border-dashed rounded-xl text-xl mb-[1rem] border-cyan-800 hover:bg-slate-600 hover:border-2 hover:border-dashed flex py-3.5 justify-center items-center">
+            <h1>Mint your NFT Merch</h1>
+          </div>
+        </Link>
       </div>
     );
   }
