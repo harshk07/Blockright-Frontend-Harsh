@@ -173,47 +173,6 @@ export const AgreementPage = () => {
     }
   };
 
-  // Utility function to convert a string to hex
-
-  // const handleMintMerch = async () => {
-  //   if (agreed) {
-  //     try {
-  //       // Check if MetaMask is installed and connected
-  //       if (window.ethereum && window.ethereum.isMetaMask) {
-  //         // Request account access if not already granted
-  //         const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
-  //         const from = accounts[0];
-
-  //         // Your signing logic goes here
-  //         const exampleMessage = 'By signing this you agree for the minting of the NFTs';
-  //         // const msg = `0x${Buffer.from(exampleMessage, 'utf8').toString('hex')}`;
-  //         const msg = `0x${stringToHex(exampleMessage)}`;
-  //         const sign = await window.ethereum.request({
-  //           method: 'personal_sign',
-  //           params: [msg, from],
-  //         });
-
-  //         console.log('Signature:', sign);
-
-  //         // Now you can proceed with minting or perform other actions with the signature
-  //         console.log("Minting merchandise...");
-
-  //         submitRights();
-
-  //         navigate("/Loader");
-  //       } else {
-  //         // MetaMask not available or not connected
-  //         alert("Please install and connect MetaMask to proceed.");
-  //       }
-  //     } catch (err) {
-  //       console.error(err);
-  //       alert(`Error: ${err.message}`);
-  //     }
-  //   } else {
-  //     alert("Please agree to the terms and conditions.");
-  //   }
-  // };
-
   return (
     <div className="bg-black">
       <Navbar2 value={fetchedWalletAddress} />

@@ -3,12 +3,13 @@ import QRCode from "qrcode";
 import { saveAs } from "file-saver";
 import jsPDF from "jspdf";
 import axios from "axios";
-import { useNavigate } from "react-router";
-import {AiFillAmazonCircle} from "react-icons/ai"
-import {SiShopify} from "react-icons/si"
+import { useNavigate, useLocation } from "react-router";
+import { AiFillAmazonCircle } from "react-icons/ai";
+import { SiShopify } from "react-icons/si";
 import { Link } from "react-router-dom";
 
 const MyForm = () => {
+  const [orderId, setOrderId] = useState("");
   const [formData, setFormData] = useState({
     userName: "",
     userEmail: "",
@@ -23,7 +24,11 @@ const MyForm = () => {
   const [qrCodeData, setQrCodeData] = useState("");
   const [paymentCompleted, setPaymentCompleted] = useState(false);
 
-  const navigate=useNavigate();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const { productDetails } = location.state;
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -61,7 +66,8 @@ const MyForm = () => {
     return hexValue;
   };
 
-  const saveAsPDF = () => {
+  const saveAsPDF = async () => {
+    await sendOrderToAPI();
     const pdf = new jsPDF();
     const organization = "Blockright Pvt. Ltd.";
     pdf.text(organization, 70, 10);
@@ -82,10 +88,44 @@ const MyForm = () => {
     `;
 
     pdf.text(formFields, 70, 20);
-    navigate("/Customerpayment")
     pdf.save("formDataWithQRCode.pdf");
 
+    // Call the API when saving the PDF
+    console.log("Location state before navigating:", location.state);
+    navigate('/Customerpayment', { state: { ...location.state, orderId } });
+    console.log("Location state After navigating:", location.state);
+    console.log("API for product details PDF and navigate to CustomerPayment called");
   };
+
+  const sendOrderToAPI = async () => {
+    try {
+      const options = {
+        method: 'POST',
+        url: 'http://127.0.0.1:8000/order/ecommerce/',
+        headers: { 'Content-Type': 'application/json' },
+        data: {
+          userName: formData.userName,
+          userEmail: formData.userEmail,
+          userMobile: formData.userMobile,
+          city: formData.city,
+          country: formData.country,
+          address: formData.address,
+          pin: formData.pin,
+          products: productDetails
+        }
+      };
+      const response = await axios.request(options);
+      console.log(response.data);
+      setOrderId(response.data.response.order_id);
+      console.log(response.data.response.order_id);
+      return response.data.response.order_id; // Return orderId
+    } catch (error) {
+      console.error("Error sending order to API:", error);
+      throw error; // Propagate error
+    }
+  };
+
+  console.log("MyForm me test kar rahe hai order ID: ", orderId);
 
   const handleStepNext = () => {
     if (currentStep === 1) {
@@ -233,19 +273,16 @@ const MyForm = () => {
           )}
           {currentStep === 2 ? (
             <>
-            <button
-              type="button"
-              onClick={()=>saveAsPDF}
-              className="bg-blue-500 text-white py-2 px-4 ml-2 rounded-lg hover:bg-blue-600"
-            >
-              Proceed to Payment
-            </button>
-            {/* <div className="flex items-center mx-2 justify-center rounded-lg w-10 border border-black text-black hover:bg-blue-500 hover:text-white">
-              <a href={'https://www.amazon.in/'} target="_blank" rel="noreferrer"> <AiFillAmazonCircle size={24}/></a>
-            </div> */}
-            <div className="flex items-center justify-center rounded-lg w-10 border border-black text-black hover:bg-blue-500 hover:text-white">
-              <a href={'https://73476d-3.myshopify.com/products/bored-ape-nike-club-mug'} target="_blank" rel="noreferrer"><SiShopify size={24}/></a> 
-            </div>
+              <button
+                type="button"
+                onClick={saveAsPDF}
+                className="bg-blue-500 text-white py-2 px-4 ml-2 rounded-lg hover:bg-blue-600"
+              >
+                Proceed to Payment
+              </button>
+              <div className="flex items-center justify-center rounded-lg w-10 border border-black text-black hover:bg-blue-500 hover:text-white">
+                {/* You can add your external links here */}
+              </div>
             </>
           ) : (
             <button
@@ -257,13 +294,6 @@ const MyForm = () => {
           )}
         </div>
       </form>
-
-      {/* {qrCodeData && (
-        <div className="mt-6">
-          <h2 className="text-2xl font-semibold mb-4">QR Code</h2>
-          <img src={qrCodeData} alt="QR Code" className="w-full" />
-        </div>
-      )} */}
     </div>
   );
 };

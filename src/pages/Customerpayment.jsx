@@ -1,6 +1,31 @@
 import React from 'react'
+import axios from "axios";
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const Customerpayment = () => {
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const { orderId } = location.state;
+
+    console.log("OrderID after navigation to customerPayment: ", orderId)
+
+    const handleClick = () => {
+
+        const options = {
+            method: 'POST',
+            url: 'http://127.0.0.1:8000/payment/make/',
+            headers: { 'Content-Type': 'application/json' },
+            data: { orderId: orderId }
+        };
+
+        axios.request(options).then(function (response) {
+            console.log(response.data);
+        }).catch(function (error) {
+            console.error(error);
+        });
+    }
+
     return (
         <div className='flex items-center justify-center h-[100vh]'>
             <div className="flex flex-col items-center border-b bg-white py-4 sm:flex-row sm:px-10 lg:px-20 xl:px-32">
@@ -8,7 +33,6 @@ const Customerpayment = () => {
                     <p className="text-xl text-black font-medium">Payment Details</p>
                     <p className="text-gray-800">Complete your order by providing your payment details.</p>
                     <div className="">
-                      
                         <label for="card-holder" className="mt-4 mb-2 block text-sm font-medium">Card Holder</label>
                         <div className="relative">
                             <input type="text" id="card-holder" name="card-holder" className="bg-white w-full rounded-md border border-gray-200 px-4 py-3 pl-11 text-sm uppercase shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500" placeholder="Your full name here" />
@@ -61,7 +85,7 @@ const Customerpayment = () => {
                             <p className="text-2xl font-semibold text-gray-900">$408.00</p>
                         </div>
                     </div>
-                    <button className="mt-4 mb-8 w-full rounded-md bg-gray-900 px-6 py-3 font-medium text-white">Place Order</button>
+                    <button onClick={handleClick} className="mt-4 mb-8 w-full rounded-md bg-gray-900 px-6 py-3 font-medium text-white">Place Order</button>
                 </div>
             </div>
 

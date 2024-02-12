@@ -14,24 +14,22 @@ const Upload = () => {
       <div className="w-[40rem]">
         <div className="flex">
           <button
-            className={`${
-              activeTab === "approved"
+            className={`${activeTab === "approved"
                 ? "bg-green-400 text-black"
                 : "border-[1px] border-gray-800 text-white"
-            } py-2 px-4 rounded-l-lg`}
+              } py-2 px-4 rounded-l-lg`}
             onClick={() => handleTabClick("approved")}
           >
             Approved
           </button>
           <button
-            className={`${
-              activeTab === "pendingRights"
+            className={`${activeTab === "pendingRights"
                 ? "bg-orange-400 text-white"
                 : "border-[1px] border-gray-800 text-white"
-            } py-2 px-4 rounded-r-lg`}
+              } py-2 px-4 rounded-r-lg`}
             onClick={() => handleTabClick("pendingRights")}
           >
-            Pending Rights
+            Requested Rights
           </button>
         </div>
         <div className="rounded">
