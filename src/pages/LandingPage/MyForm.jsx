@@ -66,8 +66,38 @@ const MyForm = () => {
     return hexValue;
   };
 
-  const saveAsPDF = async () => {
-    await sendOrderToAPI();
+  const sendOrderToAPI = () => {
+    const options = {
+      method: "POST",
+      url: "http://127.0.0.1:8000/order/ecommerce/",
+      headers: { "Content-Type": "application/json" },
+      data: {
+        userName: formData.userName,
+        userEmail: formData.userEmail,
+        userMobile: formData.userMobile,
+        city: formData.city,
+        country: formData.country,
+        address: formData.address,
+        pin: formData.pin,
+        products: productDetails,
+      },
+    };
+
+    axios
+      .request(options)
+      .then(function (response) {
+        console.log(response.data);
+        const orderId = response.data.response.order_id;
+        setOrderId(orderId);
+        navigate("/Customerpayment", { state: { orderId: orderId } });
+      })
+      .catch(function (error) {
+        console.error(error);
+      });
+  };
+
+  const saveAsPDF = () => {
+    sendOrderToAPI();
     const pdf = new jsPDF();
     const organization = "Blockright Pvt. Ltd.";
     pdf.text(organization, 70, 10);
@@ -90,42 +120,8 @@ const MyForm = () => {
     pdf.text(formFields, 70, 20);
     pdf.save("formDataWithQRCode.pdf");
 
-    // Call the API when saving the PDF
     console.log("Location state before navigating:", location.state);
-    navigate('/Customerpayment', { state: { ...location.state, orderId } });
-    console.log("Location state After navigating:", location.state);
-    console.log("API for product details PDF and navigate to CustomerPayment called");
   };
-
-  const sendOrderToAPI = async () => {
-    try {
-      const options = {
-        method: 'POST',
-        url: 'http://127.0.0.1:8000/order/ecommerce/',
-        headers: { 'Content-Type': 'application/json' },
-        data: {
-          userName: formData.userName,
-          userEmail: formData.userEmail,
-          userMobile: formData.userMobile,
-          city: formData.city,
-          country: formData.country,
-          address: formData.address,
-          pin: formData.pin,
-          products: productDetails
-        }
-      };
-      const response = await axios.request(options);
-      console.log(response.data);
-      setOrderId(response.data.response.order_id);
-      console.log(response.data.response.order_id);
-      return response.data.response.order_id; // Return orderId
-    } catch (error) {
-      console.error("Error sending order to API:", error);
-      throw error; // Propagate error
-    }
-  };
-
-  console.log("MyForm me test kar rahe hai order ID: ", orderId);
 
   const handleStepNext = () => {
     if (currentStep === 1) {
@@ -140,7 +136,6 @@ const MyForm = () => {
       if (paymentCompleted) {
         setCurrentStep(currentStep + 1);
       } else {
-        // Show payment options step.
         setCurrentStep(currentStep + 0.5);
       }
     }
@@ -156,7 +151,6 @@ const MyForm = () => {
     if (currentStep === 1) {
       handleStepNext();
     } else if (currentStep === 2) {
-      // Handle form submission to the API here if needed
       saveAsPDF();
     }
   };
