@@ -75,7 +75,7 @@ const Navbar = () => {
                 My Cart ({getTotalItems()})
               </Link>
               <Link className="hover:text-gray-300" to="/cartt">
-                My Cart UI
+                My Cart UI ({getTotalItems()})
               </Link>
               <Link className="hover:text-gray-300" to="/MyProfile">
                 My Profile
