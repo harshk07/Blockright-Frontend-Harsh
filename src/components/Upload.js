@@ -34,21 +34,19 @@ const Upload = () => {
       <div className="w-[40rem]">
         <div className="flex">
           <button
-            className={`${
-              activeTab === "approved"
-                ? "bg-green-400 text-black"
-                : "border-[1px] border-gray-800 text-white"
-            } py-2 px-4 rounded-l-lg`}
+            className={`${activeTab === "approved"
+              ? "bg-green-400 text-black"
+              : "border-[1px] border-gray-800 text-white"
+              } py-2 px-4 rounded-l-lg`}
             onClick={() => handleTabClick("approved")}
           >
             Approved
           </button>
           <button
-            className={`${
-              activeTab === "pendingRights"
-                ? "bg-orange-400 text-white"
-                : "border-[1px] border-gray-800 text-white"
-            } py-2 px-4 rounded-r-lg`}
+            className={`${activeTab === "pendingRights"
+              ? "bg-orange-400 text-white"
+              : "border-[1px] border-gray-800 text-white"
+              } py-2 px-4 rounded-r-lg`}
             onClick={() => handleTabClick("pendingRights")}
           >
             Requested Rights
@@ -73,33 +71,32 @@ const Upload = () => {
           Recent Transaction
         </p>
         <div class="bg-white shadow-lg rounded-lg p-4 w-[19rem] h-[24rem] overflow-y-scroll">
-          <ul>
-            {transaction.map((item, key) => {
-              return (
-                <li
-                  key={key}
-                  class="flex justify-between items-center py-1 border-b"
-                >
-                  <div>
-                    <p class="text-[10px] font-bold text-gray-800">
-                      {item.title} - {item.category}
-                    </p>
-                    <p class="text-[10px] text-gray-500">
-                      #{item.quantity} Sold in {item.address}, {item.country}
-                    </p>
-                    <p class="text-[10px] text-gray-500">
-                      {new Date(item.time).toDateString()}
-                    </p>
-                  </div>
-                  <div>
-                    <p class="text-2xl font-bold text-green-500">
-                      +${item.price}
-                    </p>
-                  </div>
-                </li>
-              );
-            })}
-          </ul>
+          {transaction.length === 0 ? (
+            <p class="text-gray-500 text-center">No Transactions Yet</p>
+          ) : (
+            <ul>
+              {transaction.map((item, key) => {
+                return (
+                  <li key={key} class="flex justify-between items-center py-1 border-b">
+                    <div>
+                      <p class="text-[10px] font-bold text-gray-800">
+                        {item.title} - {item.category}
+                      </p>
+                      <p class="text-[10px] text-gray-500">
+                        #{item.quantity} Sold in {item.address}, {item.country}
+                      </p>
+                      <p class="text-[10px] text-gray-500">
+                        {new Date(item.time).toDateString()}
+                      </p>
+                    </div>
+                    <div>
+                      <p class="text-2xl font-bold text-green-500">+${item.price}</p>
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
+          )}
         </div>
       </div>
     </div>
