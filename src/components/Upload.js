@@ -7,6 +7,7 @@ const Upload = () => {
   const [activeTab, setActiveTab] = useState("approved");
   const walletAddress = localStorage.getItem("walletAddress");
   const [transaction, setTransaction] = useState([]);
+  const [earned, setEarned] = useState(0);
   useEffect(() => {
     const options = {
       method: "GET",
@@ -18,7 +19,8 @@ const Upload = () => {
       .request(options)
       .then(function (response) {
         console.log("transaction", response.data);
-        setTransaction(response.data);
+        setTransaction(response.data.transactionList);
+        setEarned(response.data.earned);
       })
       .catch(function (error) {
         console.error(error);
@@ -60,7 +62,7 @@ const Upload = () => {
         <div className="flex mb-4 gap-3">
           <div className="bg-slate-100 w-[14rem] h-[6rem] rounded-xl flex flex-col justify-center items-center">
             <p className="text-cyan-500 font-normal">Earned</p>
-            <p className="text-cyan-500 text-4xl font-bold">$0</p>
+            <p className="text-cyan-500 text-4xl font-bold">${earned}</p>
           </div>
           <div className="bg-slate-100 w-[14rem] h-[6rem] rounded-xl flex flex-col justify-center items-center">
             <p className="text-orange-400">Withdrawn</p>
@@ -90,7 +92,7 @@ const Upload = () => {
                       </p>
                     </div>
                     <div>
-                      <p class="text-2xl font-bold text-green-500">+${item.price}</p>
+                      <p class="text-2xl font-bold text-green-500">+${item.totalEarned}</p>
                     </div>
                   </li>
                 );
