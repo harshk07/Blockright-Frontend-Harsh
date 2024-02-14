@@ -2,14 +2,16 @@ import React from "react";
 import { Carousel } from "react-carousel-minimal";
 
 export const Carousel1 = ({ firstElement }) => {
+  const imageUrl =
+    firstElement !== null && firstElement !== ""
+      ? firstElement
+      : "https://i.ibb.co/BVWR9sd/smartmockups-ljw7xib1.jpg";
   const data = [
     {
-      image: `${
-        firstElement || "https://i.ibb.co/BVWR9sd/smartmockups-ljw7xib1.jpg"
-      }`,
-      caption: `<div>
+      image: imageUrl,
+      caption: `
                   Doodle #21
-                </div>`,
+                `,
     },
     {
       image: "https://i.ibb.co/1GDMLq2/smartmockups-ljw7z0cg.jpg",

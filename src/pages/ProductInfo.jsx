@@ -2,14 +2,15 @@ import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../layout/Footer";
 import { Card1 } from "../components/Card1";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { Tabs } from "../components/Tabs";
 import { Carousel1 } from "../components/Carousel1";
 import axios from "axios";
 
 export const ProductInfo = () => {
   const [productInfo, setProductInfo] = useState({});
-  const productId = "65cb39def043aea8098f17c8";
+  const { productId } = useParams();
+  // const productId = "65cb39def043aea8098f17c8";
   useEffect(() => {
     const options = {
       method: "GET",

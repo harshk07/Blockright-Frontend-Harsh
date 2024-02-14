@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { VscLinkExternal  } from "react-icons/vsc";
+import { VscLinkExternal } from "react-icons/vsc";
 import axios from "axios";
 import WalletIDMainContext from "../context/walletID/WalletIDMainContext";
 import { Link, useNavigate } from "react-router-dom";
@@ -54,6 +54,12 @@ const Punk = () => {
     const shouldRenderCard =
       hasCapRights || hasTshirtRights || hasHoodieRights || hasMugRights;
 
+    const hasProductId =
+      item.capRights.productId ||
+      item.tshirtRights.productId ||
+      item.hoodieRights.productId ||
+      item.mugRights.productId;
+
     if (shouldRenderCard) {
       return (
         <div
@@ -93,12 +99,14 @@ const Punk = () => {
                       <p className="text-xs -mt-1 ml-2"> Earned</p>
                     </div>
                     <div className="text-2xl ml-2 mt-3">
-                      <VscLinkExternal 
-                        className="hover:cursor-pointer"
-                        onClick={() => {
-                          navigate("/ProductInfo");
-                        }}
-                      />
+                      {item.capRights.productId ? (
+                        <VscLinkExternal
+                          className="hover:cursor-pointer"
+                          onClick={() => {
+                            navigate(`/ProductInfo/${hasProductId}`);
+                          }}
+                        />
+                      ) : null}
                     </div>
                   </div>
                 </div>
@@ -131,12 +139,14 @@ const Punk = () => {
                       <p className="text-xs -mt-1 ml-2"> Earned</p>
                     </div>
                     <div className="text-2xl ml-2 mt-3">
-                      <VscLinkExternal 
-                        className="hover:cursor-pointer"
-                        onClick={() => {
-                          navigate("/ProductInfo");
-                        }}
-                      />
+                      {item.tshirtRights.productId ? (
+                        <VscLinkExternal
+                          className="hover:cursor-pointer"
+                          onClick={() => {
+                            navigate(`/ProductInfo/${hasProductId}`);
+                          }}
+                        />
+                      ) : null}
                     </div>
                   </div>
                 </div>
@@ -169,12 +179,14 @@ const Punk = () => {
                       <p className="text-xs -mt-1 ml-2"> Earned</p>
                     </div>
                     <div className="text-2xl ml-2 mt-3">
-                      <VscLinkExternal 
-                        className="hover:cursor-pointer"
-                        onClick={() => {
-                          navigate("/ProductInfo");
-                        }}
-                      />
+                      {item.hoodieRights.productId ? (
+                        <VscLinkExternal
+                          className="hover:cursor-pointer"
+                          onClick={() => {
+                            navigate(`/ProductInfo/${hasProductId}`);
+                          }}
+                        />
+                      ) : null}
                     </div>
                   </div>
                 </div>
@@ -206,12 +218,14 @@ const Punk = () => {
                       <p className="text-xs -mt-1 ml-2"> Earned</p>
                     </div>
                     <div className="text-2xl ml-2 mt-3">
-                      <VscLinkExternal 
-                        className="hover:cursor-pointer"
-                        onClick={() => {
-                          navigate("/ProductInfo");
-                        }}
-                      />
+                      {item.mugRights.productId ? (
+                        <VscLinkExternal
+                          className="hover:cursor-pointer"
+                          onClick={() => {
+                            navigate(`/ProductInfo/${hasProductId}`);
+                          }}
+                        />
+                      ) : null}
                     </div>
                   </div>
                 </div>
