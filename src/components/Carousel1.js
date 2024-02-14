@@ -51,11 +51,11 @@ export const Carousel1 = ({ firstElement }) => {
             dots={true}
             pauseIconColor="white"
             pauseIconSize="40px"
-            slideBackgroundColor="darkgrey"
             slideImageFit="contain"
             thumbnails={true}
             thumbnailWidth="60px"
             style={{
+              backgroundColor: "transparent",
               textAlign: "center",
               width: "660px",
               height: "460px",
