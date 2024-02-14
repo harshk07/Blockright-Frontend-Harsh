@@ -42,39 +42,33 @@ const PendingRights = () => {
       return (
         <div
           key={index}
-          className="mt-10 border-2 border-dashed rounded-lg border-cyan-800 hover:bg-slate-600 hover:border-2 hover:border-dashed flex justify-center w-[35rem] gap-5 py-5 px-5 items-center text-gray-300"
+          className="mt-4 flex flex-col md:flex-row bg-white rounded-lg shadow-md overflow-hidden"
         >
-          {Object.entries(rightsData).map(([rightsType, rights]) => (
-            <div key={rightsType} className="">
-              <p className="text-xl font-bold">{rights.merchTitle}</p>
-              <p className="border-[1.5px] border-b mt-1"></p>
-              <div>
-                <div className="flex gap-3 py-2">
-                  <div>
-                    <p className="text-sm">
-                      {rights.merchantQuantity || 0} {rightsType} Minted{" "}
-                      {rights.licenseFees || 0} license Fees{" "}
-                    </p>
-                  </div>
-                  <div className="leading-0 flex">
-                    <div>
-                      <p className="text-2xl m-0 p-0 font-semibold">
-                        ${rights.merchantQuantity * rights.licenseFees || 0}
-                      </p>
-                      <p className="text-xs -mt-1 ml-2"> Earned</p>
-                    </div>
-                  </div>
-                </div>
-                <p className="border-1 border-b"></p>
-              </div>
-            </div>
-          ))}
-          <div className="w-[8rem] h-[8rem]">
+          <div className="md:flex-shrink-0">
             <img
               src={imgSrc}
               alt="image of nft"
-              className="object-contain w-full h-full"
+              className="h-32 w-full object-cover md:h-full md:w-36"
             />
+          </div>
+          <div className="p-4 flex flex-col justify-between leading-normal">
+            {Object.entries(rightsData).map(([rightsType, rights]) => (
+              <div key={rightsType} className="mb-8">
+                <div className="text-gray-900 font-bold text-xl mb-2">
+                  {rights.merchTitle}
+                </div>
+                <p className="text-gray-700 text-base">
+                  {rights.merchantQuantity || 0} {rightsType} minted at $
+                  {rights.licenseFees || 0} license fee each.
+                </p>
+                <div className="mt-4">
+                  <span className="text-sm font-semibold">Total Earned: </span>
+                  <span className="text-lg font-bold">
+                    ${rights.merchantQuantity * rights.licenseFees || 0}
+                  </span>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       );
@@ -84,18 +78,19 @@ const PendingRights = () => {
 
   if (errorMessage) {
     return (
-      <div className="text-xl font-bold flex items-center justify-center gap-3 w-[32rem]">
-        <Link to="/NftPage">
-          <div className="border-2 border-dashed rounded-xl text-xl mb-[1rem] border-cyan-800 hover:bg-slate-600 hover:border-2 hover:border-dashed flex py-3.5 justify-center items-center">
-            <h1>Mint your NFT Merch</h1>
-          </div>
+      <div className="flex items-center justify-center mt-10">
+        <Link
+          to="/NftPage"
+          className="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        >
+          <div>Mint your NFT Merch</div>
         </Link>
       </div>
     );
   }
 
   return (
-    <div className="mt-10">
+    <div className="mt-8 flex">
       {pendingRightsData.map((item, index) => renderRightsCard(item, index))}
     </div>
   );
