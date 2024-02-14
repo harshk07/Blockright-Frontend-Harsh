@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { VscLinkExternal  } from "react-icons/vsc";
+import { VscLinkExternal } from "react-icons/vsc";
 import axios from "axios";
 import WalletIDMainContext from "../context/walletID/WalletIDMainContext";
 import { Link, useNavigate } from "react-router-dom";
@@ -71,153 +71,153 @@ const Punk = () => {
             {/* cap */}
             {item.capRights.merchantQuantity * item.capRights.licenseFees >
               0 && (
-              <>
-                <div className="flex justify-between gap-3 py-2">
-                  <div>
-                    <p className="text-sm">
-                      {item.capRights.merchantQuantity || 0} capRights Minted{" "}
-                      {item.capRights.licenseFees || 0} license Fees{" "}
-                    </p>
-                    <p className="text-sm">
-                      {" "}
-                      0 sold, {item.capRights.availableQuantity} left
-                    </p>
-                  </div>
-                  <div className="leading-0 flex">
+                <>
+                  <div className="flex justify-between gap-3 py-2">
                     <div>
-                      <p className="text-2xl m-0 p-0 font-semibold">
-                        $
-                        {item.capRights.merchantQuantity *
-                          item.capRights.licenseFees || 0}
+                      <p className="text-sm">
+                        {item.capRights.merchantQuantity || 0} capRights Minted{" "}
+                        {item.capRights.licenseFees || 0} license Fees{" "}
                       </p>
-                      <p className="text-xs -mt-1 ml-2"> Earned</p>
+                      <p className="text-sm">
+                        {" "}
+                        0 sold, {item.capRights.availableQuantity} left
+                      </p>
                     </div>
-                    <div className="text-2xl ml-2 mt-3">
-                      <VscLinkExternal 
-                        className="hover:cursor-pointer"
-                        onClick={() => {
-                          navigate("/ProductInfo");
-                        }}
-                      />
+                    <div className="leading-0 flex">
+                      <div>
+                        <p className="text-2xl m-0 p-0 font-semibold">
+                          $
+                          {item.capRights.merchantQuantity *
+                            item.capRights.licenseFees || 0}
+                        </p>
+                        <p className="text-xs -mt-1 ml-2"> Earned</p>
+                      </div>
+                      <div className="text-2xl ml-2 mt-3">
+                        <VscLinkExternal
+                          className="hover:cursor-pointer"
+                          onClick={() => {
+                            navigate("/ProductInfo");
+                          }}
+                        />
+                      </div>
                     </div>
                   </div>
-                </div>
-                <p className="border-1 border-b"></p>
-              </>
-            )}
+                  <p className="border-1 border-b"></p>
+                </>
+              )}
             {/* Tshirt */}
             {item.tshirtRights.merchantQuantity *
               item.tshirtRights.licenseFees >
               0 && (
-              <>
-                <div className="flex justify-between gap-3 py-2">
-                  <div>
-                    <p className="text-sm">
-                      {item.tshirtRights.merchantQuantity || 0} tshirtRights
-                      Minted {item.tshirtRights.licenseFees || 0} license Fees{" "}
-                    </p>
-                    <p className="text-sm">
-                      {" "}
-                      0 sold, {item.tshirtRights.availableQuantity} left
-                    </p>
-                  </div>
-                  <div className="leading-0 flex">
+                <>
+                  <div className="flex justify-between gap-3 py-2">
                     <div>
-                      <p className="text-2xl m-0 p-0 font-semibold">
-                        $
-                        {item.tshirtRights.merchantQuantity *
-                          item.tshirtRights.licenseFees || 0}
+                      <p className="text-sm">
+                        {item.tshirtRights.merchantQuantity || 0} tshirtRights
+                        Minted {item.tshirtRights.licenseFees || 0} license Fees{" "}
                       </p>
-                      <p className="text-xs -mt-1 ml-2"> Earned</p>
+                      <p className="text-sm">
+                        {" "}
+                        0 sold, {item.tshirtRights.availableQuantity} left
+                      </p>
                     </div>
-                    <div className="text-2xl ml-2 mt-3">
-                      <VscLinkExternal 
-                        className="hover:cursor-pointer"
-                        onClick={() => {
-                          navigate("/ProductInfo");
-                        }}
-                      />
+                    <div className="leading-0 flex">
+                      <div>
+                        <p className="text-2xl m-0 p-0 font-semibold">
+                          $
+                          {item.tshirtRights.merchantQuantity *
+                            item.tshirtRights.licenseFees || 0}
+                        </p>
+                        <p className="text-xs -mt-1 ml-2"> Earned</p>
+                      </div>
+                      <div className="text-2xl ml-2 mt-3">
+                        <VscLinkExternal
+                          className="hover:cursor-pointer"
+                          onClick={() => {
+                            navigate("/ProductInfo");
+                          }}
+                        />
+                      </div>
                     </div>
                   </div>
-                </div>
-                <p className="border-1 border-b"></p>
-              </>
-            )}
+                  <p className="border-1 border-b"></p>
+                </>
+              )}
             {/* HoodieRights */}
             {item.hoodieRights.merchantQuantity *
               item.hoodieRights.licenseFees >
               0 && (
-              <>
-                <div className="flex justify-between gap-3 py-2">
-                  <div>
-                    <p className="text-sm">
-                      {item.hoodieRights.merchantQuantity || 0} hoodieRights
-                      Minted {item.hoodieRights.licenseFees || 0} license Fees{" "}
-                    </p>
-                    <p className="text-sm">
-                      {" "}
-                      0 sold, {item.hoodieRights.availableQuantity} left
-                    </p>
-                  </div>
-                  <div className="leading-0 flex">
+                <>
+                  <div className="flex justify-between gap-3 py-2">
                     <div>
-                      <p className="text-2xl m-0 p-0 font-semibold">
-                        $
-                        {item.hoodieRights.merchantQuantity *
-                          item.hoodieRights.licenseFees || 0}
+                      <p className="text-sm">
+                        {item.hoodieRights.merchantQuantity || 0} hoodieRights
+                        Minted {item.hoodieRights.licenseFees || 0} license Fees{" "}
                       </p>
-                      <p className="text-xs -mt-1 ml-2"> Earned</p>
+                      <p className="text-sm">
+                        {" "}
+                        0 sold, {item.hoodieRights.availableQuantity} left
+                      </p>
                     </div>
-                    <div className="text-2xl ml-2 mt-3">
-                      <VscLinkExternal 
-                        className="hover:cursor-pointer"
-                        onClick={() => {
-                          navigate("/ProductInfo");
-                        }}
-                      />
+                    <div className="leading-0 flex">
+                      <div>
+                        <p className="text-2xl m-0 p-0 font-semibold">
+                          $
+                          {item.hoodieRights.merchantQuantity *
+                            item.hoodieRights.licenseFees || 0}
+                        </p>
+                        <p className="text-xs -mt-1 ml-2"> Earned</p>
+                      </div>
+                      <div className="text-2xl ml-2 mt-3">
+                        <VscLinkExternal
+                          className="hover:cursor-pointer"
+                          onClick={() => {
+                            navigate("/ProductInfo");
+                          }}
+                        />
+                      </div>
                     </div>
                   </div>
-                </div>
-                <p className="border-1 border-b"></p>
-              </>
-            )}
+                  <p className="border-1 border-b"></p>
+                </>
+              )}
             {/* mugRights */}
             {item.mugRights.merchantQuantity * item.mugRights.licenseFees >
               0 && (
-              <>
-                <div className="flex justify-between gap-3 py-2">
-                  <div>
-                    <p className="text-sm">
-                      {item.mugRights.merchantQuantity || 0} mugRights Minted{" "}
-                      {item.mugRights.licenseFees || 0} license Fees{" "}
-                    </p>
-                    <p className="text-sm">
-                      {" "}
-                      0 sold, {item.mugRights.availableQuantity} left
-                    </p>
-                  </div>
-                  <div className="leading-0 flex">
+                <>
+                  <div className="flex justify-between gap-3 py-2">
                     <div>
-                      <p className="text-2xl m-0 p-0 font-semibold">
-                        $
-                        {item.mugRights.merchantQuantity *
-                          item.mugRights.licenseFees || 0}
+                      <p className="text-sm">
+                        {item.mugRights.merchantQuantity || 0} mugRights Minted{" "}
+                        {item.mugRights.licenseFees || 0} license Fees{" "}
                       </p>
-                      <p className="text-xs -mt-1 ml-2"> Earned</p>
+                      <p className="text-sm">
+                        {" "}
+                        0 sold, {item.mugRights.availableQuantity} left
+                      </p>
                     </div>
-                    <div className="text-2xl ml-2 mt-3">
-                      <VscLinkExternal 
-                        className="hover:cursor-pointer"
-                        onClick={() => {
-                          navigate("/ProductInfo");
-                        }}
-                      />
+                    <div className="leading-0 flex">
+                      <div>
+                        <p className="text-2xl m-0 p-0 font-semibold">
+                          $
+                          {item.mugRights.merchantQuantity *
+                            item.mugRights.licenseFees || 0}
+                        </p>
+                        <p className="text-xs -mt-1 ml-2"> Earned</p>
+                      </div>
+                      <div className="text-2xl ml-2 mt-3">
+                        <VscLinkExternal
+                          className="hover:cursor-pointer"
+                          onClick={() => {
+                            navigate("/ProductInfo");
+                          }}
+                        />
+                      </div>
                     </div>
                   </div>
-                </div>
-                <p className="border-1 border-b"></p>
-              </>
-            )}
+                  <p className="border-1 border-b"></p>
+                </>
+              )}
           </div>
           <div className="w-[8rem] h-[8rem]">
             <img
