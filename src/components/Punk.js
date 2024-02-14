@@ -80,7 +80,7 @@ const Punk = () => {
                       </p>
                       <p className="text-sm">
                         {" "}
-                        0 sold, {item.capRights.merchantQuantity} left
+                        0 sold, {item.capRights.availableQuantity} left
                       </p>
                     </div>
                     <div className="leading-0 flex">
@@ -113,7 +113,7 @@ const Punk = () => {
                       </p>
                       <p className="text-sm">
                         {" "}
-                        0 sold, {item.tshirtRights.merchantQuantity} left
+                        0 sold, {item.tshirtRights.availableQuantity} left
                       </p>
                     </div>
                     <div className="leading-0 flex">
@@ -146,7 +146,7 @@ const Punk = () => {
                       </p>
                       <p className="text-sm">
                         {" "}
-                        0 sold, {item.hoodieRights.merchantQuantity} left
+                        0 sold, {item.hoodieRights.availableQuantity} left
                       </p>
                     </div>
                     <div className="leading-0 flex">
@@ -178,7 +178,7 @@ const Punk = () => {
                       </p>
                       <p className="text-sm">
                         {" "}
-                        0 sold, {item.mugRights.merchantQuantity} left
+                        0 sold, {item.mugRights.availableQuantity} left
                       </p>
                     </div>
                     <div className="leading-0 flex">

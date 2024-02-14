@@ -60,7 +60,7 @@ function CartPage2() {
           id="checkout"
         >
           <div
-            className="flex md:flex-row bg-blue-300 flex-col justify-center"
+            className="flex md:flex-row bg-blue-700 flex-col justify-center"
             id="cart"
           >
             <div
@@ -70,64 +70,64 @@ function CartPage2() {
               <p className="text-5xl font-black leading-10 text-gray-800 pt-3">
                 Products
               </p>
-              {cart.items.map((item, index) => (
-                <div
-                  key={index}
-                  className="md:flex items-center mt-14 py-8 border-t border-gray-200"
-                >
-                  <div className="w-1/4">
-                    <img
-                      src={item.imgSource}
-                      alt={item.title}
-                      className="w-full h-full object-center object-cover"
-                    />
-                  </div>
-                  <div className="md:pl-3 md:w-3/4">
-                    <p className="text-xs leading-3 text-gray-800 md:pt-0 pt-4">
-                      {item.title}
-                    </p>
-                    <div className="flex items-center justify-between w-full pt-1">
-                      <p className="text-base font-black leading-none text-gray-800">
-                        North wolf bag
-                      </p>
-                      <select className="py-2 px-1 border border-gray-200 mr-6 focus:outline-none">
-                        <option>{item.quantity}</option>
-                      </select>
+              {cart.items.length === 0 ? (
+                <div className="w-full text-center text-gray-500">
+                  Please add items into the cart
+                </div>
+              ) : (
+                cart.items.map((item, index) => (
+                  <div
+                    key={index}
+                    className="md:flex items-center mt-14 py-8 border-t border-gray-200"
+                  >
+                    <div className="w-1/4">
+                      <img
+                        src={item.imgSource}
+                        alt={item.title}
+                        className="w-full h-full object-center object-cover"
+                      />
                     </div>
-                    <p className="text-xs leading-3 text-gray-600 pt-2">
-                      Size: {item.size}
-                    </p>
-                    <p className="text-xs leading-3 text-gray-600 py-4">
-                      Color: {item.color}
-                    </p>
-                    <p className="w-96 text-xs leading-3 text-gray-600">
-                      Composition: 100% calf leather
-                    </p>
-                    <div className="flex items-center justify-between pt-5 pr-6">
-                      <div className="flex itemms-center">
-                        <p className="text-xs leading-3 underline text-gray-800 cursor-pointer">
-                          Add to favorites
+                    <div className="md:pl-3 md:w-3/4">
+                      <p className="text-xs leading-3 text-gray-800 md:pt-0 pt-4">
+                        {item.title}
+                      </p>
+                      <div className="flex items-center justify-between w-full pt-1">
+                        <p className="text-base font-black leading-none text-gray-800">
+                          North wolf bag
                         </p>
-                        <p
-                          onClick={() => handleRemoveItemClick(index)}
-                          className="text-xs leading-3 underline text-red-500 pl-5 cursor-pointer"
-                        >
-                          Remove
+                        <select className="py-2 px-1 border border-gray-200 mr-6 focus:outline-none">
+                          <option>{item.quantity}</option>
+                        </select>
+                      </div>
+                      <p className="text-xs leading-3 text-gray-600 pt-2">
+                        Size: {item.size}
+                      </p>
+                      <p className="text-xs leading-3 text-gray-600 py-4">
+                        Color: {item.color}
+                      </p>
+                      <p className="w-96 text-xs leading-3 text-gray-600">
+                        Composition: 100% calf leather
+                      </p>
+                      <div className="flex items-center justify-between pt-5 pr-6">
+                        <div className="flex itemms-center">
+                          <p className="text-xs leading-3 underline text-gray-800 cursor-pointer">
+                            Add to favorites
+                          </p>
+                          <p
+                            onClick={() => handleRemoveItemClick(index)}
+                            className="text-xs leading-3 underline text-red-500 pl-5 cursor-pointer"
+                          >
+                            Remove
+                          </p>
+                        </div>
+                        <p className="text-base font-black leading-none text-gray-800">
+                          ${item.price * item.quantity}
                         </p>
                       </div>
-                      <p className="text-base font-black leading-none text-gray-800">
-                        ${item.price * item.quantity}
-                      </p>
                     </div>
-                    <button
-                      onClick={() => handleRemoveItemClick(index)}
-                      className="text-white bg-red-500 px-3 py-1 mt-2 rounded-md"
-                    >
-                      Remove
-                    </button>
                   </div>
-                </div>
-              ))}
+                ))
+              )}
             </div>
             <div className="md:w-1/3 xl:w-1/4 w-full bg-gray-100 h-full">
               <div className="flex flex-col md:h-screen px-14 py-20 justify-between overflow-y-auto">
@@ -178,20 +178,20 @@ function CartPage2() {
 
       <style>
         {` /* width */
-                #scroll::-webkit-scrollbar {
-                    width: 1px;
-                }
+        #scroll::-webkit-scrollbar {
+          width: 1px;
+        }
 
-                /* Track */
-                #scroll::-webkit-scrollbar-track {
-                    background: #f1f1f1;
-                }
+        /* Track */
+        #scroll::-webkit-scrollbar-track {
+          background: #f1f1f1;
+        }
 
-                /* Handle */
-                #scroll::-webkit-scrollbar-thumb {
-                    background: rgb(133, 132, 132);
-                }
-`}
+        /* Handle */
+        #scroll::-webkit-scrollbar-thumb {
+          background: rgb(133, 132, 132);
+        }
+      `}
       </style>
     </>
   );
