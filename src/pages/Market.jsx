@@ -200,7 +200,7 @@ export const Market = () => {
                       $
                       {selectItem
                         ? selectItem.price *
-                        quantities.reduce((acc, qty) => acc + qty, 0)
+                          quantities.reduce((acc, qty) => acc + qty, 0)
                         : "-"}
                       <br />
                       $80
@@ -213,8 +213,8 @@ export const Market = () => {
                     <p className="text-black text-xl font-semibold ml-1">
                       {selectItem
                         ? selectItem.price *
-                        quantities.reduce((acc, qty) => acc + qty, 0) +
-                        80
+                            quantities.reduce((acc, qty) => acc + qty, 0) +
+                          80
                         : "-"}
                     </p>
                   </div>

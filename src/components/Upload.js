@@ -79,7 +79,10 @@ const Upload = () => {
             <ul>
               {transaction.map((item, key) => {
                 return (
-                  <li key={key} class="flex justify-between items-center py-1 border-b">
+                  <li
+                    key={key}
+                    class="flex justify-between items-center py-1 border-b"
+                  >
                     <div>
                       <p class="text-[10px] font-bold text-gray-800">
                         {item.title} - {item.category}
@@ -92,7 +95,9 @@ const Upload = () => {
                       </p>
                     </div>
                     <div>
-                      <p class="text-2xl font-bold text-green-500">+${item.totalEarned}</p>
+                      <p class="text-2xl font-bold text-green-500">
+                        +${item.totalEarned}
+                      </p>
                     </div>
                   </li>
                 );
