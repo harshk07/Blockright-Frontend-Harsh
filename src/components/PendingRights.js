@@ -40,37 +40,40 @@ const PendingRights = () => {
 
     if (shouldRenderCard) {
       return (
-        <div
-          key={index}
-          className="mt-4 flex flex-col md:flex-row bg-white rounded-lg shadow-md overflow-hidden"
-        >
-          <div className="md:flex-shrink-0">
-            <img
-              src={imgSrc}
-              alt="image of nft"
-              className="h-32 w-full object-cover md:h-full md:w-36"
-            />
-          </div>
-          <div className="p-4 flex flex-col justify-between leading-normal">
-            {Object.entries(rightsData).map(([rightsType, rights]) => (
-              <div key={rightsType} className="mb-8">
-                <div className="text-gray-900 font-bold text-xl mb-2">
-                  {rights.merchTitle}
+        <>
+          <div
+            key={index}
+            className="mt-4 flex flex-col md:flex-row bg-white rounded-lg shadow-md overflow-hidden"
+          >
+            <div className="md:flex-shrink-0">
+              <img
+                src={imgSrc}
+                alt="image of nft"
+                className="h-32 w-full object-cover md:h-full md:w-36"
+              />
+            </div>
+            <div className="p-4 flex flex-col justify-between leading-normal">
+              {Object.entries(rightsData).map(([rightsType, rights]) => (
+                <div key={rightsType} className="mb-8">
+                  <div className="text-gray-900 font-bold text-xl mb-2">
+                    {rights.merchTitle}
+                  </div>
+                  <p className="text-gray-700 text-base">
+                    {rights.merchantQuantity || 0} {rightsType} minting for $
+                    {rights.licenseFees || 0} license fee each.
+                  </p>
+                  <div className="mt-4">
+                    <span className="text-sm font-semibold">Total Earned: </span>
+                    <span className="text-lg font-bold">
+                      ${rights.merchantQuantity * rights.licenseFees || 0}
+                    </span>
+                  </div>
                 </div>
-                <p className="text-gray-700 text-base">
-                  {rights.merchantQuantity || 0} {rightsType} minted at $
-                  {rights.licenseFees || 0} license fee each.
-                </p>
-                <div className="mt-4">
-                  <span className="text-sm font-semibold">Total Earned: </span>
-                  <span className="text-lg font-bold">
-                    ${rights.merchantQuantity * rights.licenseFees || 0}
-                  </span>
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
+          <p>Contact at blockright@contact.com if rights are not apporved withing 7 days.</p>
+        </>
       );
     }
     return null;
