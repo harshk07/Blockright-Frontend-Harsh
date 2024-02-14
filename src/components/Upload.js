@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import Punk from "./Punk";
 import PendingRights from "./PendingRights";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Upload = () => {
   const [activeTab, setActiveTab] = useState("approved");
   const walletAddress = localStorage.getItem("walletAddress");
   const [transaction, setTransaction] = useState([]);
   const [earned, setEarned] = useState(0);
+  const navigate = useNavigate();
   useEffect(() => {
     const options = {
       method: "GET",
@@ -36,26 +38,32 @@ const Upload = () => {
       <div className="w-[40rem]">
         <div className="flex">
           <button
-            className={`${activeTab === "approved"
-              ? "bg-green-400 text-black"
-              : "border-[1px] border-gray-800 text-white"
-              } py-2 px-4 rounded-l-lg`}
+            className={`${
+              activeTab === "approved"
+                ? "bg-green-400 text-black"
+                : "border-[1px] border-gray-800 text-white"
+            } py-2 px-4 rounded-l-lg`}
             onClick={() => handleTabClick("approved")}
           >
             Approved
           </button>
           <button
-            className={`${activeTab === "pendingRights"
-              ? "bg-orange-400 text-white"
-              : "border-[1px] border-gray-800 text-white"
-              } py-2 px-4 rounded-r-lg`}
+            className={`${
+              activeTab === "pendingRights"
+                ? "bg-orange-400 text-white"
+                : "border-[1px] border-gray-800 text-white"
+            } py-2 px-4 rounded-r-lg`}
             onClick={() => handleTabClick("pendingRights")}
           >
             Requested Rights
           </button>
         </div>
         <div className="rounded">
-          {activeTab === "pendingRights" ? <PendingRights /> : <Punk />}
+          {activeTab === "pendingRights" ? (
+            <PendingRights />
+          ) : (
+            <Punk />
+          )}
         </div>
       </div>
       <div className="w-[19rem] text-gray-400">
