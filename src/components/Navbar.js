@@ -71,11 +71,11 @@ const Navbar = () => {
               <Link2 className="hover:text-gray-300" to="#contact" smooth>
                 Contact us
               </Link2>
-              <Link className="hover:text-gray-300" to="/CartPage">
+              {/* <Link className="hover:text-gray-300" to="/CartPage">
                 My Cart ({getTotalItems()})
-              </Link>
+              </Link> */}
               <Link className="hover:text-gray-300" to="/cartt">
-                My Cart UI ({getTotalItems()})
+                Cart({getTotalItems()})
               </Link>
               <Link className="hover:text-gray-300" to="/MyProfile">
                 My Profile

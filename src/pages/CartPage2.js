@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useCart } from "../context/cart/CartContext";
 import { useLocation, useNavigate } from "react-router-dom";
+import Navbar from "../components/Navbar";
 
 function CartPage2() {
   const { cart, removeFromCart } = useCart();
@@ -54,9 +55,10 @@ function CartPage2() {
 
   return (
     <>
+      {Navbar}
       <div>
         <div
-          className="w-full absolute z-10 right-0 h-full overflow-x-hidden transform translate-x-0 transition ease-in-out duration-700"
+          className="w-full absolute z-10 right-0 h-[80] overflow-x-hidden transform translate-x-0 transition ease-in-out duration-700"
           id="checkout"
         >
           <div
@@ -71,7 +73,7 @@ function CartPage2() {
                 Products
               </p>
               {cart.items.length === 0 ? (
-                <div className="w-full text-center text-gray-500">
+                <div className="w-full mt-20 text-center text-gray-500">
                   Please add items into the cart
                 </div>
               ) : (
