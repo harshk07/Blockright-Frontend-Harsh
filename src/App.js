@@ -32,6 +32,7 @@ import CartPage from "./pages/CartPage";
 import { CartProvider } from "./context/cart/CartContext";
 import CartPage2 from "./pages/CartPage2";
 import Navbar from "./components/Navbar";
+import ProductInfo from "./pages/ProductInfo";
 
 function App() {
   return (
@@ -129,6 +130,7 @@ function App() {
                 <Route path="/CartPage" element={<CartPage />} />
                 <Route path="/cartt" element={<CartPage2 />} />
                 <Route path="/MyForm" element={<MyForm />} />
+                <Route path="/ProductInfo" element={<ProductInfo />} />
                 <Route exact path="*" element={<ErrorPage />} />
               </Routes>
             </div>

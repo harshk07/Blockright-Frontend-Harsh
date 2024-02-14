@@ -19,8 +19,9 @@ const PendingRights = () => {
           }
         );
         console.log("Pending rights data:", response.data.response);
-
-        setErrorMessage(response.data.message);
+        if (response.data.response.length === 0) {
+          setErrorMessage("No rights Requested");
+        }
         setPendingRightsData(response.data.response);
       } catch (error) {
         console.error(error);
@@ -81,12 +82,12 @@ const PendingRights = () => {
 
   if (errorMessage) {
     return (
-      <div className="flex items-center justify-center mt-10">
-        <Link
-          to="/NftPage"
-          className="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        >
-          <div>Mint your NFT Merch</div>
+      <div className="flex flex-col items-center w-[50%] justify-center mt-10">
+        <p className="text-blue-500">{errorMessage}</p>
+        <Link to="/NftPage">
+          <div className="border-2 border-dashed  rounded-xl text-2xl border-cyan-800 hover:bg-slate-600 hover:border-2 hover:border-dashed p-3 flex justify-center items-center">
+            <h1>Mint your NFT Merch</h1>
+          </div>
         </Link>
       </div>
     );
