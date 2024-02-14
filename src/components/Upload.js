@@ -7,6 +7,7 @@ const Upload = () => {
   const [activeTab, setActiveTab] = useState("approved");
   const walletAddress = localStorage.getItem("walletAddress");
   const [transaction, setTransaction] = useState([]);
+  const [earned, setEarned] = useState(0);
   useEffect(() => {
     const options = {
       method: "GET",
@@ -18,7 +19,8 @@ const Upload = () => {
       .request(options)
       .then(function (response) {
         console.log("transaction", response.data);
-        setTransaction(response.data);
+        setTransaction(response.data.transactionList);
+        setEarned(response.data.earned);
       })
       .catch(function (error) {
         console.error(error);
@@ -34,21 +36,19 @@ const Upload = () => {
       <div className="w-[40rem]">
         <div className="flex">
           <button
-            className={`${
-              activeTab === "approved"
-                ? "bg-green-400 text-black"
-                : "border-[1px] border-gray-800 text-white"
-            } py-2 px-4 rounded-l-lg`}
+            className={`${activeTab === "approved"
+              ? "bg-green-400 text-black"
+              : "border-[1px] border-gray-800 text-white"
+              } py-2 px-4 rounded-l-lg`}
             onClick={() => handleTabClick("approved")}
           >
             Approved
           </button>
           <button
-            className={`${
-              activeTab === "pendingRights"
-                ? "bg-orange-400 text-white"
-                : "border-[1px] border-gray-800 text-white"
-            } py-2 px-4 rounded-r-lg`}
+            className={`${activeTab === "pendingRights"
+              ? "bg-orange-400 text-white"
+              : "border-[1px] border-gray-800 text-white"
+              } py-2 px-4 rounded-r-lg`}
             onClick={() => handleTabClick("pendingRights")}
           >
             Requested Rights
@@ -62,7 +62,7 @@ const Upload = () => {
         <div className="flex mb-4 gap-3">
           <div className="bg-slate-100 w-[14rem] h-[6rem] rounded-xl flex flex-col justify-center items-center">
             <p className="text-cyan-500 font-normal">Earned</p>
-            <p className="text-cyan-500 text-4xl font-bold">$0</p>
+            <p className="text-cyan-500 text-4xl font-bold">${earned}</p>
           </div>
           <div className="bg-slate-100 w-[14rem] h-[6rem] rounded-xl flex flex-col justify-center items-center">
             <p className="text-orange-400">Withdrawn</p>
@@ -96,7 +96,7 @@ const Upload = () => {
                     </div>
                     <div>
                       <p class="text-2xl font-bold text-green-500">
-                        +${item.price}
+                        +${item.totalEarned}
                       </p>
                     </div>
                   </li>
