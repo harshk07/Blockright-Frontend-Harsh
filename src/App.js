@@ -130,7 +130,10 @@ function App() {
                 <Route path="/CartPage" element={<CartPage />} />
                 <Route path="/cartt" element={<CartPage2 />} />
                 <Route path="/MyForm" element={<MyForm />} />
-                <Route path="/ProductInfo" element={<ProductInfo />} />
+                <Route
+                  path="/ProductInfo/:productId"
+                  element={<ProductInfo />}
+                />
                 <Route exact path="*" element={<ErrorPage />} />
               </Routes>
             </div>

@@ -2,14 +2,16 @@ import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../layout/Footer";
 import { Card1 } from "../components/Card1";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { Tabs } from "../components/Tabs";
 import { Carousel1 } from "../components/Carousel1";
+import { IoShareSocial } from "react-icons/io5";
 import axios from "axios";
 
 export const ProductInfo = () => {
   const [productInfo, setProductInfo] = useState({});
-  const productId = "65cb39def043aea8098f17c8";
+  const { productId } = useParams();
+  // const productId = "65cb39def043aea8098f17c8";
   useEffect(() => {
     const options = {
       method: "GET",
@@ -28,11 +30,19 @@ export const ProductInfo = () => {
   }, []);
   const [selectedSize, setSelectedSize] = useState("");
   const [selectedColor, setSelectedColor] = useState("");
+  const handleShareClick = (event) => {
+    event.stopPropagation();
 
-  const handleSizeClick = (size) => {
-    setSelectedSize(size);
+    const url = `http://localhost:3000/market/${productId}`;
+    navigator.clipboard
+      .writeText(url)
+      .then(() => {
+        console.log("URL copied to clipboard:", url);
+      })
+      .catch((error) => {
+        console.error("Error copying URL to clipboard:", error);
+      });
   };
-
   const handleColorClick = (color) => {
     setSelectedColor(color);
   };
@@ -99,6 +109,7 @@ export const ProductInfo = () => {
 
               <div className="flex justify-center gap-3 mb-2">
                 <div
+                  className="flex items-center gap-5"
                   onClick={() => {
                     navigate(`/market/${productId}`);
                   }}
@@ -106,6 +117,9 @@ export const ProductInfo = () => {
                   <button className="inline-flex text-white bg-sky-600 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">
                     Buy Merch
                   </button>
+                  <p onClick={handleShareClick}>
+                    <IoShareSocial size={30} color="red" />
+                  </p>
                 </div>
               </div>
             </div>
