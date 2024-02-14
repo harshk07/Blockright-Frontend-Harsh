@@ -91,7 +91,7 @@ export const Market = () => {
         );
         console.log("filter data", filteredData);
         setNftData(filteredData);
-        console.log("nft data inside", nftData);
+        console.log("nft data inside", filteredData);
       })
       .catch(function (error) {
         console.error(error);
@@ -128,12 +128,14 @@ export const Market = () => {
                   <div className="mx-3">
                     <div className="flex b bg-white mb-4">
                       <div className="w-24 h-28 mt-8 ">
-                        <img
-                          className="w-24 h-28"
-                          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRLwGb3KPeGRFGXJuTQIBwU1RA-taAyI-5r3Td5EYCBWz0YlyKFmrvTsl6ExLT5Xfwj-8&usqp=CAU"
-                          // src={nftData[0].images[0]}
-                          alt="cloth img"
-                        />
+                        {selectItem && (
+                          <img
+                            className="w-24 h-28"
+                            src={selectItem.images[0]}
+                            alt="NFT image"
+                          />
+                        )}
+
                         <div className="flex mt-2 items-baseline">
                           <button
                             onClick={handleDecreasePieces}

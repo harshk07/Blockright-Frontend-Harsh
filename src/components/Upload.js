@@ -17,7 +17,7 @@ const Upload = () => {
     axios
       .request(options)
       .then(function (response) {
-        console.log(response.data);
+        console.log("transaction", response.data);
         setTransaction(response.data);
       })
       .catch(function (error) {

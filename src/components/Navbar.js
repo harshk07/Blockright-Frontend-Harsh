@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 // import Navbar2 from './Navbar2';
 // import { BrowserRouter } from 'react-router-dom';
-import { HashLink as Link2 } from 'react-router-hash-link';
+import { HashLink as Link2 } from "react-router-hash-link";
 import logo from "../Images/blockright-logo.png";
-import { ethers } from 'ethers';
+import { ethers } from "ethers";
 import WalletIDMainContext from "../context/walletID/WalletIDMainContext";
 import { useContext } from "react";
-import { useCart } from '../context/cart/CartContext';
+import { useCart } from "../context/cart/CartContext";
 
 const Navbar = () => {
   const { setFetchedWalletAddress } = useContext(WalletIDMainContext);
@@ -22,30 +22,30 @@ const Navbar = () => {
   // const [connButtonText,setConnButtonText]=useState('Connect Wallet');
   const connectWalletHandler = () => {
     if (window.ethereum) {
-      window.ethereum.request({ method: 'eth_requestAccounts' })
-        .then(result => {
+      window.ethereum
+        .request({ method: "eth_requestAccounts" })
+        .then((result) => {
           accountChangeHandler(result[0]);
-        })
+        });
+    } else {
+      setErrorMessage("Install metamask");
     }
-    else {
-      setErrorMessage('Install metamask')
-    }
-  }
+  };
   const accountChangeHandler = (newAccount) => {
     setDefaultAccount(newAccount);
     setFetchedWalletAddress(newAccount);
     getUserBalance(newAccount);
-  }
+  };
   const getUserBalance = (address) => {
-    window.ethereum.request({ method: 'eth_getBalance', params: [address, 'latest'] })
-      .then(balance => {
+    window.ethereum
+      .request({ method: "eth_getBalance", params: [address, "latest"] })
+      .then((balance) => {
         setUserBalance(ethers.formatEther(balance));
-      })
-  }
+      });
+  };
   return (
     <>
       <div className="lg:mx-auto lg:w-[55rem]  2xl:w-[75rem] 2xl:mx-auto">
-
         {/* <h1 style={{ "color": "white" }}>address:{defaultAccount}</h1>
         <h1 style={{ "color": "white" }}>Balance:{userBalance}</h1> */}
         <header className="body-font" id="Home">
@@ -74,6 +74,9 @@ const Navbar = () => {
               <Link className="hover:text-gray-300" to="/CartPage">
                 My Cart ({getTotalItems()})
               </Link>
+              <Link className="hover:text-gray-300" to="/cartt">
+                My Cart UI ({getTotalItems()})
+              </Link>
               <Link className="hover:text-gray-300" to="/MyProfile">
                 My Profile
               </Link>
@@ -85,7 +88,6 @@ const Navbar = () => {
           {errorMessage}
         </header>
       </div>
-
     </>
   );
 };

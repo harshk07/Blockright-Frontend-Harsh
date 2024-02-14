@@ -30,14 +30,14 @@ import RightsAdmin from "./component/RightsAdmin";
 import Customerpayment from "./pages/Customerpayment";
 import CartPage from "./pages/CartPage";
 import { CartProvider } from "./context/cart/CartContext";
-
+import CartPage2 from "./pages/CartPage2";
+import Navbar from "./components/Navbar";
 
 function App() {
   return (
     <WalletIDMainState>
       <Router>
         <CartProvider>
-
           <>
             <div>
               <Routes>
@@ -119,11 +119,15 @@ function App() {
                 <Route path="/Shopping" element={<Shopping />} />
                 <Route path="/Market/:id" element={<Market />} />
                 <Route path="/AgreementPage" element={<AgreementPage />} />
-                <Route path="/ConfirmorderPage" element={<ConfirmorderPage />} />
+                <Route
+                  path="/ConfirmorderPage"
+                  element={<ConfirmorderPage />}
+                />
                 <Route path="/Loader" element={<Loader />} />
                 <Route path="/Customerpayment" element={<Customerpayment />} />
                 <Route path="/MyProfile" element={<MyProfile />} />
                 <Route path="/CartPage" element={<CartPage />} />
+                <Route path="/cartt" element={<CartPage2 />} />
                 <Route path="/MyForm" element={<MyForm />} />
                 <Route exact path="*" element={<ErrorPage />} />
               </Routes>
