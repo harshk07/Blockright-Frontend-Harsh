@@ -106,15 +106,13 @@ export const Market = () => {
       <Navbar />
       <div className="mx-[9rem] lg:mx-auto lg:w-[55rem] 2xl:w-[75rem] 2xl:mx-auto">
         <section className="body-font">
-          <div className="container mx-auto flex px-5 my-24 md:flex-row flex-col items-center">
-            <div className="">
-              <Carousel1
-                firstElement={selectItem ? selectItem.images[0] : null}
-              />
-            </div>
-            <div className="ml-10 lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center gap-4">
-              <div className="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 -mt-5 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center gap-3 ">
-                <div className="bg-white p-5 mb-5 overflow-hidden mx-3">
+          <div className="container mx-auto flex px-5 mt-10 md:flex-row flex-col items-start">
+            <Carousel1
+              firstElement={selectItem ? selectItem.images[0] : null}
+            />
+            <div className="ml-2 flex flex-col mb-10 items-center text-center">
+              <div className="flex flex-col mb-16 items-center text-center gap-3 ">
+                <div className="bg-white p-[2.5rem] mb-5 overflow-hidden mx-3">
                   <div className="flex items-center justify-between">
                     <p className="font-bold text-gray-900 text-2xl">
                       {selectItem
@@ -130,22 +128,22 @@ export const Market = () => {
                       <div className="w-24 h-28 mt-8 ">
                         {selectItem && (
                           <img
-                            className="w-24 h-28"
+                            className="w-[12rem] object-contain"
                             src={selectItem.images[0]}
                             alt="NFT image"
                           />
                         )}
 
-                        <div className="flex mt-2 items-baseline">
+                        <div className="flex mt-2 gap-14">
                           <button
                             onClick={handleDecreasePieces}
-                            className="flex items-center justify-center font-semibold w-5 h-5 rounded-full text-white bg-red-500 absolute"
+                            className="flex items-center justify-center font-semibold w-5 h-5 rounded-full text-white bg-red-500"
                           >
                             -
                           </button>
                           <button
                             onClick={handleIncreasePieces}
-                            className="flex items-center justify-center font-semibold w-5 h-5 rounded-full text-white bg-red-500 absolute ml-16 mb-10"
+                            className="flex items-center justify-center font-semibold w-5 h-5 rounded-full text-white bg-red-500"
                           >
                             +
                           </button>
@@ -154,7 +152,7 @@ export const Market = () => {
                       <div className="flex flex-col pl-2 mt-7 items-baseline gap-1">
                         {Array.from({ length: numberOfPieces }).map(
                           (_, index) => (
-                            <div key={index} className="flex gap-[8rem] ">
+                            <div key={index} className="flex gap-[1rem] ">
                               <p className="font-normal flex items-center">
                                 <input
                                   type="number"
@@ -192,15 +190,11 @@ export const Market = () => {
                       </div>
                     </div>
                   </div>
-                  <div className=" flex justify-end gap-2 mx-3">
-                    {/* <Country /> */}
-                    {/* <City /> */}
-                  </div>
-                  <div className="border-b border-1 border-slate-800 mt-6 mx-3"></div>
-                  <div className="my-2 flex gap-60 text-end mx-3">
-                    <div className="text-black text-lg font-normal">
-                      Subtotal <br />
-                      Shipping
+                  <div className="border-b border-1 border-slate-800 mt-[6rem] mx-3"></div>
+                  <div className="my-2 flex gap-[17rem] text-end mx-3">
+                    <div className="text-black flex flex-col text-lg font-normal">
+                      <span>Subtotal</span>
+                      <span>Shipping</span>
                     </div>
                     <div className="text-black font-semibold text-lg">
                       $
@@ -215,7 +209,7 @@ export const Market = () => {
                   <div className="border-b border-1 border-slate-800 mx-3"></div>
                   <div className="w-[23rem] flex items-baseline mt-4 mx-3">
                     <p className="text-black text-xl font-medium">Total</p>
-                    <p className="text-black text-xs ml-[14rem] ">$</p>
+                    <p className="text-black text-xl ml-[18rem] ">$</p>
                     <p className="text-black text-xl font-semibold ml-1">
                       {selectItem
                         ? selectItem.price *
