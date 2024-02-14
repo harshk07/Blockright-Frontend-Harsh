@@ -42,15 +42,14 @@ function CartPage2() {
 
   const navigate = useNavigate();
 
-  const handleRemoveItemClick = (itemIndex) => {
-    removeFromCart(itemIndex);
-    console.log(`Item at index ${itemIndex} removed from the cart`);
-  };
-
   const handleProceedToCheckout = () => {
     console.log("Products after checking out:", productDetails);
     console.log("Before going to the myForm page.. state : ", location.state);
     navigate("/myForm", { state: { productDetails } });
+  };
+  const handleRemoveItemClick = (itemIndex) => {
+    removeFromCart(itemIndex);
+    console.log(`Item at index ${itemIndex} removed from the cart`);
   };
 
   return (
@@ -120,6 +119,12 @@ function CartPage2() {
                         ${item.price * item.quantity}
                       </p>
                     </div>
+                    <button
+                      onClick={() => handleRemoveItemClick(index)}
+                      className="text-white bg-red-500 px-3 py-1 mt-2 rounded-md"
+                    >
+                      Remove
+                    </button>
                   </div>
                 </div>
               ))}
