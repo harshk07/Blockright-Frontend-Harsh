@@ -76,8 +76,6 @@ const PendingRights = () => {
               ))}
             </div>
           </div>
-          {/* <p>Cx ontact at blockright@contact.com if rights are not apporved withing 7 days.</p> */}
-        </>
         </div>
       );
     }
