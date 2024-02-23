@@ -41,10 +41,10 @@ const PendingRights = () => {
 
     if (shouldRenderCard) {
       return (
-        <>
+        <div className="">
           <div
             key={index}
-            className="mt-4 flex flex-col md:flex-row bg-white rounded-lg shadow-md overflow-hidden"
+            className="mt-4 flex bg-white rounded-lg shadow-md overflow-hidden"
           >
             <div className="md:flex-shrink-0">
               <img
@@ -53,7 +53,7 @@ const PendingRights = () => {
                 className="h-32 w-full object-cover md:h-full md:w-36"
               />
             </div>
-            <div className="p-4 flex flex-col justify-between leading-normal">
+            <div className="p-4 leading-normal flex flex-col">
               {Object.entries(rightsData).map(([rightsType, rights]) => (
                 <div key={rightsType} className="mb-8">
                   <div className="text-gray-900 font-bold text-xl mb-2">
@@ -64,7 +64,9 @@ const PendingRights = () => {
                     {rights.licenseFees || 0} license fee each.
                   </p>
                   <div className="mt-4">
-                    <span className="text-sm font-semibold">Total Earned: </span>
+                    <span className="text-sm font-semibold">
+                      Total Earned:{" "}
+                    </span>
                     <span className="text-lg font-bold">
                       ${rights.merchantQuantity * rights.licenseFees || 0}
                     </span>
@@ -73,8 +75,7 @@ const PendingRights = () => {
               ))}
             </div>
           </div>
-          <p>Contact at blockright@contact.com if rights are not apporved withing 7 days.</p>
-        </>
+        </div>
       );
     }
     return null;
