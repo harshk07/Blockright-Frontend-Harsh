@@ -19,10 +19,11 @@ const PendingRights = () => {
           }
         );
         console.log("Pending rights data:", response.data.response);
-        if (response.data.response.length === 0) {
-          setErrorMessage("No rights Requested");
-        }
+        // if (response.data.response.length === 0) {
+        //   setErrorMessage("No rights Requested");
+        // }
         setPendingRightsData(response.data.response);
+        // console.log(response.data.response);
       } catch (error) {
         console.error(error);
       }
@@ -75,6 +76,8 @@ const PendingRights = () => {
               ))}
             </div>
           </div>
+          {/* <p>Cx ontact at blockright@contact.com if rights are not apporved withing 7 days.</p> */}
+        </>
         </div>
       );
     }
