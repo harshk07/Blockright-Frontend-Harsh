@@ -20,7 +20,7 @@ export const User = () => {
     fetchUserData();
   }, []);
 
-  const tableCellStyle = "border-2 p-3 w-100%";
+  const tableCellStyle = "border-2 py-2 px-3 w-100%";
   const tableHeaderStyle = "border-2";
   const tableRowStyle = "border-2";
 
