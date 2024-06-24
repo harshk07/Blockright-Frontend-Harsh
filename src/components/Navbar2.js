@@ -11,6 +11,7 @@ const Navbar2 = () => {
     if (storedValue) {
       setMyValue(storedValue);
     }
+    console.log(storedValue)
   }, []);
 
   const truncateWalletAddress = (address) => {

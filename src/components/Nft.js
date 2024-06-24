@@ -19,22 +19,18 @@ export const Nft = ({ imgSource, name, nftId }) => {
 
   return (
     <div
-      className="text-center flex"
-      style={{ justifyContent: "center", flexDirection: "column" }}
+      className="text-center flex flex-col items-center cursor-pointer"
       onClick={() => handleSubmit(imgSource, name, nftId)}
     >
-      <div className="h-47 w-44 border-4 border-black hover:border-4 hover:border-white">
+      <div className="h-48 w-48 border-4 border-black hover:border-white transition-colors">
         <img
           src={imgSource}
           alt="select Nfts"
-          style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "cover" }}
+          className="w-full h-full object-contain"
         />
       </div>
-      <div
-        className="my-1 flex max-w-[175px]"
-        style={{ justifyContent: "center" }}
-      >
-        <div className="text-blue-700 font-sans text-l font-semibold">
+      <div className="my-1 max-w-[175px] flex justify-center">
+        <div className="text-blue-700 font-sans text-lg font-semibold">
           {name}
         </div>
       </div>

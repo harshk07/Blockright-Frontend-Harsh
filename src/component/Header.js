@@ -79,7 +79,7 @@ export const Header = () => {
           <div className="bg-black rounded-full h-11 w-11 mr-3">
             <img
               className="rounded-full"
-              src="https://i.postimg.cc/WpmS3bd6/sachi.png"
+              src="https://static.vecteezy.com/system/resources/thumbnails/027/951/137/small_2x/stylish-spectacles-guy-3d-avatar-character-illustrations-png.png"
               alt="User"
             />
           </div>

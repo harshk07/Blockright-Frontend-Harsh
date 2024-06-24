@@ -11,6 +11,9 @@ export const NftPage = () => {
     window.scrollTo(0, 0);
   }, []);
   const localWalletId = localStorage.getItem("walletID");
+  useEffect(() => {
+    console.log(localWalletId);
+  }, []);
 
   const { fetchedWalletId, fetchedWalletAddress } =
     useContext(WalletIDMainContext);
@@ -63,13 +66,13 @@ export const NftPage = () => {
           <div className="text-slate-300">
             <div className="text-center">
               <h3 className="text-3xl font-semibold mt-5 pt-[40px] text-white">
-                Select an asset for allocation of digital rights
+                Select an NFT to Mint
               </h3>
               <p className="my-2 font-light text-white">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Dignissimos,
+                Choose from a variety of digital assets to mint your unique NFT.
                 <br />
-                reprehenderit! Lorem ipsum dolor sit icing elit. Possimus.
+                Click on any asset to start the minting process and secure your
+                digital rights.
               </p>
             </div>
             <div className="mt-16 px-10">
@@ -78,7 +81,7 @@ export const NftPage = () => {
                   {row.map((item, index) => (
                     <Nft
                       key={index}
-                      imgSource={item.cached_file_url}
+                      imgSource={item.image_url}
                       name={item.name}
                       nftId={item._id}
                     />

@@ -51,7 +51,7 @@ const ConnectWallet = () => {
           }
 
           const dataToSave = {
-            walletAddress: "0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d", //result[0] dalna idhar dynamic ke liye
+            walletAddress: "0x638AD8201F57cE5E14758D8283d9922c04f7f10A", //result[0] dalna idhar dynamic ke liye
             walletType: walletType,
             totalRefferal: ["saluh"],
           };
