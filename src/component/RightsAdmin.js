@@ -98,6 +98,7 @@ const RightsAdmin = () => {
         discount: 0,
         totalQuantity: totalQuantity,
         availableQuantity: 0,
+        soldQuantity: 0,
         lastDate: "2023-09-06T16:03:17.110Z",
         description: "",
         merchTitle: merchTitle,
