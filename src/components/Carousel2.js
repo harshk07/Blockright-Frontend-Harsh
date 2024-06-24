@@ -12,7 +12,7 @@ export const Carousel2 = () => {
                 </div>`
     },
     {
-      image: "https://i.ibb.co/1GDMLq2/smartmockups-ljw7z0cg.jpg",
+      image: "https://i.ibb.co/p0d22LB/Blockright-image-hero2.jpg",
       caption: "Crypto Punk #232"
     },
     {
@@ -24,6 +24,7 @@ export const Carousel2 = () => {
       caption: "Doodle #323"
     },
   ];
+  
 
   const captionStyle = {
     fontSize: '2em',

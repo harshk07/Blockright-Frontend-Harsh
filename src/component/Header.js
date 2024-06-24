@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export const Header = () => {
   let color = "hover:text-blue-700 text-lg";
@@ -7,71 +8,71 @@ export const Header = () => {
       <nav>
         <div className="bg-neutral-100 flex justify-between items-center h-[70px] shadow-xl shadow-black-900 ">
           <div className="ml-3">
-            <h1 className="text-black text-2xl">
+            <h1 className="text-black text-xl">
               <b>Blockright</b>
             </h1>
           </div>
-          <div className=" w-[35%]">
-            <ul className="text-black  flex justify-around ">
-              <li style={{ margin: "0px 10px" }}>
-                <a className={color} href="/AdminDashboard">
+          <div className="w-[35%]">
+            <ul className="text-black flex justify-around ">
+              <li className="mx-2">
+                <Link className={color} href="/AdminDashboard">
                   User
-                </a>
+                </Link>
               </li>
-              <li style={{ margin: "0px 10px" }}>
-                <a className={color} href="/AdminDashboard/nft">
+              <li className="mx-2">
+                <Link className={color} href="/AdminDashboard/nft">
                   NFT
-                </a>
+                </Link>
               </li>
-              <li style={{ margin: "0px 10px" }}>
-                <a className={color} href="/AdminDashboard/products">
+              <li className="mx-2">
+                <Link className={color} href="/AdminDashboard/products">
                   Products
-                </a>
+                </Link>
               </li>
-              <li style={{ margin: "0px 10px" }}>
-                <a
+              <li className="mx-2">
+                <Link
                   className={color}
                   href="/AdminDashboard/rights"
                   aria-current="page"
                 >
                   Rights
-                </a>
+                </Link>
               </li>
-              <li style={{ margin: "0px 10px" }}>
-                <a
+              <li className="mx-2">
+                <Link
                   className={color}
                   href="/AdminDashboard/orders"
                   aria-current="page"
                 >
                   Orders
-                </a>
+                </Link>
               </li>
-              <li style={{ margin: "0px 10px" }}>
-                <a
+              <li className="mx-2">
+                <Link
                   className={color}
                   href="/AdminDashboard/shop"
                   aria-current="page"
                 >
                   Shop
-                </a>
+                </Link>
               </li>
-              <li style={{ margin: "0px 10px" }}>
-                <a
+              <li className="mx-2">
+                <Link
                   className={color}
                   href="/AdminDashboard/license"
                   aria-current="page"
                 >
                   License
-                </a>
+                </Link>
               </li>
-              <li style={{ margin: "0px 10px" }}>
-                <a
+              <li className="mx-2">
+                <Link
                   className={color}
                   href="/AdminDashboard/payment"
                   aria-current="page"
                 >
                   Payment
-                </a>
+                </Link>
               </li>
             </ul>
           </div>

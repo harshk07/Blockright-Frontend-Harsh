@@ -60,7 +60,7 @@ const Header = () => {
               <img
                 className="object-cover object-center rounded"
                 alt="hero"
-                src="https://i.ibb.co/5WyK0mT/Untitled-design-3-removebg-preview.png"
+                src="https://i.ibb.co/zbbxck9/Blockright-image-hero.png"
               />
             </div>
           </div>
