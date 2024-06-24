@@ -15,7 +15,7 @@ const PendingRights = () => {
         const response = await axios.get(
           "http://127.0.0.1:8000/drm/getSpecificRight/",
           {
-            params: { wallet_id: "65c4f232ecc0bd903efc8211" },
+            params: { wallet_id: "667944130332c767df39ef87" },
           }
         );
         console.log("Pending rights data:", response.data.response);
@@ -87,7 +87,7 @@ const PendingRights = () => {
       <div className="flex flex-col items-center w-[50%] justify-center mt-10">
         <p className="text-blue-500">{errorMessage}</p>
         <Link to="/NftPage">
-          <div className="border-2 border-dashed  rounded-xl text-2xl border-cyan-800 hover:bg-slate-600 hover:border-2 hover:border-dashed p-3 flex justify-center items-center">
+          <div className="border-2 border-dashed rounded-xl text-2xl border-cyan-800 hover:bg-slate-600 hover:border-2 hover:border-dashed p-3 flex justify-center items-center">
             <h1>Mint your NFT Merch</h1>
           </div>
         </Link>
@@ -96,7 +96,7 @@ const PendingRights = () => {
   }
 
   return (
-    <div className="mt-8 flex">
+    <div className="mt-8 flex flex-col">
       {pendingRightsData.map((item, index) => renderRightsCard(item, index))}
     </div>
   );

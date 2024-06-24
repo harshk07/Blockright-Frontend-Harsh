@@ -581,7 +581,6 @@ export const Rightspage = () => {
                       type="number"
                       value={quantity4}
                       onChange={(event) => {
-                        // Update the license term in the parent component
                         const quantityTaken = event.target.value;
                         setQuantity4(quantityTaken);
                       }}
@@ -630,7 +629,6 @@ export const Rightspage = () => {
                     value={merch4LicenseCondition}
                     onChange={(event) => {
                       if (event.target.value !== "Select") {
-                        // Update the user license condition in the parent component
                         setMerch4LicenseCondition(event.target.value);
                         console.log(event.target.value);
                       }
@@ -646,12 +644,6 @@ export const Rightspage = () => {
                   <h2 className="font-bold texl-xl text-black mt-5">
                     $ {result4} estimated earning from license royalty
                   </h2>
-                  {/* <div className="flex mt-2">
-                    <p className="">
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Quae.
-                    </p>
-                  </div> */}
                 </AccordionDetails>
               </Accordion>
             </div>

@@ -252,7 +252,7 @@ const Punk = () => {
     return (
       <div className="text-xl font-bold flex items-center justify-center gap-3 w-[32rem]">
         <Link to="/NftPage">
-          <div className="border-2 border-dashed rounded-xl text-xl mb-[1rem] border-cyan-800 hover:bg-slate-600 hover:border-2 hover:border-dashed flex py-3.5 justify-center items-center">
+          <div className="border-2 border-dashed rounded-xl text-xl text-white my-10 border-blue-800 hover:bg-cyan-600 hover:border-2 hover:border-dashed flex p-8 justify-center items-center">
             <h1>Mint your NFT Merch</h1>
           </div>
         </Link>
