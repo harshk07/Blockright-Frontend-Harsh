@@ -15,7 +15,7 @@ const Punk = () => {
       try {
         const response = await axios.get(
           "http://127.0.0.1:8000/user/getRights/",
-          { params: { walletId: "65c4f232ecc0bd903efc8211" } }
+          { params: { walletId: "667944130332c767df39ef87" } }
         );
         console.log(response);
         if (response.data.message) {

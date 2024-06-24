@@ -45,13 +45,13 @@ const PendingRights = () => {
         <div className="">
           <div
             key={index}
-            className="mt-4 flex bg-white rounded-lg shadow-md overflow-hidden"
+            className="flex bg-white rounded-lg w-[90%] shadow-md overflow-hidden"
           >
             <div className="md:flex-shrink-0">
               <img
                 src={imgSrc}
                 alt="image of nft"
-                className="h-32 w-full object-cover md:h-full md:w-36"
+                className="h-28 w-full object-cover md:h-full md:w-36"
               />
             </div>
             <div className="p-4 leading-normal flex flex-col">
